@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+# Created by server.py at startup
+.runtime/
+# Bundled Windows Python for the Downloads distribution; not tracked
+runtime/
+# Extracted game artwork: copy from your own install, never commit
+backend/local-data/item_icons/
+# Save files and editor backups must never be committed
+*.fch
+*.fch.old
+.rune-backups/
+.DS_Store

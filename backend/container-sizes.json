@@ -1,0 +1,30 @@
+{
+  "piece_chest_blackmetal": {
+    "width": 8,
+    "height": 4
+  },
+  "piece_chest_barrel": {
+    "width": 6,
+    "height": 2
+  },
+  "piece_chest_warderobe": {
+    "width": 5,
+    "height": 10
+  },
+  "piece_chest_wood": {
+    "width": 5,
+    "height": 2
+  },
+  "piece_chest": {
+    "width": 6,
+    "height": 3
+  },
+  "piece_chest_private": {
+    "width": 3,
+    "height": 2
+  },
+  "piece_chest_grausten": {
+    "width": 8,
+    "height": 5
+  }
+}

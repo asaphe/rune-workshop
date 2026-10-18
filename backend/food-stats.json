@@ -1,0 +1,590 @@
+{
+  "foods": {
+    "BakedPoteitr": {
+      "health": 34.0,
+      "stamina": 17.0,
+      "eitr": 100.0,
+      "duration": 1500.0
+    },
+    "BlackSoup": {
+      "health": 50.0,
+      "stamina": 17.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "BloodPudding": {
+      "health": 25.0,
+      "stamina": 75.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "Blueberries": {
+      "health": 8.0,
+      "stamina": 25.0,
+      "eitr": 0.0,
+      "duration": 600.0
+    },
+    "BoarJerky": {
+      "health": 23.0,
+      "stamina": 23.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "Bread": {
+      "health": 23.0,
+      "stamina": 70.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "Carrot": {
+      "health": 10.0,
+      "stamina": 32.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "CarrotSoup": {
+      "health": 15.0,
+      "stamina": 45.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "Cloudberry": {
+      "health": 13.0,
+      "stamina": 40.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "CookedAsksvinMeat": {
+      "health": 70.0,
+      "stamina": 24.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedBjornMeat": {
+      "health": 40.0,
+      "stamina": 13.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedBoneMawSerpentMeat": {
+      "health": 90.0,
+      "stamina": 30.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "CookedBugMeat": {
+      "health": 60.0,
+      "stamina": 20.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedChickenMeat": {
+      "health": 60.0,
+      "stamina": 20.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedDeerMeat": {
+      "health": 35.0,
+      "stamina": 12.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedEgg": {
+      "health": 35.0,
+      "stamina": 12.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedHareMeat": {
+      "health": 60.0,
+      "stamina": 20.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedLoxMeat": {
+      "health": 50.0,
+      "stamina": 16.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedMeat": {
+      "health": 30.0,
+      "stamina": 10.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedMooseMeat": {
+      "health": 80.0,
+      "stamina": 27.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedSealBlubber": {
+      "health": 60.0,
+      "stamina": 20.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedVoltureMeat": {
+      "health": 70.0,
+      "stamina": 24.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "CookedWolfMeat": {
+      "health": 45.0,
+      "stamina": 15.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "DeerStew": {
+      "health": 45.0,
+      "stamina": 15.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "Eyescream": {
+      "health": 21.0,
+      "stamina": 65.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "Fiddleheadfern": {
+      "health": 30.0,
+      "stamina": 30.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "FierySvinstew": {
+      "health": 95.0,
+      "stamina": 32.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "FishAndBread": {
+      "health": 30.0,
+      "stamina": 90.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "FishCooked": {
+      "health": 45.0,
+      "stamina": 15.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "FishSoup": {
+      "health": 37.0,
+      "stamina": 18.0,
+      "eitr": 105.0,
+      "duration": 1800.0
+    },
+    "FishWraps": {
+      "health": 70.0,
+      "stamina": 23.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "GlowWorm": {
+      "health": 30.0,
+      "stamina": 30.0,
+      "eitr": 0.0,
+      "duration": 600.0
+    },
+    "HoneyGlazedChicken": {
+      "health": 80.0,
+      "stamina": 26.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "Kale": {
+      "health": 35.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "KaleChips": {
+      "health": 35.0,
+      "stamina": 105.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "Lingonberry": {
+      "health": 35.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "Lingondricka": {
+      "health": 35.0,
+      "stamina": 105.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "LoxPie": {
+      "health": 75.0,
+      "stamina": 24.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "MagicallyStuffedShroom": {
+      "health": 25.0,
+      "stamina": 12.0,
+      "eitr": 75.0,
+      "duration": 1500.0
+    },
+    "MarinatedGreens": {
+      "health": 32.0,
+      "stamina": 16.0,
+      "eitr": 95.0,
+      "duration": 1800.0
+    },
+    "MashedMeat": {
+      "health": 100.0,
+      "stamina": 34.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "MeatPlatter": {
+      "health": 80.0,
+      "stamina": 26.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "MeatballsMashedPoteitr": {
+      "health": 35.0,
+      "stamina": 18.0,
+      "eitr": 105.0,
+      "duration": 1500.0
+    },
+    "MinceMeatSauce": {
+      "health": 40.0,
+      "stamina": 13.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "MisthareSupreme": {
+      "health": 85.0,
+      "stamina": 28.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "MooseKebab": {
+      "health": 110.0,
+      "stamina": 37.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "Mushroom": {
+      "health": 15.0,
+      "stamina": 15.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "MushroomBlue": {
+      "health": 20.0,
+      "stamina": 20.0,
+      "eitr": 0.0,
+      "duration": 600.0
+    },
+    "MushroomJotunPuffs": {
+      "health": 25.0,
+      "stamina": 25.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "MushroomMagecap": {
+      "health": 25.0,
+      "stamina": 25.0,
+      "eitr": 25.0,
+      "duration": 900.0
+    },
+    "MushroomOmelette": {
+      "health": 28.0,
+      "stamina": 85.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "MushroomSmokePuff": {
+      "health": 15.0,
+      "stamina": 15.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "MushroomYellow": {
+      "health": 10.0,
+      "stamina": 30.0,
+      "eitr": 0.0,
+      "duration": 600.0
+    },
+    "NeckTailGrilled": {
+      "health": 25.0,
+      "stamina": 8.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "Oat": {
+      "health": 33.0,
+      "stamina": 33.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "OatMilk": {
+      "health": 37.0,
+      "stamina": 110.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "OatmealLingonberryJam": {
+      "health": 39.0,
+      "stamina": 115.0,
+      "eitr": 85.0,
+      "duration": 1800.0
+    },
+    "Onion": {
+      "health": 13.0,
+      "stamina": 40.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "OnionSoup": {
+      "health": 20.0,
+      "stamina": 60.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "OvenPancake": {
+      "health": 37.0,
+      "stamina": 18.0,
+      "eitr": 105.0,
+      "duration": 1800.0
+    },
+    "Pancakes": {
+      "health": 39.0,
+      "stamina": 115.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "PiquantPie": {
+      "health": 105.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "Poteitr": {
+      "health": 35.0,
+      "stamina": 35.0,
+      "eitr": 35.0,
+      "duration": 900.0
+    },
+    "PulledBear": {
+      "health": 37.0,
+      "stamina": 16.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "QueensJam": {
+      "health": 14.0,
+      "stamina": 40.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "Raspberry": {
+      "health": 7.0,
+      "stamina": 20.0,
+      "eitr": 0.0,
+      "duration": 600.0
+    },
+    "RoastedCrustPie": {
+      "health": 34.0,
+      "stamina": 100.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "RoyalJelly": {
+      "health": 15.0,
+      "stamina": 15.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "Salad": {
+      "health": 26.0,
+      "stamina": 80.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "Sausages": {
+      "health": 55.0,
+      "stamina": 18.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "ScorchingMedley": {
+      "health": 32.0,
+      "stamina": 95.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "SealSoup": {
+      "health": 110.0,
+      "stamina": 37.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "SeekerAspic": {
+      "health": 28.0,
+      "stamina": 14.0,
+      "eitr": 85.0,
+      "duration": 1800.0
+    },
+    "SerpentMeatCooked": {
+      "health": 70.0,
+      "stamina": 23.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "SerpentStew": {
+      "health": 80.0,
+      "stamina": 26.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "ShocklateSmoothie": {
+      "health": 16.0,
+      "stamina": 50.0,
+      "eitr": 0.0,
+      "duration": 1200.0
+    },
+    "SizzlingBerryBroth": {
+      "health": 28.0,
+      "stamina": 14.0,
+      "eitr": 85.0,
+      "duration": 1500.0
+    },
+    "SmokedFish": {
+      "health": 30.0,
+      "stamina": 16.0,
+      "eitr": 95.0,
+      "duration": 1500.0
+    },
+    "SmokedMooseMeat": {
+      "health": 105.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "SparklingShroomshake": {
+      "health": 30.0,
+      "stamina": 15.0,
+      "eitr": 90.0,
+      "duration": 1500.0
+    },
+    "SpicyMarmalade": {
+      "health": 30.0,
+      "stamina": 90.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "TurnipStew": {
+      "health": 18.0,
+      "stamina": 55.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "VikingCupcake": {
+      "health": 43.0,
+      "stamina": 43.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "Vineberry": {
+      "health": 30.0,
+      "stamina": 30.0,
+      "eitr": 30.0,
+      "duration": 900.0
+    },
+    "WolfJerky": {
+      "health": 33.0,
+      "stamina": 33.0,
+      "eitr": 0.0,
+      "duration": 1800.0
+    },
+    "WolfMeatSkewer": {
+      "health": 65.0,
+      "stamina": 21.0,
+      "eitr": 0.0,
+      "duration": 1500.0
+    },
+    "YggdrasilPorridge": {
+      "health": 27.0,
+      "stamina": 13.0,
+      "eitr": 80.0,
+      "duration": 1500.0
+    },
+    "Honey": {
+      "health": 8.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 900.0
+    },
+    "FeastAshlands": {
+      "health": 75.0,
+      "stamina": 75.0,
+      "eitr": 38.0,
+      "duration": 3000.0
+    },
+    "FeastBlackforest": {
+      "health": 35.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 3000.0
+    },
+    "FeastDeepNorth": {
+      "health": 85.0,
+      "stamina": 85.0,
+      "eitr": 43.0,
+      "duration": 3000.0
+    },
+    "FeastMeadows": {
+      "health": 35.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 3000.0
+    },
+    "FeastMistlands": {
+      "health": 65.0,
+      "stamina": 65.0,
+      "eitr": 33.0,
+      "duration": 3000.0
+    },
+    "FeastMountains": {
+      "health": 45.0,
+      "stamina": 45.0,
+      "eitr": 0.0,
+      "duration": 3000.0
+    },
+    "FeastOceans": {
+      "health": 45.0,
+      "stamina": 45.0,
+      "eitr": 0.0,
+      "duration": 3000.0
+    },
+    "FeastPlains": {
+      "health": 55.0,
+      "stamina": 55.0,
+      "eitr": 0.0,
+      "duration": 3000.0
+    },
+    "FeastSwamps": {
+      "health": 35.0,
+      "stamina": 35.0,
+      "eitr": 0.0,
+      "duration": 3000.0
+    }
+  },
+  "base": {
+    "m_baseHP": 25.0,
+    "m_baseStamina": 50.0
+  }
+}

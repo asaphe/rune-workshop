@@ -1,0 +1,4847 @@
+{
+  "DvergerArbalest_shoot": {
+    "usesDurability": true,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "DvergerArbalest_shootAshlands": {
+    "usesDurability": true,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "DvergerArbalest_shootDeepNorth": {
+    "usesDurability": true,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "DvergerArbalest": {
+    "usesDurability": true,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "FW_ArmorBronzeChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorBronzeLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorFenringChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorFenringLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorMageChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorMageChest_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorMageLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorMageLegs_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorPaddedCuirass": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorPaddedGreaves": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorTrollLeatherChest": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "FW_ArmorTrollLeatherLegs": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "FW_AxeBronze": {
+    "usesDurability": true,
+    "base": 125.0,
+    "perLevel": 50.0
+  },
+  "FW_BattleaxeCrystal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "FW_BowDraugrFang": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FW_CapeLinen": {
+    "usesDurability": true,
+    "base": 1500.0,
+    "perLevel": 50.0
+  },
+  "FW_CapeTrollHide": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 50.0
+  },
+  "FW_CapeWolf": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 50.0
+  },
+  "FW_HelmetBronze": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "FW_KnifeSilver": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "FW_KnifeSkollAndHati": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "FW_ShieldBlackmetalTower": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "FW_StaffFireball": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "FW_StaffLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "FW_SwordBlackmetal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SP_ArmorBronzeChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorBronzeLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorFenringChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorFenringLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorMageChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorMageChest_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorMageLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorMageLegs_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorPaddedCuirass": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorPaddedGreaves": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorTrollLeatherChest": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorTrollLeatherLegs": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "SP_AxeBronze": {
+    "usesDurability": true,
+    "base": 125.0,
+    "perLevel": 50.0
+  },
+  "SP_BattleaxeCrystal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SP_BowDraugrFang": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SP_CapeLinen": {
+    "usesDurability": true,
+    "base": 1500.0,
+    "perLevel": 50.0
+  },
+  "SP_CapeTrollHide": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 50.0
+  },
+  "SP_CapeWolf": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 50.0
+  },
+  "SP_HelmetBronze": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_KnifeSilver": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SP_KnifeSkollAndHati": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "SP_ShieldBlackmetalTower": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SP_StaffFireball": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SP_StaffLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SP_SwordBlackmetal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "Catapult_Ammo_BloodGold": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Catapult_ammo": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketBlackDamageHealth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketBlackStamina": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketBloodGoldHealth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketBloodGoldStamina": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketBronzeHealth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketBronzeStamina": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketCarapaceEitr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketChitinSwim": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketFlametalEitr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketFlametalStaminaHealth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketIronHealth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketIronStamina": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketScaleStaminaDamage": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketSilverDamage": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrinketSilverResist": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader0Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader0Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader1Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader1Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader2Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader2Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader3Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader3Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader4Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader4Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader5Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader5Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader6Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader6Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader7Armor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Upgrader7Weapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorAshlandsMediumChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorAshlandsMediumlegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorBerserkerChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorBerserkerLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorBerserkerUndeadChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorBerserkerUndeadLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorBronzeChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorBronzeLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorCarapaceChest": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 200.0
+  },
+  "ArmorCarapaceLegs": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 200.0
+  },
+  "ArmorDeepNorthHeavyChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDeepNorthHeavylegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDeepNorthMageChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDeepNorthMagelegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDeepNorthMediumChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDeepNorthMediumlegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress1": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress10": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress2": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress3": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress4": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress5": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress6": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress7": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress8": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorDress9": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorFenringChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorFenringLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorFlametalChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorFlametalLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorHarvester1": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorHarvester2": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorIronChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorIronLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorLeatherChest": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 100.0
+  },
+  "ArmorLeatherLegs": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 100.0
+  },
+  "ArmorLoxChest": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "ArmorLoxLegs": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "ArmorMageChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorMageChest_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorMageLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorMageLegs_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorPaddedCuirass": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorPaddedGreaves": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorRagsChest": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ArmorRagsLegs": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ArmorRootChest": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "ArmorRootLegs": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "ArmorTrollLeatherChest": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "ArmorTrollLeatherLegs": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic1": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic10": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic2": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic3": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic4": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic5": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic6": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic7": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic8": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorTunic9": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorWolfChest": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorWolfLegs": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "CapeAsh": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 50.0
+  },
+  "CapeAsksvin": {
+    "usesDurability": true,
+    "base": 1500.0,
+    "perLevel": 50.0
+  },
+  "CapeDeepNorth": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 50.0
+  },
+  "CapeDeepNorthMage": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 50.0
+  },
+  "CapeDeerHide": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "CapeFeather": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 50.0
+  },
+  "CapeLinen": {
+    "usesDurability": true,
+    "base": 1500.0,
+    "perLevel": 50.0
+  },
+  "CapeLox": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 50.0
+  },
+  "CapeOdin": {
+    "usesDurability": true,
+    "base": 1500.0,
+    "perLevel": 50.0
+  },
+  "CapeTrollHide": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 50.0
+  },
+  "CapeWolf": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 50.0
+  },
+  "SP_ArmorDress1": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "SP_ArmorLeatherLegs": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 100.0
+  },
+  "SP_ArmorTunic5": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "ArmorGoldHeavyChestUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldHeavyHelmetUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldHeavyLegsUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldMageChestUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldMageHelmetUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldMageLegsUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldMediumChestUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldMediumHelmetUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArmorGoldMediumLegsUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AsksvinEgg": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AsksvinMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BakedPoteitr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BakedPoteitrUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BarleyWine": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BarleyWineBase": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BjornMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BlackCore": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BlackSoup": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BloodPudding": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Blueberries": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoarJerky": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoneMawSerpentMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Bread": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BugMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Carrot": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CarrotSoup": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ChickenEgg": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ChickenMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Cloudberry": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedAsksvinMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedBjornMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedBoneMawSerpentMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedBugMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedChickenMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedDeerMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedEgg": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedHareMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedLoxMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedMooseMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedSealBlubber": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedVoltureMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CookedWolfMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DeerMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DeerStew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Eyescream": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Fiddleheadfern": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FierySvinstew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishAndBread": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishAnglerRaw": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishCooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishRaw": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishSoup": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishWraps": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FrostCore": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GenericMoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GlowWorm": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HareMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HoneyGlazedChicken": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Kale": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "KaleChips": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "KaleChipsUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "KeysGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Larva": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Lingonberry": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Lingondricka": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LoxMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LoxPie": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LoxPieUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MagicallyStuffedShroom": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MagicallyStuffedShroomUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MarinatedGreens": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MashedMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseBugRepellent": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseBzerker": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseEitrLingering": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseEitrMinor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseFrostResist": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseHasty": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseHealthLingering": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseHealthMajor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseHealthMedium": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseHealthMinor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseLightFoot": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBasePoisonResist": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseStaminaLingering": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseStaminaMedium": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseStaminaMinor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseStrength": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseSwimmer": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseTamer": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBaseTasty": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBugRepellent": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadBzerker": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadEitrLingering": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadEitrMinor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadFrostResist": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadHasty": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadHealthLingering": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadHealthMajor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadHealthMedium": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadHealthMinor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadLightfoot": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadPoisonResist": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadStaminaLingering": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadStaminaMedium": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadStaminaMinor": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadStrength": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadSwimmer": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadTamer": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadTasty": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeadTrollPheromones": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeatPlatter": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeatballsMashedPoteitr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MinceMeatSauce": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MisthareSupreme": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorGoldChest": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorGoldHelmet": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorGoldLegs": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorMageChest": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorMageHelmet": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorMageLegs": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorMediumHelmet": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmorMediumLegs": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldArmormediumChest": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldAtgeir": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldAxe": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldAxe2H": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldBow": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldCrossbow": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldFistweapon": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldKeys": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldKnife": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldMace": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldMace2H": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldShieldBuckler": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldShieldRound": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldShieldTower": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldSmallParts": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldSpear": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldStaffOrbofAhri": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldStafffrostorbs": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldStaffspiritcaller": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldStaffthunderblood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldSword": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoldSword2H": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoltenCore": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MooseKebab": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MooseMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Mushroom": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomBlue": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomBzerker": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomJotunPuffs": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomMagecap": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomOmelette": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomSmokePuff": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MushroomYellow": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "NeckTailGrilled": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Oat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OatMilk": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OatmealLingonberryJam": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Onion": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OnionSoup": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OvenPancake": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OvenPancakeUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Pancakes": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PiquantPie": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PiquantPieUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Poteitr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Pukeberries": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PulledBear": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "QueensJam": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Raspberry": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "RawMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "RoastedCrustPie": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "RoastedCrustPieUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "RottenMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "RoyalJelly": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Salad": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Sausages": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ScorchingMedley": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SealBlubber": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SealSoup": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SeekerAspic": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SerpentMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SerpentMeatCooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SerpentStew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShieldBucklerGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShieldCore": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShieldRoundGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShieldTowerGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShocklateSmoothie": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SizzlingBerryBroth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SmallPartsGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SmokedFish": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SmokedMooseMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Softtissue": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SparklingShroomshake": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpicyMarmalade": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TurnipStew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "VikingCupcake": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "VikingCupcakeUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Vineberry": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "VoltureEgg": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "VoltureMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfJerky": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfMeat": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfMeatSkewer": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "YggdrasilPorridge": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HelmetAshlandsMediumHood": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetBerserkerHood": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetBerserkerUndead": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetBronze": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetCarapace": {
+    "usesDurability": true,
+    "base": 1200.0,
+    "perLevel": 200.0
+  },
+  "HelmetCelebration": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetCrownofValheim": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetDNHeavy": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetDNMage": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetDNMediumHood": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetDrake": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetDverger": {
+    "usesDurability": false,
+    "base": 1000.0,
+    "perLevel": 100.0
+  },
+  "HelmetFenring": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetFishingHat": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetFlametal": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat1": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat10": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat2": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat3": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat4": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat5": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat6": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat7": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat8": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetHat9": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetIron": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetLeather": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 100.0
+  },
+  "HelmetLox": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "HelmetMage": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetMage_Ashlands": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetMidsummerCrown": {
+    "usesDurability": false,
+    "base": 1000.0,
+    "perLevel": 50.0
+  },
+  "HelmetOdin": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 100.0
+  },
+  "HelmetPadded": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetPointyHat": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetRoot": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetRootCrown": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetStrawHat": {
+    "usesDurability": true,
+    "base": 800.0,
+    "perLevel": 100.0
+  },
+  "HelmetSweatBand": {
+    "usesDurability": true,
+    "base": 1000.0,
+    "perLevel": 200.0
+  },
+  "HelmetTrollLeather": {
+    "usesDurability": true,
+    "base": 500.0,
+    "perLevel": 200.0
+  },
+  "HelmetYule": {
+    "usesDurability": false,
+    "base": 1000.0,
+    "perLevel": 50.0
+  },
+  "Acorn": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AncientSeed": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AskBladder": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AskHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AsksvinCarrionNeck": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AsksvinCarrionPelvic": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AsksvinCarrionRibcage": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AsksvinCarrionSkull": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AxeHead1": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AxeHead2": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BarberKit": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BarkaBranch": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Barley": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BarleyFlour": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BarrelRings": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BeechSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Bilebag": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BirchSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BjornHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BjornPaw": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BlackMarble": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BlackMetal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BlackMetalScrap": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Blackwood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Bloodbag": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoneFragments": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BonemawSerpentScale": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BonemawSerpentTooth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BreadDough": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Bronze": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BronzeNails": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BronzeScrap": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CandleWick": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Carapace": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CarrotSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CelestialFeather": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CeramicPlate": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Chain": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CharcoalResin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CharredBone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CharredCogwheel": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Charredskull": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Chitin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Coal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Copper": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CopperOre": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CopperScrap": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CrownJewel": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Crystal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CuredSquirrelHamstring": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Dandelion": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DeerHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DragonTear": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DvergrNeedle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Ectoplasm": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Eitr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ElakingHairBundle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ElderBark": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Entrails": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FaderEmber": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastAshlands_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastBlackforest_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastDeepNorth_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastMeadows_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastMistlands_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastMountains_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastOceans_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastPlains_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastSwamps_Material": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Feathers": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FineWood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FirCone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FirConeFrost": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_Blue": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_Cyan": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_Green": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_Purple": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_Red": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_White": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FireworksRocket_Yellow": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishAndBreadUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBait": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitAshlands": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitCave": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitDeepNorth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitForest": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitMistlands": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitOcean": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitPlains": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FishingBaitSwamp": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Flametal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FlametalNew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FlametalOre": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FlametalOreNew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Flax": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Flint": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FragrantBundle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FreezeGland": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FreshSeaweed": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Frostwood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FrozenFuel": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GemstoneBlue": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GemstoneGreen": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GemstoneRed": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GiantBloodSack": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Gold": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GoldOre": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Grausten": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GreydwarfEye": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Guck": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HardAntler": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HatefulBlood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Honey": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HoneyGlazedChickenUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Hook": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Ice": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Iron": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "IronNails": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "IronOre": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "IronScrap": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Ironpit": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "JuteBlue": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "JuteRed": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "KaleSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LeatherScraps": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Leatherstraps": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LinenThread": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LoxPelt": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Mandible": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MeatPlatterUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MechanicalSpring": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MemorialCoal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MisthareSupremeUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MoleClaws": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MooseHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MooseSinew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MorgenHeart": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "MorgenSinew": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "NeckTail": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Needle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "NornThread": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OatFlour": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OatSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Obsidian": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OnionSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Ooze": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OozeMork": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OrbFrostFire": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "OrbThunderBlood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PineCone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Pot_Shard_Green": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Pot_Shard_Red": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PoteitrSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PowderedDragonEgg": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ProustitePowder": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PungentPebbles": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "QueenBee": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Resin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Root": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "RoundLog": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Sap": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ScaleHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ScytheHandle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SealHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SerpentScale": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SharpeningStone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Silver": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SilverOre": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpiceAshlands": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpiceDeepNorth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpiceForests": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpiceMistlands": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpiceMountains": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpiceOceans": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpicePlains": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Stone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "StoneRock": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SulfurStone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SurtlingCore": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Tar": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Thistle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Thunderstone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Tin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TinOre": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrollHide": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Turnip": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TurnipSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "UndeadBjornRibcage": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Voidplasm": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Wisp": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfClaw": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfFang": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfHairBundle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WolfPelt": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Wood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WrithanRoots": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "YggdrasilWood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "YmirRemains": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Bell": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BellFragment": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BlobVial": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BloodGoldKey": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CryptKey": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DragonEgg": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DvergrKey": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DvergrKeyFragment": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DyrnwynBladeFragment": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DyrnwynHiltFragment": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "DyrnwynTipFragment": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FaderDrop": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FrozenKingDrop": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "GoblinTotem": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HildirKey_forestcrypt": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HildirKey_mountaincave": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "HildirKey_plainsfortress": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "QueenDrop": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Tankard": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TankardAnniversary": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TankardOdin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Tankard_dvergr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "WitheredBone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "YagluthDrop": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShieldBanded": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldBlackmetal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldBlackmetalTower": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldBoneTower": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldBronzeBuckler": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldCarapace": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "ShieldCarapaceBuckler": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "ShieldFlametal": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "ShieldFlametalTower": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "ShieldGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "ShieldGoldBuckler": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "ShieldGoldTower": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "ShieldIronBuckler": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldIronSquare": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldIronTower": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldKnight": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ShieldRoots": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldSerpentscale": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "ShieldSilver": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldWood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "ShieldWoodTower": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "Cultivator": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 200.0
+  },
+  "Feaster": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 100.0
+  },
+  "FishingRod": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Hammer": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 100.0
+  },
+  "Hoe": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 200.0
+  },
+  "SaddleAsksvin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SaddleLox": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SaddleMoose": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Scythe": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 200.0
+  },
+  "Shovel": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 200.0
+  },
+  "TrophyAbomination": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyAsksvin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBarka": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBjorn": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBjornUndead": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBlob": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBlob_Frost": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBlob_Lava": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBlob_Morkhalla": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBoar": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBonemass": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyBonemawSerpent": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyCharredArcher": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyCharredMage": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyCharredMelee": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyCultist": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyCultist_Hildir": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDeathsquito": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDeer": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDeerWhite": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDragonQueen": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDraugr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDraugrElite": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDraugrFem": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyDvergr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyEikthyr": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyElaking": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyFader": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyFallenValkyrie": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyFenring": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyForestTroll": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyFrostTroll": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGhost": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGjall": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGoblin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGoblinBrute": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGoblinBruteBrosBrute": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGoblinBruteBrosShaman": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGoblinKing": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGoblinShaman": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGreydwarf": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGreydwarfBrute": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGreydwarfShaman": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyGrowth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyHare": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyHatchling": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyJotunWarrior": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyJotunWitch": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyLeech": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyLox": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyMole": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyMoose": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyMorgen": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyNeck": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySGolem": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySeal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySeeker": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySeekerBrute": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySeekerQueen": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySerpent": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySkeleton": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySkeletonHildir": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySkeletonPoison": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophySurtling": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyTheElder": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyTick": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyUlv": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyVolture": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyWolf": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyWraith": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TrophyWrithan": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BeltStrength": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Demister": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "IceShoes": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "IceSkates": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Wishbone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Amber": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AmberPearl": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AncientCoin": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AncientGemstoneBlack": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AncientGemstoneGreen": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AncientGemstoneOrange": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AncientGemstonePurple": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Coins": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Ruby": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SilverNecklace": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowBloodGold": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowBronze": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowCarapace": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowCharred": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowFire": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowFlint": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowFrost": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowIron": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowNeedle": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowObsidian": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowPoison": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowSilver": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "ArrowWood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "AtgeirBlackmetal": {
+    "usesDurability": true,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AtgeirBronze": {
+    "usesDurability": true,
+    "base": 125.0,
+    "perLevel": 50.0
+  },
+  "AtgeirGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "AtgeirGoldUncooked": {
+    "usesDurability": false,
+    "base": 125.0,
+    "perLevel": 50.0
+  },
+  "AtgeirGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "AtgeirGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "AtgeirHimminAfl": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "AtgeirIron": {
+    "usesDurability": true,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AtgeirWood": {
+    "usesDurability": true,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AxeBerzerkr": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "AxeBerzerkrBlood": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "AxeBerzerkrLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "AxeBerzerkrNature": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "AxeBlackMetal": {
+    "usesDurability": true,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AxeBronze": {
+    "usesDurability": true,
+    "base": 125.0,
+    "perLevel": 50.0
+  },
+  "AxeEarly": {
+    "usesDurability": true,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AxeFlint": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 30.0
+  },
+  "AxeGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "AxeGoldUncooked": {
+    "usesDurability": false,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AxeGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "AxeGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "AxeIron": {
+    "usesDurability": true,
+    "base": 175.0,
+    "perLevel": 50.0
+  },
+  "AxeJotunBane": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "AxeStone": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 30.0
+  },
+  "AxeWood": {
+    "usesDurability": true,
+    "base": 125.0,
+    "perLevel": 50.0
+  },
+  "Battleaxe": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeBlackmetal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeCrystal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeGoldUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeSkullSplittur": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "BattleaxeWood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "BoltBlackmetal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoltBloodGold": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoltBone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoltCarapace": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoltCharred": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BoltIron": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBile": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBlob_Frost": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBlob_Lava": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBlob_Morkhalla": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBlob_Poison": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBlob_PoisonElite": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombBlob_Tar": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombDynamite": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombLava": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombOoze": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombSiege": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BombSmoke": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Bow": {
+    "usesDurability": true,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "BowAshlands": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "BowAshlandsBlood": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "BowAshlandsRoot": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "BowAshlandsStorm": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "BowDraugrFang": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BowFineWood": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BowGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "BowGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BowGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "BowGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "BowHuntsman": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "BowSpineSnap": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "Club": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "CrossbowArbalest": {
+    "usesDurability": true,
+    "base": 150.0,
+    "perLevel": 50.0
+  },
+  "CrossbowGold": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "CrossbowGoldUncooked": {
+    "usesDurability": false,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "CrossbowGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "CrossbowGold_FrostFire": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "CrossbowRipper": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "CrossbowRipperBlood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "CrossbowRipperLightning": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "CrossbowRipperNature": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "FistBjornClaw": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "FistBjornUndeadClaw": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "FistFenrirClaw": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "FistGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "FistGoldUncooked": {
+    "usesDurability": false,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "FistGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "FistGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "GrapplingHook": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "KnifeBlackMetal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeButcher": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeChitin": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeCopper": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeFlint": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "KnifeGoldUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "KnifeGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "KnifeSilver": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeSkollAndHati": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "KnifeVoid": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "KnifeWood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "Lantern": {
+    "usesDurability": false,
+    "base": 0.0,
+    "perLevel": 0.0
+  },
+  "Lantern_DN": {
+    "usesDurability": false,
+    "base": 0.0,
+    "perLevel": 0.0
+  },
+  "MaceBronze": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "MaceEldner": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "MaceEldnerBlood": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "MaceEldnerLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "MaceEldnerNature": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "MaceGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "MaceGoldUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "MaceGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "MaceGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "MaceIron": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "MaceNeedle": {
+    "usesDurability": true,
+    "base": 150.0,
+    "perLevel": 50.0
+  },
+  "MaceSilver": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "MaceWood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "PickaxeAntler": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "PickaxeBlackMetal": {
+    "usesDurability": true,
+    "base": 210.0,
+    "perLevel": 50.0
+  },
+  "PickaxeBronze": {
+    "usesDurability": true,
+    "base": 120.0,
+    "perLevel": 50.0
+  },
+  "PickaxeIron": {
+    "usesDurability": true,
+    "base": 150.0,
+    "perLevel": 50.0
+  },
+  "PickaxeStone": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SledgeDemolisher": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "SledgeGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SledgeGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SledgeGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SledgeGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SledgeIron": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SledgeStagbreaker": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SledgeWood": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Snowball": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "Sparkler": {
+    "usesDurability": true,
+    "base": 8.0,
+    "perLevel": 0.0
+  },
+  "SpearBronze": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpearCarapace": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "SpearChitin": {
+    "usesDurability": true,
+    "base": 50.0,
+    "perLevel": 50.0
+  },
+  "SpearElderbark": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpearFlint": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpearGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SpearGoldUncooked": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpearGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SpearGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SpearSplitner": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SpearSplitner_Blood": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SpearSplitner_Lightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SpearSplitner_Nature": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SpearWolfFang": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "SpearWood": {
+    "usesDurability": true,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "StaffClusterbomb": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "StaffFireball": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffFrostOrbs": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "StaffFrostOrbsUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffGreenRoots": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffIceShards": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "StaffOrbofAhri": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "StaffOrbofAhriUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffRedTroll": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "StaffShield": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffSkeleton": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffSpiritCaller": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "StaffSpiritCallerUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "StaffThunderBlood": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "StaffThunderbloodUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordBlackmetal": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordBronze": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordDyrnwyn": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SwordGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SwordGoldUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SwordGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "SwordIron": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordIronFire": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordMistwalker": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "SwordNiedhogg": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SwordNiedhoggBlood": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SwordNiedhoggLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SwordNiedhoggNature": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "SwordSilver": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "SwordWood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "THSwordGold": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "THSwordGoldUncooked": {
+    "usesDurability": false,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "THSwordGold_BloodLightning": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "THSwordGold_FrostFire": {
+    "usesDurability": true,
+    "base": 400.0,
+    "perLevel": 50.0
+  },
+  "THSwordKrom": {
+    "usesDurability": true,
+    "base": 250.0,
+    "perLevel": 50.0
+  },
+  "THSwordSlayer": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "THSwordSlayerBlood": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "THSwordSlayerLightning": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "THSwordSlayerNature": {
+    "usesDurability": true,
+    "base": 300.0,
+    "perLevel": 50.0
+  },
+  "THSwordWood": {
+    "usesDurability": true,
+    "base": 200.0,
+    "perLevel": 50.0
+  },
+  "Torch": {
+    "usesDurability": true,
+    "base": 20.0,
+    "perLevel": 50.0
+  },
+  "TorchMist": {
+    "usesDurability": true,
+    "base": 20.0,
+    "perLevel": 50.0
+  },
+  "TurretBolt": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TurretBoltBloodgold": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TurretBoltBone": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TurretBoltFlametal": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "TurretBoltWood": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastAshlands": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastBlackforest": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastDeepNorth": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastMeadows": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastMistlands": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastMountains": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastOceans": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastPlains": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "FeastSwamps": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "LastBossGate_RuneTile": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "chest_hildir1": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "chest_hildir2": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "chest_hildir3": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "VineberrySeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  },
+  "VineGreenSeeds": {
+    "usesDurability": false,
+    "base": 100.0,
+    "perLevel": 50.0
+  }
+}

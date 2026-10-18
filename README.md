@@ -5,46 +5,85 @@ world saves, built around verified, byte-exact round-trips and retained backups.
 
 ## Quick setup
 
-### Windows: choose your setup
+### Windows: no installation needed (recommended)
 
-**Have a portable Rune copy? No Python installation is needed.** If the folder
-contains `runtime/pythonw.exe`, extract the whole copy and double-click
-**Launch Rune.cmd**. Keep `runtime` beside `server.py`; Rune uses that private
-runtime without installing Python system-wide. Continue with step 4 below.
+1. On this repository's main page, choose **Code → Download ZIP**, then
+   right-click the downloaded ZIP and choose **Extract All**. Open the extracted
+   folder containing `server.py` and **Launch Rune.cmd**.
+2. Open [Python's official Windows downloads](https://www.python.org/downloads/windows/).
+   Under a currently supported stable Python 3 release, choose **Windows
+   embeddable package (64-bit)** for an Intel/AMD Windows PC. For Windows on ARM,
+   choose **Windows embeddable package (ARM64)**. Do not choose the installer,
+   install manager, or a prerelease.
+3. Create a folder named **runtime** beside `server.py`. Extract **all contents**
+   of the Python ZIP directly into it. `python.exe` and `pythonw.exe` must be
+   directly inside `runtime`, not inside another nested folder. Keep the DLLs,
+   Python standard-library ZIP, and `python*._pth` file together and unchanged.
+4. Double-click **Launch Rune.cmd**. Rune opens in your browser.
+   **No Python installation, administrator access, Tcl/Tk, or pip is needed.**
+5. Follow [Open your first save](#open-your-first-save) below.
 
-**GitHub's Code → Download ZIP is source only.** It does not include Python or
-item artwork. A portable Windows release would be a separate download with a
-bundled, tested runtime; this README update does not add such a release.
+Your folder should look like this:
 
-For the source ZIP:
+```text
+rune-workshop-main/
+  Launch Rune.cmd
+  launch.py
+  server.py
+  backend/
+  web/
+  runtime/
+    python.exe
+    pythonw.exe
+    python315.dll       (the number depends on your Python version)
+    python315.zip
+    python315._pth
+    ...other files from the Python ZIP
+```
 
-1. Download **Code → Download ZIP**, then extract it. Open the extracted folder
-   containing `server.py` and **Launch Rune.cmd**; do not run it inside the ZIP.
-2. If you do not have Python, install a **currently supported stable Python 3
-   release** from [python.org](https://www.python.org/downloads/windows/), with
-   the Windows launcher (`pyw`) and Tcl/Tk components. **3.9 is Rune's minimum
-   compatibility version, not the recommended version to install.** No pip
-   packages are needed.
-3. Double-click **Launch Rune.cmd**. Rune opens in your browser and runs locally.
-4. Before editing, use Valheim's **Manage Saves** to move your **current** character
-   or world to **Local**, then quit Valheim completely, including the main menu.
-5. In Rune, choose **Open character** or the **World** tab. Select the current
-   local save, make your changes, then **Save** or **Save world**.
+Rune uses the official ZIP as supplied. The launcher adds Rune's own folder to
+Python's import path; you do not need to edit `._pth` or enable `site`.
+Python binaries are not stored in this repository, and there is no custom Rune
+runtime package to download. If your existing copy already has a working
+`runtime/pythonw.exe`, you can skip steps 2–3.
 
-Placeholder diamonds instead of item pictures are expected until you add
-[local item artwork](#item-artwork); editing still works.
+Item artwork is **not included**. Placeholder diamonds are expected and editing
+works with them. There is currently no first-install icon extraction wizard.
+If you have artwork from an existing Rune copy, see [Item artwork](#item-artwork).
+
+### Open your first save
+
+1. In Valheim, open **Manage Saves** and move your **current** character or world
+   to **Local**. Quit Valheim completely, including the main menu.
+2. In Rune, choose **Open character** or **World**. Select the current local save.
+   For a world, select its save folder; for a character, select its `.fch` file.
+3. Make your changes and choose **Save** or **Save world**. Rune backs up the
+   original before writing. **Export** creates a separate copy instead.
+4. Start Valheim and select that same Local character/world.
 
 If two characters have the same name, check their **Local / Steam Cloud** labels
 and modification dates. An old local copy may not be the character you currently
 play. Moving the current save to Local in the game avoids editing the wrong copy.
 
+### Optional: use an installed Python on Windows
+
+If you prefer a normal Python installation, install a currently supported stable
+Python 3 release from [python.org](https://www.python.org/downloads/windows/)
+with the Windows launcher (`pyw`), then double-click **Launch Rune.cmd**.
+A `runtime` folder is not required for this route. If the launcher is missing,
+you can run `python launch.py` in Command Prompt from the Rune folder instead.
+No pip packages are required.
+
+**Python 3.9 is the minimum compatibility version, not the recommended version
+to install.** For a new setup, use a currently supported stable release.
+
 ### macOS
 
-If needed, install a currently supported stable Python 3 release from
-[python.org](https://www.python.org/downloads/macos/),
-extract the ZIP, then double-click **Launch Rune.command**. See the launch notes
-below if macOS blocks the downloaded file. The same Local-save and closed-game
-requirements apply.
+Install a currently supported stable Python 3 release from
+[python.org](https://www.python.org/downloads/macos/), extract Rune's ZIP, then
+double-click **Launch Rune.command**. See the launch notes below if macOS blocks
+the downloaded file. Follow [Open your first save](#open-your-first-save) before
+editing. The Windows embeddable Python ZIP does not run on macOS.
 
 ### After updating Rune
 
@@ -55,18 +94,12 @@ an older server or reload its startup catalog. Save pending edits before restart
 
 ## Launch options
 
-Rune's minimum compatible Python version is 3.9. For a new installation, use a
-currently supported stable Python 3 release. A portable Windows copy supplies
-its own runtime, so no separate installation is needed. Rune requires no pip
-packages.
-
-Python also provides an [embeddable Windows ZIP](https://docs.python.org/3/using/windows.html#the-embeddable-package).
-It excludes Tcl/Tk, which Rune uses for its Windows file picker, so that ZIP alone
-is not a complete Rune runtime. A portable Rune package needs to include those
-components too.
+Rune requires Python 3.9 or newer, with no pip packages. For a new setup, use a
+currently supported stable Python 3 release. The official Windows embeddable
+ZIP works without installation; Windows uses its native file picker, not Tcl/Tk.
 
 - **Windows:** double-click **Launch Rune.cmd**. It uses a bundled
-  `runtime\pythonw.exe` when one is present and otherwise falls back to the
+  `runtime\pythonw.exe` through `launch.py` when one is present and otherwise falls back to the
   `pyw` launcher from a [python.org](https://www.python.org/downloads/) install.
 - **macOS:** double-click **Launch Rune.command**. It runs in a Terminal
   window; closing the window stops Rune. A `git clone` copy runs as is. A copy
@@ -202,13 +235,13 @@ running the tests and supplying optional private save fixtures.
 
 - `web`: browser interface
 - `backend`: required parser code, item metadata and artwork
-- `runtime`: optional bundled Python in a prepared portable copy; absent from the source ZIP
+- `runtime`: your extracted official Windows embeddable Python; absent from the source ZIP
 - `licenses`: upstream notices
 - `.runtime`: temporary working files, created when running
 
 The server binds only to 127.0.0.1 and makes no external requests. The Windows
 launcher runs it in the background. For a console that stops with Ctrl+C, run
-`runtime\python.exe server.py` (Windows) or `python3 server.py` from this directory.
+`runtime\python.exe launch.py` (Windows) or `python3 server.py` from this directory.
 
 Original browser interface using the patched miskamero/VikingEditor parser
 (https://github.com/miskamero/VikingEditor, GPL-3.0). Item labels were prepared
@@ -305,7 +338,8 @@ to its save folder. In-game arrival has not been manually tested.
 
 | What you see | What to do |
 |---|---|
-| “Python 3.9 or newer” when launching | 3.9 is the minimum, not an installation recommendation. Use a currently supported stable Python 3 release with the Windows launcher and Tcl/Tk, or a prepared portable Rune copy containing `runtime/pythonw.exe`. The source ZIP does not include a runtime. |
+| “Python 3.9 or newer” when launching | Extract the official embeddable Python ZIP into `runtime`, or use an installed Python with the Windows launcher. 3.9 is the minimum compatibility version, not an installation recommendation. |
+| Rune does not open | Check that `runtime/pythonw.exe` exists directly inside `runtime`. From Command Prompt in the Rune folder, run `runtime\python.exe launch.py --check`. A startup error dialog points to `.runtime/startup.log` when available. |
 | Diamonds instead of item pictures | Add your local icon folder, then relaunch Rune. See [Item artwork](#item-artwork). |
 | Save is disabled | Read the message above the tabs. Move Cloud saves to Local in Valheim, quit the game, and reopen the local save. Imported/dropped files must be reopened by their file path for direct saving. |
 | Edits do not appear in game | Check that you saved rather than only exported, and that the game loads the same Local character/world you edited. Compare names, storage labels and modification dates. |

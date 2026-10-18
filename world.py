@@ -2,6 +2,7 @@
 import copy, io, math, os, re, struct, zipfile
 from pathlib import Path
 from datetime import datetime
+from platforms import flush_to_disk
 from subscripts.playerDataUtil import get_stable_hash_code as hashcode, ITEM_HASH_TO_PREFAB
 
 def p(fmt,*values): return struct.pack('<'+fmt,*values)
@@ -158,7 +159,7 @@ def parse_chunk(raw,texts=None,tombs=None):
 def generations(path):
     return sorted(int(m.group(1)) for f in path.glob('_main.*.ok') if (m:=re.fullmatch(r'_main\.(\d+)\.ok',f.name)))
 def durable(path,data):
-    with open(path,'xb') as f:f.write(data);f.flush();os.fsync(f.fileno())
+    with open(path,'xb') as f:f.write(data);flush_to_disk(f)
     if path.read_bytes()!=data:raise ValueError('Write verification failed.')
 class World:
     def __init__(self,path):

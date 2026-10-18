@@ -59,7 +59,10 @@ character in Rune.
 Before a changed save, Rune writes and verifies an exact backup in the
 `.rune-backups` folder beside the character. It then atomically replaces the
 character file, without a missing-file interval. Every backup ends in `.fch.old`.
-External file changes and a running game block saving.
+External file changes and a running game block saving. Rune re-reads the file
+immediately before replacing it, but it cannot lock out other programs: if Steam
+Cloud sync or another editor writes the same save in that final instant, its
+write can be overwritten. Keep Steam and other save tools idle while saving.
 
 **Backups** lists both current and older editor backups and lets you download a
 verified `.fch` restore copy. **Export** downloads the edited character separately.
@@ -120,6 +123,10 @@ one-based in the UI; use the actual container dimensions in game.
 **Save world** requires a local world and a closed game. It verifies the loaded
 files have not changed, creates a verified full-generation ZIP in the world's
 .rune-backups folder, and writes a new generation with its commit marker last.
+The marker is written to a temporary file and renamed into place, so it is
+either complete or absent; if a save fails, the files it already wrote are
+removed. If an older Rune version left an incomplete marker, Rune opens the
+previous complete generation, says so, and the next save writes a complete one.
 The old generation is retained. The saved backup path is displayed after saving.
 To restore, close Valheim and extract the backup world folder into a separate
 location; do not merge it over a newer world generation.

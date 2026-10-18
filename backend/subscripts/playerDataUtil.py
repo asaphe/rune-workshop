@@ -551,9 +551,9 @@ def pack_player_data_hex(data: dict) -> str:
             100.0
         )
 
-        durability_raw = int(
+        durability_raw = int(round(
             durability * 100.0
-        )
+        ))
 
         pkg.write_int32(durability_raw)
 

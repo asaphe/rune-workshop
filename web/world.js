@@ -42,7 +42,7 @@ function renderContainers(){
  $('containerList').innerHTML=rows.length?rows.map(c=>'<button class="container-row '+(c.id===worldSelected?'active':'')+'" data-container="'+c.id+'"><strong>'+esc(containerTitle(c))+'</strong><small>X '+Math.round(c.position[0])+' · Y '+Math.round(c.position[1])+' · Z '+Math.round(c.position[2])+'</small><small>'+(c.error?'Unsupported inventory':c.items.length+' item stacks')+'</small></button>').join(''):'<p class="muted">No matching containers.</p>';
 }
 let containerItemSelected=0;
-function containerSize(c){return {width:Math.max(c.size?.width||5,...c.items.map(i=>i.grid_x+1)),height:Math.max(c.size?.height||2,...c.items.map(i=>i.grid_y+1))}}
+function containerSize(c){const items=c.items||[];return {width:Math.max(c.size?.width||5,...items.map(i=>i.grid_x+1)),height:Math.max(c.size?.height||2,...items.map(i=>i.grid_y+1))}}
 function freeContainerSlot(c){
  if(!c.size)return null;
  for(let y=0;y<c.size.height;y++)for(let x=0;x<c.size.width;x++)if(!c.items.some(i=>i.grid_x===x&&i.grid_y===y))return {x,y};
@@ -50,7 +50,7 @@ function freeContainerSlot(c){
 }
 function renderContainerGrid(){
  const c=worldState?.containers.find(c=>c.id===worldSelected);if(!c||!$('containerGrid'))return;
- const dim=containerSize(c);let html='';
+ if(c.error)return;const dim=containerSize(c);let html='';
  for(let y=0;y<dim.height;y++)for(let x=0;x<dim.width;x++){
   const n=c.items.findIndex(i=>i.grid_x===x&&i.grid_y===y),i=c.items[n];
   html+=`<button type="button" class="slot ${i?'':'empty'} ${n>=0&&n===containerItemSelected?'selected':''}" data-container-slot="${n}" aria-label="${i?esc(itemName(i))+'; quantity '+i.stack:'Empty slot '+(x+1)+', row '+(y+1)}">${i?icon(i)+`<span class="item-name">${esc(itemName(i))}</span><span class="stack">${i.stack}</span>`:'＋'}</button>`;
@@ -112,7 +112,7 @@ async function openWorld(path){
  if(worldDirty()&&!confirm('Discard unsaved world changes and open another world?'))return;
  busy(true,'Reading world containers…');
  try{
-  worldState=await(await api('/api/world/open',{path})).json();worldBaseline=worldSnapshot();worldHistory=[];worldSelected=worldState.containers[0]?.id;containerItemSelected=0;
+  worldState=await(await api('/api/world/open',{path})).json();if(worldState.warning)toast(worldState.warning,true);worldBaseline=worldSnapshot();worldHistory=[];worldSelected=worldState.containers[0]?.id;containerItemSelected=0;
   $('worldPath').value=worldState.path;$('worldContents').hidden=false;worldFilters();worldChanged();renderContainer();renderWorldExtras();
  }catch(e){$('worldStatus').textContent=e.message;toast(e.message,true)}finally{busy(false)}
 }
@@ -124,7 +124,7 @@ $('worldSave').onclick=async()=>{
  try{
   const result=await(await api('/api/world/save',worldPayload())).json();
   worldState=result.world;worldBaseline=worldSnapshot();worldHistory=[];worldChanged();renderContainer();renderWorldExtras();
-  $('worldSaveHelp').textContent=result.unchanged?'No changes to save.':'Saved generation '+result.generation+'. Full backup: '+result.backup;
+  $('worldSaveHelp').textContent=result.unchanged?'No changes to save.':'Saved generation '+result.generation+'. Full backup: '+result.backup+(result.warning?' '+result.warning:'');
   toast(result.unchanged?'No changes to save.':'World saved. Previous generation and backup retained.');
  }catch(e){$('worldSaveHelp').textContent=e.message;toast(e.message,true)}finally{busy(false)}
 };

@@ -175,7 +175,6 @@ def read_string_list(pkg: BinaryReader) -> list:
 # .fch -> JSON
 
 def decompile_fch(fch_path: str) -> dict:
-    print(f"Reading binary save: {fch_path}")
 
     with open(fch_path, "rb") as f:
         file_bytes = f.read()
@@ -355,14 +354,12 @@ def decompile_fch(fch_path: str) -> dict:
 
     if pkg.stream.tell() != len(zpackage_bytes):
         raise ValueError("Unexpected trailing profile data")
-    print("Successfully unpacked save.")
 
     return save_data
 
 # JSON -> .fch
 
 def compile_fch(json_path: str, fch_path: str):
-    print(f"Reading JSON file: {json_path}")
 
     with open(json_path, "r", encoding="utf-8") as f:
         save_data = json.load(f)
@@ -679,10 +676,6 @@ def compile_fch(json_path: str, fch_path: str):
             file_writer.get_bytes()
         )
 
-    print(
-        f"Successfully compiled and hashed! "
-        f"File created at: {fch_path}"
-    )
 
 # CLI, klinoff likey
 if __name__ == "__main__":

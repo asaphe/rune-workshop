@@ -80,6 +80,7 @@ def encode_inventory(v,items,originals):
     inventory(out);return out
 def chunk_name(c):return f'{c[0]>>8:02x}_{c[0]&255:02x}__{c[1]}_{c[2]}.chunk'
 TEXT_PREFABS={hashcode('portal_wood'):('portal','tag'),hashcode('portal_stone'):('portal','tag'),hashcode('sign'):('sign','text'),hashcode('sign_notext'):('sign','text')}
+PORTAL_PREFABS={h for h,(kind,_) in TEXT_PREFABS.items() if kind=='portal'}
 MODIFIERS={'nobuildcost','passivemobs','teleportall','playerevents','fire'}
 
 def num(n):
@@ -110,7 +111,7 @@ def patch_settings(raw,settings):
     result=raw[4:meta['start']]+p('i',len(keys))+b''.join(string(k) for k in keys)+raw[meta['end']:]
     result=p('i',len(result))+result;metadata(result);return result
 
-def parse_chunk(raw,texts=None,tombs=None):
+def parse_chunk(raw,texts=None,tombs=None,links=None):
     r=Reader(raw);v=r.read('h');count=r.read('i')
     if v not in (40,41,42) or not 0<=count<=len(raw)//10:raise ValueError('Unsupported chunk format.')
     containers=[]
@@ -144,11 +145,14 @@ def parse_chunk(raw,texts=None,tombs=None):
                     if key==hashcode('items') and creator!=0:
                         entry=dict(creator=str(creator),object=obj,position=pos,prefab_hash=prefab,start=start,end=end)
                         try:entry['version'],entry['items']=inventory(data)
-                        except ValueError as e:entry['error']=str(e)
+                        except ValueError as e:entry['error']=str(e);entry['items']=[]
                         containers.append(entry)
             if bit==64:strings_end=r.pos
         if tombs is not None and prefab==hashcode('Player_tombstone') and owner and grave_items:
             tombs.append(dict(owner=str(owner),ownerName=strings.get(hashcode('ownerName'),{}).get('value',''),position=pos,items=grave_items))
+        # Every linked portal, whoever built it, so retagging one side can unlink the other.
+        if links is not None and connection and prefab in PORTAL_PREFABS:
+            links.append(dict(object=obj,object_start=object_start,flags=flags,connection=connection))
         if texts is not None and creator and prefab in TEXT_PREFABS:
             kind,key=TEXT_PREFABS[prefab];field=strings.get(hashcode(key))
             texts.append(dict(object=obj,creator=str(creator),position=pos,prefab_hash=prefab,kind=kind,key=key,
@@ -158,16 +162,26 @@ def parse_chunk(raw,texts=None,tombs=None):
 
 def generations(path):
     return sorted(int(m.group(1)) for f in path.glob('_main.*.ok') if (m:=re.fullmatch(r'_main\.(\d+)\.ok',f.name)))
-def durable(path,data):
-    with open(path,'xb') as f:f.write(data);flush_to_disk(f)
+def durable(path,data,created=None):
+    with open(path,'xb') as f:
+        if created is not None:created.append(path)
+        f.write(data);flush_to_disk(f)
     if path.read_bytes()!=data:raise ValueError('Write verification failed.')
+def complete_marker(path):
+    raw=path.read_bytes()
+    return len(raw)==4 and struct.unpack('<i',raw)[0] in (40,41,42)
 class World:
     def __init__(self,path):
         self.path=Path(str(path).strip().strip('"')).resolve()
         if self.path.is_file():self.path=self.path.parent
         nums=generations(self.path)
         if not nums:raise ValueError('Choose a Valheim 1.0 world folder containing _main.<number>.ok and .chunks files.')
-        self.number=max(nums);self.files={};self.containers=[];self.texts=[];self.tombs=[];prefix=f'_main.{self.number}'
+        # A save interrupted while writing its marker leaves an empty or partial .ok; the previous generation is still the committed one.
+        complete=[n for n in nums if complete_marker(self.path/f'_main.{n}.ok')]
+        if not complete:raise ValueError('No complete world generation: every _main.<number>.ok marker is empty or invalid.')
+        self.seen=nums;self.number=max(complete)
+        self.warning=f'Generation {max(nums)} was never finished (its _main.{max(nums)}.ok marker is incomplete), so generation {self.number} was opened. Saving writes a new, complete generation.' if self.number!=max(nums) else None
+        self.files={};self.containers=[];self.texts=[];self.tombs=[];self.links=[];prefix=f'_main.{self.number}'
         for ext in ('.chunks','.fwl2','.db2','.ok'):self.files[prefix+ext]=(self.path/(prefix+ext)).read_bytes()
         self.settings_error=None
         self.meta=metadata(self.files[prefix+'.fwl2'])
@@ -179,21 +193,23 @@ class World:
         actual=0
         for c in self.chunks:
             name=chunk_name(c);raw=(self.path/name).read_bytes();self.files[name]=raw
-            texts=[];count,entries=parse_chunk(raw,texts,self.tombs);actual+=count
+            texts=[];links=[];count,entries=parse_chunk(raw,texts,self.tombs,links);actual+=count
             for entry in texts:
                 entry.update(id=str(len(self.texts)),chunk=name);self.texts.append(entry)
+            for link in links:
+                link.update(chunk=name);self.links.append(link)
             if count!=c[3]:raise ValueError('Chunk count mismatch.')
             for entry in entries:
                 entry.update(id=str(len(self.containers)),chunk=name);self.containers.append(entry)
         if actual!=total:raise ValueError('World object count mismatch.')
         self.verify_source()
     def verify_source(self):
-        if max(generations(self.path),default=-1)!=self.number:raise ValueError('World changed since opening. Reopen it before saving.')
+        if generations(self.path)!=self.seen:raise ValueError('World changed since opening. Reopen it before saving.')
         for name,raw in self.files.items():
             if (self.path/name).read_bytes()!=raw:raise ValueError('World changed since opening. Reopen it before saving.')
     def public(self):
         parts=[x.lower() for x in self.path.parts];cloud='userdata' in parts and 'remote' in parts
-        return dict(name=self.path.name,path=str(self.path),generation=self.number,canSave=not cloud,containers=self.containers,texts=self.texts,
+        return dict(name=self.path.name,path=str(self.path),generation=self.number,canSave=not cloud,containers=self.containers,texts=self.texts,warning=self.warning,
           settings={key:any(k.lower()==key for k in self.meta['keys']) for key in sorted(MODIFIERS)} if self.meta else None,
           settingsError=self.settings_error,
           saveHelp='Steam Cloud world: move it to Local in Valheim Manage Saves, then quit Valheim and reopen it.' if cloud else 'Save creates a new world generation and a complete backup ZIP. Close Valheim first.')
@@ -220,7 +236,9 @@ class World:
             changed_texts[key]=(entry,value)
             conn=entry['connection']
             if entry['kind']=='portal' and conn and conn['type'] in (1,17):disconnect.add(conn['hash'])
-        for entry in self.texts:
+        text_objects={(t['chunk'],t['object_start']) for t in self.texts}
+        peers=[dict(link,kind='portal',id=None) for link in self.links if (link['chunk'],link['object_start']) not in text_objects]
+        for entry in self.texts+peers:
             change=changed_texts.get(entry['id']);conn=entry['connection'];flags=entry['flags']
             remove_conn=entry['kind']=='portal' and conn and conn['type'] in (1,17) and conn['hash'] in disconnect
             if not change and not remove_conn:continue
@@ -274,9 +292,18 @@ class World:
         number,files=built;folder=self.path/'.rune-backups';folder.mkdir(exist_ok=True)
         backup=folder/(datetime.now().strftime('%Y%m%d-%H%M%S-%f')+'.zip')
         durable(backup,self.archive(self.files));self.verify_source();ensure_closed()
-        marker=f'_main.{number}.ok'
-        for name,data in files.items():
-            if name!=marker:durable(self.path/name,data)
-        self.verify_source();ensure_closed();durable(self.path/marker,files[marker])
-        refreshed=World(self.path);self.__dict__.update(refreshed.__dict__)
-        return dict(unchanged=False,backup=str(backup),generation=number)
+        marker=f'_main.{number}.ok';staged=self.path/f'.{marker}.tmp';created=[];committed=False
+        try:
+            for name,data in files.items():
+                if name!=marker:durable(self.path/name,data,created)
+            staged.unlink(missing_ok=True);durable(staged,files[marker],created)
+            self.verify_source();ensure_closed()
+            if (self.path/marker).exists():raise ValueError('World changed since opening. Reopen it before saving.')
+            # The marker appears complete or not at all, so a crash can never leave a torn commit.
+            os.replace(staged,self.path/marker);committed=True
+        finally:
+            if not committed:
+                for leftover in created:leftover.unlink(missing_ok=True)
+        try:refreshed=World(self.path);self.__dict__.update(refreshed.__dict__);warning=None
+        except (OSError,ValueError,struct.error) as e:warning=f'Saved, but reopening the new generation failed ({e}). Reopen the world before making more changes.'
+        return dict(unchanged=False,backup=str(backup),generation=number,warning=warning)

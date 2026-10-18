@@ -180,6 +180,7 @@ class World:
         complete=[n for n in nums if not torn_marker(self.path/f'_main.{n}.ok')]
         if not complete:raise ValueError('No complete world generation: every _main.<number>.ok marker is empty or partial.')
         self.seen=nums;self.number=max(complete)
+        self.markers={n:(self.path/f'_main.{n}.ok').read_bytes() for n in nums}
         self.warning=f'Generation {max(nums)} was never finished (its _main.{max(nums)}.ok marker is empty or partial), so generation {self.number} was opened. Saving writes a new, complete generation.' if self.number!=max(nums) else None
         self.files={};self.containers=[];self.texts=[];self.tombs=[];self.links=[];prefix=f'_main.{self.number}'
         for ext in ('.chunks','.fwl2','.db2','.ok'):self.files[prefix+ext]=(self.path/(prefix+ext)).read_bytes()
@@ -205,6 +206,8 @@ class World:
         self.verify_source()
     def verify_source(self):
         if generations(self.path)!=self.seen:raise ValueError('World changed since opening. Reopen it before saving.')
+        for n,raw in self.markers.items():
+            if (self.path/f'_main.{n}.ok').read_bytes()!=raw:raise ValueError('World changed since opening. Reopen it before saving.')
         for name,raw in self.files.items():
             if (self.path/name).read_bytes()!=raw:raise ValueError('World changed since opening. Reopen it before saving.')
     def public(self):
@@ -307,6 +310,7 @@ class World:
             for leftover in staged_left:
                 try:leftover.unlink(missing_ok=True)
                 except OSError:pass
-        try:refreshed=World(self.path);self.__dict__.update(refreshed.__dict__);warning=None
-        except (OSError,ValueError,struct.error) as e:warning=f'Saved, but reopening the new generation failed ({e}). Reopen the world before making more changes.'
-        return dict(unchanged=False,backup=str(backup),generation=number,warning=warning)
+        try:refreshed=World(self.path);self.__dict__.update(refreshed.__dict__)
+        except (OSError,ValueError,struct.error) as e:
+            return dict(unchanged=False,backup=str(backup),generation=number,reopen=True,warning=f'Saved generation {number}, but reading it back failed ({e}). Reopen the world before making more changes.')
+        return dict(unchanged=False,backup=str(backup),generation=number,warning=None)

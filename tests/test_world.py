@@ -153,8 +153,16 @@ class WorldTests(unittest.TestCase):
     def test_refresh_failure_after_commit_reports_success_with_warning(self):
         with patch.object(world,'World',side_effect=ValueError('boom')):result=self.w.save(self.changes(),lambda:None)
         self.assertFalse(result['unchanged'])
+        self.assertTrue(result['reopen'])
         self.assertIn('Reopen the world',result['warning'])
         self.assertEqual(world.generations(self.path),[1,result['generation']])
+        with self.assertRaisesRegex(ValueError,'changed since opening'):self.w.save(self.changes(),lambda:None)
+    def test_marker_completed_in_place_after_opening_counts_as_a_change(self):
+        number,files=self.w.build(self.changes())
+        for name,data in files.items():(self.path/name).write_bytes(b'' if name.endswith('.ok') else data)
+        stale=world.World(self.path);self.assertEqual(stale.number,1)
+        (self.path/f'_main.{number}.ok').write_bytes(files[f'_main.{number}.ok'])
+        with self.assertRaisesRegex(ValueError,'changed since opening'):stale.save([],lambda:None,settings={'nobuildcost':True})
     def test_retagging_unlinks_peer_portal_without_creator(self):
         def portal(creator,tag):
             return world.p('Hfffi',1|32|64,1.,2.,3.,world.hashcode('portal_wood'))+world.p('Bi',1,4242)+bytes([1])+world.p('iq',world.hashcode('creator'),creator)+bytes([1])+world.p('i',world.hashcode('tag'))+world.string(tag)

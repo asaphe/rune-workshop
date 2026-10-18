@@ -65,6 +65,17 @@ class SessionTests(unittest.TestCase):
             moved=server.decode(server.export_save(dict(session=sid,player=player,teleportTarget=rows[0]['id'])))[0]
         self.assertEqual(moved['worlds'][0]['logout_point'],[1.,2.,3.])
 
+    def test_scan_does_not_republish_choices_for_an_evicted_session(self):
+        sid=server.open_save(self.raw,'x.fch')['session']
+        root,_,_=server.SESSIONS[sid];root['worlds']=[dict(world_id=1)]
+        fake=type('W',(),{'path':Path('/w'),'seen':[1],'number':1,'warning':None,'meta':dict(uid='1',name='W'),'tombs':[]})()
+        def load_while_evicting(path):
+            with server.LOCK:server.SESSIONS.pop(sid);server.RECOVERY.pop(sid,None)
+            return fake
+        with patch.object(server,'World',side_effect=load_while_evicting),self.assertRaisesRegex(ValueError,'expired'):
+            server.scan_tombstones(dict(session=sid,path='/w'))
+        self.assertNotIn(sid,server.RECOVERY)
+
     def test_world_sessions_are_capped_and_replaced_per_path(self):
         worlds=[type('W',(),{'path':Path(f'/w{i}')})() for i in range(6)]
         with patch.object(server,'MAX_WORLDS',3):
@@ -106,6 +117,16 @@ class TokenTests(unittest.TestCase):
 
     def test_icons_require_token(self):
         self.assertEqual(self.request('/icons/'+'a'*64+'.png')[0].status,403)
+
+    def test_committed_world_save_is_never_reported_as_failed(self):
+        import json
+        committed=type('W',(),{'save':lambda self,*a:dict(unchanged=False,backup='b.zip',generation=2,warning=None)})()
+        body=json.dumps(dict(session='s',changes=[])).encode()
+        with patch.object(server,'world_session',return_value=committed),patch.object(server,'world_public',side_effect=FileNotFoundError('character vanished')):
+            response,data=self.request('/api/world/save',{'Cookie':f'rune{self.port}={server.TOKEN}','Content-Type':'application/json'},'POST',body)
+        result=json.loads(data)
+        self.assertEqual((response.status,result['generation'],result['reopen']),(200,2,True))
+        self.assertIn('character vanished',result['warning'])
 
     def test_static_page_and_csp(self):
         response,_=self.request('/')

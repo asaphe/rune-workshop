@@ -200,7 +200,9 @@ def scan_tombstones(data):
         if grave['owner']!=str(root['player_id']):continue
         token=secrets.token_hex(16);choices[token]=dict(path=world.path,seen=world.seen,number=world.number,uid=world.meta['uid'],grave=grave)
         rows.append(dict(id=token,position=grave['position'],items=[dict(prefab=i['prefab'] or str(i['prefab_hash']),stack=i['stack']) for i in grave['items']]))
-    with LOCK:RECOVERY[data['session']]=choices
+    with LOCK:
+        if data['session'] not in SESSIONS:raise ValueError('Session expired. Reopen your character.')
+        RECOVERY[data['session']]=choices
     return dict(world=world.meta['name'],tombstones=rows,warning=getattr(world,'warning',None))
 
 def is_cloud_cache(path):
@@ -379,7 +381,10 @@ class Handler(BaseHTTPRequestHandler):
                     world=world_session(data['session'])
                     if self.path.endswith('/export'):return self.send(200,world.export(data.get('changes',[]),data.get('texts'),data.get('settings')),'application/zip')
                     result=world.save(data.get('changes',[]),ensure_game_closed,data.get('texts'),data.get('settings'))
-                    result['world']=world_public(world,data['session'])
+                    if not result.get('unchanged') and not result.get('reopen'):
+                        try:result['world']=world_public(world,data['session'])
+                        except Exception as exc:result.update(reopen=True,warning=f'Saved generation {result["generation"]}, but preparing the updated view failed ({exc}). Reopen the world before making more changes.')
+                    elif result.get('unchanged'):result['world']=world_public(world,data['session'])
                 return self.send(200,result)
             if self.path=='/api/backups':return self.send(200,list_backups(data['session']))
             if self.path=='/api/backup-copy':

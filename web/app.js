@@ -11,7 +11,7 @@ const fmt=n=>Number(n||0).toLocaleString(undefined,{maximumFractionDigits:1});
 const snapshot=()=>JSON.stringify({name:state.name,usedCheats:state.usedCheats,teleportTarget:state.teleportTarget||null,player:state.player});
 const dirty=()=>state&&snapshot()!==saved;
 function toast(message,error=false){$('toast').textContent=message;$('toast').className='toast'+(error?' error':'');$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,error?9000:4000)}
-function busy(on,message='Reading your character…'){$('busy').hidden=!on;$('busyText').textContent=message;for(const el of document.querySelectorAll('main,dialog'))el.inert=on}
+function busy(on,message='Reading your character…'){$('busy').hidden=!on;$('busyText').textContent=message;for(const el of document.querySelectorAll('header,main,dialog'))el.inert=on}
 const isBusy=()=>!$('busy').hidden;
 async function api(url,data,raw=false,filename=''){const options=data===undefined?{}:{method:'POST',headers:raw?{'Content-Type':'application/octet-stream','X-Filename':encodeURIComponent(filename)}:{'Content-Type':'application/json'},body:raw?data:JSON.stringify(data)};const response=await fetch(url,options);if(!response.ok){const e=await response.json();throw Error(e.error||'Request failed')}return response}
 function remember(){history.push(snapshot());if(history.length>80)history.shift();future=[]}

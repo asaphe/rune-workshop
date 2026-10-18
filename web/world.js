@@ -13,7 +13,7 @@ $('worldWorkspace').onclick=()=>setWorldMode(true);$('characterWorkspace').oncli
 function worldRemember(){worldHistory.push(worldSnapshot());if(worldHistory.length>50)worldHistory.shift()}
 function worldChanged(){worldControls();renderContainers();renderContainerGrid()}
 function worldControls(){
- $('worldUndo').disabled=!worldHistory.length;$('worldExport').disabled=!worldState;
+ $('worldUndo').disabled=!worldHistory.length;$('worldExport').disabled=!worldState||!!worldState.reopenRequired;
  $('worldSave').disabled=!worldState?.canSave||!worldDirty();
  if(worldState){
   $('worldSaveHelp').textContent=worldState.saveHelp;
@@ -123,8 +123,9 @@ $('worldSave').onclick=async()=>{
  busy(true,'Backing up and saving the world…');
  try{
   const result=await(await api('/api/world/save',worldPayload())).json();
-  worldState=result.world;worldBaseline=worldSnapshot();worldHistory=[];worldChanged();renderContainer();renderWorldExtras();
-  $('worldSaveHelp').textContent=result.unchanged?'No changes to save.':'Saved generation '+result.generation+'. Full backup: '+result.backup+(result.warning?' '+result.warning:'');
+  if(result.reopen){worldState.canSave=false;worldState.reopenRequired=true;worldState.saveHelp=result.warning;worldBaseline=worldSnapshot();worldHistory=[];worldChanged()}
+  else{worldState=result.world;worldBaseline=worldSnapshot();worldHistory=[];worldChanged();renderContainer();renderWorldExtras()}
+  $('worldSaveHelp').textContent=result.unchanged?'No changes to save.':result.reopen?result.warning:'Saved generation '+result.generation+'. Full backup: '+result.backup;
   if(result.warning)toast(result.warning,true);else toast(result.unchanged?'No changes to save.':'World saved. Previous generation and backup retained.');
  }catch(e){$('worldSaveHelp').textContent=e.message;toast(e.message,true)}finally{busy(false)}
 };

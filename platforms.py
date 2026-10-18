@@ -112,6 +112,50 @@ def sync_directory(path):
         finally:os.close(fd)
     except OSError:pass
 
+def _windows_file_picker(start):
+    """Windows common dialog; no Tk, installer, or third-party modules required."""
+    import ctypes
+    from ctypes import wintypes as w
+
+    class OpenFileName(ctypes.Structure):
+        _fields_ = [
+            ('lStructSize', w.DWORD), ('hwndOwner', w.HWND), ('hInstance', w.HINSTANCE),
+            ('lpstrFilter', w.LPCWSTR), ('lpstrCustomFilter', w.LPWSTR),
+            ('nMaxCustFilter', w.DWORD), ('nFilterIndex', w.DWORD),
+            ('lpstrFile', w.LPWSTR), ('nMaxFile', w.DWORD),
+            ('lpstrFileTitle', w.LPWSTR), ('nMaxFileTitle', w.DWORD),
+            ('lpstrInitialDir', w.LPCWSTR), ('lpstrTitle', w.LPCWSTR),
+            ('Flags', w.DWORD), ('nFileOffset', w.WORD), ('nFileExtension', w.WORD),
+            ('lpstrDefExt', w.LPCWSTR), ('lCustData', ctypes.c_ssize_t),
+            ('lpfnHook', ctypes.c_void_p), ('lpTemplateName', w.LPCWSTR),
+            ('pvReserved', ctypes.c_void_p), ('dwReserved', w.DWORD), ('FlagsEx', w.DWORD),
+        ]
+
+    dialog = ctypes.WinDLL('comdlg32', use_last_error=True)
+    dialog.GetOpenFileNameW.argtypes = [ctypes.POINTER(OpenFileName)]
+    dialog.GetOpenFileNameW.restype = w.BOOL
+    dialog.CommDlgExtendedError.argtypes = []
+    dialog.CommDlgExtendedError.restype = w.DWORD
+    filename = ctypes.create_unicode_buffer(32768)
+    options = OpenFileName()
+    options.lStructSize = ctypes.sizeof(options)
+    options.lpstrFilter = 'Valheim character (*.fch)\0*.fch\0\0'
+    options.nFilterIndex = 1
+    options.lpstrFile = ctypes.cast(filename, w.LPWSTR)
+    options.nMaxFile = len(filename)
+    options.lpstrInitialDir = str(start)
+    options.lpstrTitle = 'Open Valheim character'
+    options.lpstrDefExt = 'fch'
+    # Explorer dialog, existing file/path, stable process cwd, no Recent entry.
+    options.Flags = 0x00080000 | 0x00001000 | 0x00000800 | 0x00000008 | 0x02000000
+    if dialog.GetOpenFileNameW(ctypes.byref(options)):
+        return filename.value or None
+    error = dialog.CommDlgExtendedError()
+    if error:
+        raise ValueError(f'The file picker could not be opened (Windows error 0x{error:04x}). Paste the file path instead.')
+    return None
+
+
 def pick_character_file():
     """Returns the chosen path, or None when the person cancels."""
     start=next((d for d in local_dirs('characters') if d.is_dir()),Path.home())
@@ -124,6 +168,8 @@ def pick_character_file():
             if re.search(r'\(-128\)\s*$',result.stderr):return None
             raise ValueError('The file picker could not be opened: '+result.stderr.strip())
         return result.stdout.strip() or None
+    if WINDOWS:
+        return _windows_file_picker(start)
     import tkinter as tk
     from tkinter import filedialog
     window=tk.Tk();window.withdraw();window.attributes('-topmost',True)

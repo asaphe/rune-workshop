@@ -3,12 +3,103 @@
 A local-only browser editor for Valheim character saves (`.fch`) and Valheim 1.0
 world saves, built around verified, byte-exact round-trips and retained backups.
 
-## Running
+## Quick setup
 
-Rune needs Python 3.9 or newer and nothing else (standard library only).
+### Windows: no installation needed (recommended)
+
+1. On this repository's main page, choose **Code → Download ZIP**, then
+   right-click the downloaded ZIP and choose **Extract All**. Open the extracted
+   folder containing `server.py` and **Launch Rune.cmd**.
+2. Open [Python's official Windows downloads](https://www.python.org/downloads/windows/).
+   Under a currently supported stable Python 3 release, choose **Windows
+   embeddable package (64-bit)** for an Intel/AMD Windows PC. For Windows on ARM,
+   choose **Windows embeddable package (ARM64)**. Do not choose the installer,
+   install manager, or a prerelease.
+3. Create a folder named **runtime** beside `server.py`. Extract **all contents**
+   of the Python ZIP directly into it. `python.exe` and `pythonw.exe` must be
+   directly inside `runtime`, not inside another nested folder. Keep the DLLs,
+   Python standard-library ZIP, and `python*._pth` file together and unchanged.
+4. Double-click **Launch Rune.cmd**. Rune opens in your browser.
+   **No Python installation, administrator access, Tcl/Tk, or pip is needed.**
+5. Follow [Open your first save](#open-your-first-save) below.
+
+Your folder should look like this:
+
+```text
+rune-workshop-main/
+  Launch Rune.cmd
+  launch.py
+  server.py
+  backend/
+  web/
+  runtime/
+    python.exe
+    pythonw.exe
+    python315.dll       (the number depends on your Python version)
+    python315.zip
+    python315._pth
+    ...other files from the Python ZIP
+```
+
+Rune uses the official ZIP as supplied. The launcher adds Rune's own folder to
+Python's import path; you do not need to edit `._pth` or enable `site`.
+Python binaries are not stored in this repository, and there is no custom Rune
+runtime package to download. If your existing copy already has a working
+`runtime/pythonw.exe`, you can skip steps 2–3.
+
+Item artwork is **not included**. Placeholder diamonds are expected and editing
+works with them. There is currently no first-install icon extraction wizard.
+If you have artwork from an existing Rune copy, see [Item artwork](#item-artwork).
+
+### Open your first save
+
+1. In Valheim, open **Manage Saves** and move your **current** character or world
+   to **Local**. Quit Valheim completely, including the main menu.
+2. In Rune, choose **Open character** or **World**. Select the current local save.
+   For a world, select its save folder; for a character, select its `.fch` file.
+3. Make your changes and choose **Save** or **Save world**. Rune backs up the
+   original before writing. **Export** creates a separate copy instead.
+4. Start Valheim and select that same Local character/world.
+
+If two characters have the same name, check their **Local / Steam Cloud** labels
+and modification dates. An old local copy may not be the character you currently
+play. Moving the current save to Local in the game avoids editing the wrong copy.
+
+### Optional: use an installed Python on Windows
+
+If you prefer a normal Python installation, install a currently supported stable
+Python 3 release from [python.org](https://www.python.org/downloads/windows/)
+with the Windows launcher (`pyw`), then double-click **Launch Rune.cmd**.
+A `runtime` folder is not required for this route. If the launcher is missing,
+you can run `python launch.py` in Command Prompt from the Rune folder instead.
+No pip packages are required.
+
+**Python 3.9 is the minimum compatibility version, not the recommended version
+to install.** For a new setup, use a currently supported stable release.
+
+### macOS
+
+Install a currently supported stable Python 3 release from
+[python.org](https://www.python.org/downloads/macos/), extract Rune's ZIP, then
+double-click **Launch Rune.command**. See the launch notes below if macOS blocks
+the downloaded file. Follow [Open your first save](#open-your-first-save) before
+editing. The Windows embeddable Python ZIP does not run on macOS.
+
+### After updating Rune
+
+Keep your portable `runtime` folder and locally extracted
+`backend/local-data/item_icons` folder when moving to a new download. Relaunch
+Rune and use its newly opened browser tab. Refreshing an old tab does not restart
+an older server or reload its startup catalog. Save pending edits before restarting.
+
+## Launch options
+
+Rune requires Python 3.9 or newer, with no pip packages. For a new setup, use a
+currently supported stable Python 3 release. The official Windows embeddable
+ZIP works without installation; Windows uses its native file picker, not Tcl/Tk.
 
 - **Windows:** double-click **Launch Rune.cmd**. It uses a bundled
-  `runtime\pythonw.exe` when one is present and otherwise falls back to the
+  `runtime\pythonw.exe` through `launch.py` when one is present and otherwise falls back to the
   `pyw` launcher from a [python.org](https://www.python.org/downloads/) install.
 - **macOS:** double-click **Launch Rune.command**. It runs in a Terminal
   window; closing the window stops Rune. A `git clone` copy runs as is. A copy
@@ -41,17 +132,27 @@ prompt), so paste that folder's path into **Open character** or the world path
 field instead.
 
 Direct **Save** needs a check that Valheim is closed, which Rune does on Windows
-and macOS. On other platforms Rune can still open and export saves. The macOS
-check looks for the native game; a Windows copy of Valheim run through Wine,
-CrossOver or Whisky is not detected, so quit it yourself before saving.
+and macOS. On other platforms Rune can still open and export saves. Quit all
+instances of the game and any dedicated server using the save before editing.
 
 ### Item artwork
 
-Item icons are game artwork and are not part of this repository. Without them
-the inventory shows a placeholder glyph per item; everything else works. To get
-the icons, put the PNGs extracted from your own Valheim install in
-`backend/local-data/item_icons/` (file names are the hashes listed in
-`backend/local-data/valheim_items.json`).
+Item icons are game artwork and are not part of this repository. Without them,
+the inventory shows placeholder diamonds; all editing features still work.
+
+If you already have a working Rune copy with icons:
+
+1. Copy its entire `backend/local-data/item_icons` folder into the same location
+   in your new Rune folder. The PNG files should sit directly inside `item_icons`,
+   not in another nested `item_icons` folder.
+2. Relaunch Rune and use the newly opened tab. Icons are checked at server startup,
+   so refreshing the old page alone is not enough.
+
+For a first installation, this repository currently has **no icon extraction
+command or setup wizard**. You need PNGs extracted from your own Valheim install,
+with the hash filenames listed in `backend/local-data/valheim_items.json`.
+Renaming arbitrary images to item names will not work. You can use Rune with its
+placeholders until artwork is available. Do not commit extracted game artwork.
 
 ## Save and export
 
@@ -79,31 +180,68 @@ files must be reopened through Open character before direct saving.
 
 ## Features
 
-Inventory editing with item artwork, quality, quantities, durability, equipment,
-move/swap, add/replace/duplicate/delete; one bulk item-cheat-flag clear button;
-skills; health, stamina and Eitr; active food timers; appearance and power;
-character cheat flag; knowledge; undo/redo.
+### Character inventory
 
-The food picker lists consumables, so select actual edible foods. Game limits
-and food effects are not simulated. Valheim can recalculate maximum stats.
-Supports profile/player/inventory versions 46/33/109 and 47/34/110.
-No in-game validation has been performed.
+Select an item in the grid to edit it. You can add, change, move/swap, duplicate,
+or delete items and edit their stack, quality, durability and equipment state.
 
-Regression tests verify unchanged files, targeted edits, cheat flags, large
-IDs, corrupt input, repeated saves/backups, external changes and failed-write
-recovery. Tests use private fixture copies in the development workspace.
+- **Max stack** fills the selected stack to its catalogued limit.
+- **Duplicate** copies the selected item into an empty inventory slot.
+- **Repair all** restores damaged items to their maximum durability at their
+  current quality level. Items with unknown durability data are left unchanged.
+- **Clear all item cheat flags** clears item flags in bulk. The character's own
+  flag is shown separately in the overview and **Character & food** section.
+- **Undo / Redo** lets you review or reverse character edits before saving.
+
+These actions change the editor's pending state. Use **Save** to write changes
+back to the local character, or **Export** to make a separate edited copy.
+
+### Skills
+
+Use **+1 / +5** on an individual learned skill or the bulk buttons for all learned
+skills. Levels stop at 100 and existing skill progress is preserved. Unlock an
+unlearned skill before editing it. These changes support Undo.
+
+The character save does not record the exact skill levels lost on the last
+death, so Rune cannot reliably reconstruct them without a suitable earlier save.
+
+### Character & food
+
+Edit health, stamina, **Eitr (magic energy)**, appearance and Forsaken power here.
+Choose up to three different active foods using the food replacement buttons.
+Replacing a food starts its full duration. Changing foods or their remaining
+time recalculates food-based maximum health, stamina and Eitr; it does not refill
+current values. Food timers are in seconds. The game may apply additional effects
+and recalculate values when you play.
+
+**In-game time since last death** accepts **Days** and **Hours** and converts them
+automatically. For example, enter `29` days and `9` hours, then Save. This expresses
+the saved gameplay timer using a standard Valheim day; it is not a record of
+world-calendar days skipped through sleeping or spent offline.
+
+### Knowledge
+
+The Knowledge tab covers recipes, materials, biomes, trophies and other saved
+discoveries. Use the category list to choose what to edit.
+
+### Compatibility and verification
+
+Supports profile/player/inventory versions 46/33/109 and 47/34/110. No in-game
+validation has been performed. Regression tests cover unchanged files, targeted
+edits, backups and failure handling. See [CONTRIBUTING.md](CONTRIBUTING.md) for
+running the tests and supplying optional private save fixtures.
 
 ## Folder contents
 
 - `web`: browser interface
 - `backend`: required parser code, item metadata and artwork
-- `runtime`: bundled Python (Downloads distribution)
+- `runtime`: your extracted official Windows embeddable Python; absent from the source ZIP
 - `licenses`: upstream notices
 - `.runtime`: temporary working files, created when running
 
 The server binds only to 127.0.0.1 and makes no external requests. The Windows
 launcher runs it in the background. For a console that stops with Ctrl+C, run
-`runtime\python.exe server.py` (Windows) or `python3 server.py` from this directory.
+`runtime\python.exe launch.py` (Windows) or `python3 server.py` from this directory.
 
 Original browser interface using the patched miskamero/VikingEditor parser
 (https://github.com/miskamero/VikingEditor, GPL-3.0). Item labels were prepared
@@ -121,9 +259,18 @@ world-generated loot containers and containers without that marker are excluded.
 Search by container type, coordinates or stored item. Filter locations using a
 200-metre X/Z grid. The creator filter appears only when multiple builders are
 represented. Names are resolved from available character saves; unmatched IDs
-use Unknown player labels. Edit quantities, quality, durability and slots; add
-or remove items, clear item cheat flags, and undo changes. Slot coordinates are
-one-based in the UI; use the actual container dimensions in game.
+use Unknown player labels.
+
+Select a container to see its inventory grid, then select a stack to edit it:
+
+- **Add item** places a new stack in the next empty slot.
+- **Max stack** fills the selected stack to the item's catalogued limit.
+- **Duplicate** copies it to the next empty slot. Repeat until the container is full.
+- Edit quantity, quality or durability, delete stacks, or clear item cheat flags.
+- **Undo** reverses a world edit.
+
+Adding and duplicating are unavailable when a container is full or its capacity
+is unknown. Changes remain pending until **Save world** or **Export world ZIP**.
 
 **Save world** requires a local world and a closed game. It verifies the loaded
 files have not changed, creates a verified full-generation ZIP in the world's
@@ -170,7 +317,36 @@ destination when Save is available.
 
 
 ## Tombstone recovery
-After respawning, quit Valheim completely. Open the current local character, then use Character & food > Tombstone recovery. Select the world save folder and scan. The chooser lists nonempty tombstones owned by this character, with positions and item summaries. Select one and Save; enter that same world to appear at its saved location. This edits only the character logout position, with the normal backup and process guards. The world is read-only for recovery; Cloud world folders can be scanned. Cloud characters must be moved to Local in-game first. Use the current save, not an older local duplicate. A changed world requires rescanning. Recovery needs access to the world save (including server worlds). In-game arrival has not been manually tested.
+1. After respawning, quit Valheim completely and open your current **local**
+   character in Rune.
+2. Go to **Character & food → Tombstone recovery**.
+3. Click **Find world folders** and choose a world from the visible list, or paste
+   the **world save folder** path. This is a folder, not your character `.fch` file.
+4. Click **Find my tombstones**. Choose among your remaining nonempty tombstones
+   using their positions and item summaries; older graves may also be listed.
+5. Select **Teleport here on next login**, then **Save** your character. Enter
+   that same world in Valheim.
+
+Tombstones are stored in the world, so the character file alone is not enough.
+Rune reads the world without changing it and edits only your character's logout
+position. Items remain in the grave, and nearby enemies may still be present.
+Cloud world folders can be scanned, but the character must be Local for direct
+saving. A changed world requires rescanning. For a server world, you need access
+to its save folder. In-game arrival has not been manually tested.
+
+## Troubleshooting
+
+| What you see | What to do |
+|---|---|
+| “Python 3.9 or newer” when launching | Extract the official embeddable Python ZIP into `runtime`, or use an installed Python with the Windows launcher. 3.9 is the minimum compatibility version, not an installation recommendation. |
+| Rune does not open | Check that `runtime/pythonw.exe` exists directly inside `runtime`. From Command Prompt in the Rune folder, run `runtime\python.exe launch.py --check`. A startup error dialog points to `.runtime/startup.log` when available. |
+| Diamonds instead of item pictures | Add your local icon folder, then relaunch Rune. See [Item artwork](#item-artwork). |
+| Save is disabled | Read the message above the tabs. Move Cloud saves to Local in Valheim, quit the game, and reopen the local save. Imported/dropped files must be reopened by their file path for direct saving. |
+| Edits do not appear in game | Check that you saved rather than only exported, and that the game loads the same Local character/world you edited. Compare names, storage labels and modification dates. |
+| “File changed” or “World changed” | Reopen the latest save before editing again; another process or the game updated it. |
+| An old browser tab cannot access saves | Use the new browser tab/link opened by the current Rune launch. |
+| New features do not appear after an update | Relaunch the updated copy. Refreshing a tab connected to an older server is not sufficient. |
+| No worlds are found | Paste the world save folder path. See [Where Rune looks for saves](#where-rune-looks-for-saves) for discovery locations and custom Steam paths. |
 
 ## Contributing, security and licence
 

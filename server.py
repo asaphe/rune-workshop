@@ -44,7 +44,7 @@ def catalogue():
     for key, item in raw.items():
         prefab = item['prefab']; label = labels.get(prefab,{})
         entries.append(dict(prefab=prefab, hash=int(key), name=label.get('name') or re.sub(r'(?<=[a-z])(?=[A-Z])',' ',prefab),
-                            category=label.get('category','Other'), maxStack=limits.get(prefab), durability=durability.get(prefab), icons=[i for i in item.get('icons',[]) if (ICONS/i).is_file()]))
+                            category=label.get('category','Other'), maxStack=limits.get(prefab), durability=durability.get(prefab), icons=[i if (ICONS/i).is_file() else None for i in item.get('icons',[])]))
     return sorted(entries,key=lambda x:x['name'].lower())
 CATALOG = catalogue()
 FOOD_DATA=json.loads((EDITOR/'food-stats.json').read_text(encoding='utf-8'))
@@ -220,13 +220,16 @@ def save_character(data):
 def browse_character():
     path=pick_character_file()
     if not path:return dict(cancelled=True)
-    return open_character_path(path)
+    return open_local_path(Path(path))
 
 def open_character_path(value):
     if not isinstance(value,str) or not value.strip():raise ValueError('Paste a character file or folder path.')
     value=value.strip().strip('"')
     path=Path(os.path.expandvars(value)).expanduser()
     if not path.is_absolute():raise ValueError('Use the full path to the file or folder.')
+    return open_local_path(path)
+
+def open_local_path(path):
     path=path.resolve()
     if path.is_dir():
         files=sorted((p for p in path.iterdir() if p.is_file() and p.suffix.lower()=='.fch'),key=lambda p:p.name.lower())

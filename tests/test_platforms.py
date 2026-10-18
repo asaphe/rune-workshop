@@ -85,4 +85,42 @@ class PickerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'file picker'):
             self.pick(subprocess.CompletedProcess([],1,stdout='',stderr='execution error: boom (-1743)'))
 
+class NameAndFlushTests(unittest.TestCase):
+    def test_ps_fallback_forms_still_match(self):
+        for entry in ('(Valheim)','(valheim_server)','-Valheim','C:\\Games\\Valheim\\valheim.exe','/Applications/Valheim.app/Contents/MacOS/Valheim'):
+            with self.subTest(entry=entry):self.assertTrue(platforms.is_game_process(entry))
+        for entry in ('(bash)','-zsh','/Applications/Safari.app/Contents/MacOS/Safari'):
+            with self.subTest(entry=entry):self.assertFalse(platforms.is_game_process(entry))
+
+    def test_parenthesised_game_blocks_save_and_names_it(self):
+        with patch.object(platforms,'WINDOWS',False),patch.object(platforms,'MACOS',True),patch.object(platforms.subprocess,'run',return_value=ps('/sbin/launchd\n(Valheim)\n/bin/ps\n')):
+            with self.assertRaisesRegex(ValueError,'"Valheim"'):platforms.ensure_game_closed()
+
+    def flush_with(self,error):
+        import fcntl
+        with tempfile.TemporaryFile() as stream,patch.object(platforms,'MACOS',True),patch.object(fcntl,'fcntl',side_effect=error),patch.object(platforms.os,'fsync') as fsync:
+            platforms.flush_to_disk(stream)
+            return fsync.call_count
+
+    @unittest.skipUnless(sys.platform=='darwin','F_FULLFSYNC exists only on macOS')
+    def test_unsupported_full_fsync_falls_back_to_fsync(self):
+        import errno
+        for code in (errno.ENOTSUP,errno.EINVAL):
+            with self.subTest(code=code):self.assertEqual(self.flush_with(OSError(code,'unsupported')),1)
+
+    @unittest.skipUnless(sys.platform=='darwin','F_FULLFSYNC exists only on macOS')
+    def test_real_io_error_still_fails_the_save(self):
+        import errno
+        with self.assertRaises(OSError):self.flush_with(OSError(errno.EIO,'I/O error'))
+
+    def test_steam_dir_override_expands_home(self):
+        with patch.dict(platforms.os.environ,{'RUNE_STEAM_DIR':'~/SteamX'}),patch.object(platforms,'WINDOWS',False),patch.object(platforms,'MACOS',False):
+            self.assertEqual(platforms.steam_roots(),[Path.home()/'SteamX'])
+
+class PickerErrorTests(unittest.TestCase):
+    def test_error_mentioning_128_elsewhere_is_not_a_cancel(self):
+        result=subprocess.CompletedProcess([],1,stdout='',stderr="execution error: Can't get /Users/x/test-128/a. (-1700)")
+        with patch.object(platforms,'MACOS',True),patch.object(platforms.subprocess,'run',return_value=result):
+            with self.assertRaisesRegex(ValueError,'file picker'):platforms.pick_character_file()
+
 if __name__=='__main__':unittest.main()

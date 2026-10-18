@@ -6,7 +6,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const readable=s=>String(s||'').replace(/([a-z])([A-Z])/g,'$1 $2').replaceAll('_',' ');
 const itemInfo=i=>itemsById[i?.prefab]||{name:i?.prefab?readable(i.prefab):`Unknown item ${i?.prefab_hash??''}`,category:'Unknown',icons:[]};
 const itemName=i=>itemInfo(i).name;
-const icon=(i,cls='')=>itemInfo(i).icons?.length?`<img class="${cls}" src="/icons/${itemInfo(i).icons[Math.min(i.variant||0,itemInfo(i).icons.length-1)]}" alt="" draggable="false">`:'<span class="fallback" aria-hidden="true">◇</span>';
+const icon=(i,cls='')=>{const icons=itemInfo(i).icons||[],name=icons[Math.min(i.variant||0,icons.length-1)];return name?`<img class="${cls}" src="/icons/${name}" alt="" draggable="false">`:'<span class="fallback" aria-hidden="true">◇</span>'};
 const fmt=n=>Number(n||0).toLocaleString(undefined,{maximumFractionDigits:1});
 const snapshot=()=>JSON.stringify({name:state.name,usedCheats:state.usedCheats,teleportTarget:state.teleportTarget||null,player:state.player});
 const dirty=()=>state&&snapshot()!==saved;

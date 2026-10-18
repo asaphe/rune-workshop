@@ -11,3 +11,11 @@ backend/local-data/item_icons/
 *.fch.old
 .rune-backups/
 .DS_Store
+# World saves
+*.fwl
+*.fwl2
+*.db
+*.db2
+*.chunks
+*.chunk
+_main.*.ok

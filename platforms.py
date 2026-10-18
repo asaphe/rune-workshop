@@ -1,5 +1,5 @@
 """Per-OS save locations, game-process checks, durable writes and the native file picker."""
-import os, subprocess, sys
+import errno, os, re, subprocess, sys
 from pathlib import Path
 
 WINDOWS=os.name=='nt'
@@ -7,7 +7,7 @@ MACOS=sys.platform=='darwin'
 APP_ID='892970'
 
 def steam_roots():
-    roots=[Path(os.environ['RUNE_STEAM_DIR'])] if os.environ.get('RUNE_STEAM_DIR') else []
+    roots=[Path(os.environ['RUNE_STEAM_DIR']).expanduser()] if os.environ.get('RUNE_STEAM_DIR') else []
     if WINDOWS:
         try:
             import winreg
@@ -29,9 +29,15 @@ def game_data_dirs():
 def local_dirs(kind):
     return [d/f'{kind}_local' for d in game_data_dirs()]
 
+def process_name(entry):
+    # ps prints "(name)" when it cannot read a process's arguments and "-zsh" for login shells.
+    entry=entry.strip()
+    if entry.startswith('(') and entry.endswith(')'):entry=entry[1:-1]
+    return re.split(r'[\\/]',entry.lstrip('-'))[-1]
+
 def is_game_process(name):
-    # Covers valheim.exe, valheim_server.exe, the macOS app binary and Linux/Wine builds; a false match only blocks a save.
-    return name.lower().startswith('valheim')
+    # Prefix match because the macOS binary name is unconfirmed; a false match only blocks a save.
+    return process_name(name).lower().startswith('valheim')
 
 def _windows_processes():
     import ctypes
@@ -61,9 +67,9 @@ def _windows_processes():
     finally:dll.CloseHandle(handle)
 
 def _macos_processes():
-    try:result=subprocess.run(['/bin/ps','-axo','comm='],capture_output=True,text=True,timeout=10)
+    try:result=subprocess.run(['/bin/ps','-axo','comm='],capture_output=True,text=True,errors='replace',timeout=10)
     except (OSError,subprocess.TimeoutExpired):raise ValueError('Cannot check whether Valheim is running. Save cancelled.')
-    names=[Path(line.strip()).name for line in result.stdout.splitlines() if line.strip()]
+    names=[process_name(line) for line in result.stdout.splitlines() if line.strip()]
     # ps always lists at least itself and launchd; an empty list means the check did not run.
     if result.returncode!=0 or len(names)<2:raise ValueError('Process inspection failed. Save cancelled.')
     return names
@@ -72,16 +78,19 @@ def ensure_game_closed():
     if WINDOWS:names=_windows_processes()
     elif MACOS:names=_macos_processes()
     else:raise ValueError('Direct saves are only enabled on Windows and macOS, where Rune can check that Valheim is closed.')
-    if any(is_game_process(n) for n in names):
-        raise ValueError('Close Valheim completely, including the main menu, before saving.')
+    running=next((n for n in names if is_game_process(n)),None)
+    if running:raise ValueError(f'Close Valheim completely, including the main menu, before saving (found running process "{process_name(running)}").')
 
 def flush_to_disk(stream):
     stream.flush()
     if MACOS:
         import fcntl
         # On macOS fsync only reaches the drive cache; F_FULLFSYNC is what survives power loss.
-        fcntl.fcntl(stream.fileno(),fcntl.F_FULLFSYNC)
-    else:os.fsync(stream.fileno())
+        try:fcntl.fcntl(stream.fileno(),fcntl.F_FULLFSYNC);return
+        # Some network and FUSE volumes reject F_FULLFSYNC; fsync is the strongest flush they offer.
+        except OSError as exc:
+            if exc.errno not in (errno.ENOTSUP,errno.EOPNOTSUPP,errno.EINVAL,errno.ENOTTY):raise
+    os.fsync(stream.fileno())
 
 def pick_character_file():
     """Returns the chosen path, or None when the person cancels."""
@@ -92,7 +101,7 @@ def pick_character_file():
         args=['/usr/bin/osascript']+[part for line in script for part in ('-e',line)]+[str(start)]
         result=subprocess.run(args,capture_output=True,text=True)
         if result.returncode!=0:
-            if '-128' in result.stderr:return None
+            if re.search(r'\(-128\)\s*$',result.stderr):return None
             raise ValueError('The file picker could not be opened: '+result.stderr.strip())
         return result.stdout.strip() or None
     import tkinter as tk

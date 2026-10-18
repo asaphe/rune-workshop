@@ -11,9 +11,12 @@ Rune needs Python 3.9 or newer and nothing else (standard library only).
   `runtime\pythonw.exe` when one is present and otherwise falls back to the
   `pyw` launcher from a [python.org](https://www.python.org/downloads/) install.
 - **macOS:** double-click **Launch Rune.command**. It runs in a Terminal
-  window; closing the window stops Rune. The first time, macOS may block a
-  downloaded script: Control-click the file, choose **Open**, then confirm. If
-  no Python 3.9+ is found it links to the python.org installer.
+  window; closing the window stops Rune. A `git clone` copy runs as is. A copy
+  downloaded as a ZIP is quarantined: on macOS 15 and later, open it once, then
+  allow it under **System Settings → Privacy & Security → Open Anyway** (or run
+  `xattr -d com.apple.quarantine "Launch Rune.command"`); on older macOS,
+  Control-click the file and choose **Open**. If no Python 3.9+ is found it
+  links to the python.org installer.
 - **Any platform, with a console:** `python3 server.py` (Ctrl+C stops it).
   `--port <n>` picks a fixed port and `--no-browser` skips opening a tab.
 
@@ -33,7 +36,9 @@ prompt), so paste that folder's path into **Open character** or the world path
 field instead.
 
 Direct **Save** needs a check that Valheim is closed, which Rune does on Windows
-and macOS. On other platforms Rune can still open and export saves.
+and macOS. On other platforms Rune can still open and export saves. The macOS
+check looks for the native game; a Windows copy of Valheim run through Wine,
+CrossOver or Whisky is not detected, so quit it yourself before saving.
 
 ### Item artwork
 

@@ -1,7 +1,6 @@
 """Local-only Valheim character editor with verified saves and retained backups."""
 from pathlib import Path
 import copy, hashlib, hmac, json, math, os, re, secrets, sys, tempfile, threading, webbrowser
-from http.cookies import SimpleCookie
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote, parse_qs
 from datetime import datetime
@@ -178,10 +177,11 @@ def export_save(data):
     if target:
         with LOCK:choices=RECOVERY.get(data['session'],{})
         if target not in choices:raise ValueError('Tombstone selection expired. Scan the world again.')
-        world,grave=choices[target]
-        world.verify_source()
+        choice=choices[target];grave=choice['grave']
+        current=World(choice['path'])
+        if (current.seen,current.number)!=(choice['seen'],choice['number']):raise ValueError('The world changed since the scan. Scan the world again.')
         if grave['owner']!=str(root['player_id']):raise ValueError('This tombstone belongs to another character.')
-        entry=next((w for w in root['worlds'] if str(w['world_id'])==world.meta['uid']),None)
+        entry=next((w for w in root['worlds'] if str(w['world_id'])==choice['uid']),None)
         if entry is None:raise ValueError('This character has no saved position in that world.')
         pos=grave['position']
         if len(pos)!=3 or not all(math.isfinite(x) for x in pos):raise ValueError('Invalid tombstone position.')
@@ -198,10 +198,10 @@ def scan_tombstones(data):
     choices={};rows=[]
     for grave in world.tombs:
         if grave['owner']!=str(root['player_id']):continue
-        token=secrets.token_hex(16);choices[token]=(world,grave)
+        token=secrets.token_hex(16);choices[token]=dict(path=world.path,seen=world.seen,number=world.number,uid=world.meta['uid'],grave=grave)
         rows.append(dict(id=token,position=grave['position'],items=[dict(prefab=i['prefab'] or str(i['prefab_hash']),stack=i['stack']) for i in grave['items']]))
     with LOCK:RECOVERY[data['session']]=choices
-    return dict(world=world.meta['name'],tombstones=rows)
+    return dict(world=world.meta['name'],tombstones=rows,warning=getattr(world,'warning',None))
 
 def is_cloud_cache(path):
     parts=[part.lower() for part in Path(path).resolve().parts]
@@ -328,17 +328,19 @@ class Handler(BaseHTTPRequestHandler):
     def cookie_name(self):
         return f'rune{self.server.server_port}'
     def authorized(self):
-        cookie=SimpleCookie(self.headers.get('Cookie',''))
-        value=cookie[self.cookie_name()].value if self.cookie_name() in cookie else ''
-        return hmac.compare_digest(value,TOKEN)
+        # Parsed by hand: SimpleCookie drops every cookie after a malformed one, and 127.0.0.1 cookies are shared by all local ports.
+        for part in self.headers.get('Cookie','').split(';'):
+            name,_,value=part.strip().partition('=')
+            if name==self.cookie_name() and hmac.compare_digest(value.encode(),TOKEN.encode()):return True
+        return False
     def do_GET(self):
         if not self.allowed():return self.send(403,{'error':'Local access only.'})
         url=urlparse(self.path);path=url.path
         if path=='/' and parse_qs(url.query).get('t'):
-            if not hmac.compare_digest(parse_qs(url.query)['t'][0],TOKEN):return self.send(403,{'error':'This Rune link is from an earlier launch. Use the link Rune printed when it started.'})
+            if not hmac.compare_digest(parse_qs(url.query)['t'][0].encode(),TOKEN.encode()):return self.send(403,{'error':'This Rune link is from an earlier launch. Use the link Rune printed when it started.'})
             return self.send(303,b'','text/plain',{'Location':'/','Set-Cookie':f'{self.cookie_name()}={TOKEN}; Path=/; HttpOnly; SameSite=Strict'})
         if (path.startswith('/api/') or path.startswith('/icons/')) and not self.authorized():
-            return self.send(403,{'error':'Open Rune with the link it printed when it started (or its launcher).'})
+            return self.send(403,{'error':'Open Rune with its launcher, or the link saved in the .runtime/url.txt file next to server.py.'})
         try:
             if path=='/api/worlds':
                 roots=local_dirs('worlds')+steam_remote_dirs('worlds')
@@ -356,7 +358,7 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as exc:self.send(400,{'error':str(exc)})
     def do_POST(self):
         if not self.allowed():return self.send(403,{'error':'Local access only.'})
-        if not self.authorized():return self.send(403,{'error':'Open Rune with the link it printed when it started (or its launcher).'})
+        if not self.authorized():return self.send(403,{'error':'Open Rune with its launcher, or the link saved in the .runtime/url.txt file next to server.py.'})
         try:
             size=int(self.headers.get('Content-Length',0))
             if not 0<size<=40*1024*1024:raise ValueError('Invalid request size.')
@@ -405,7 +407,9 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=0);parser.add_argument('--no-browser',action='store_true');args=parser.parse_args()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
     url=f'http://127.0.0.1:{server.server_port}/?t={TOKEN}'
-    (RUNTIME/'url.txt').write_text(url)
+    url_file=RUNTIME/'url.txt'
+    with os.fdopen(os.open(url_file,os.O_WRONLY|os.O_CREAT|os.O_TRUNC,0o600),'w') as stream:stream.write(url)
+    os.chmod(url_file,0o600)
     print(url,flush=True)
     if not args.no_browser:webbrowser.open(url)
     try:server.serve_forever()

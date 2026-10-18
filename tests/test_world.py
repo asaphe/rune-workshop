@@ -124,6 +124,20 @@ class WorldTests(unittest.TestCase):
         result=reopened.save(self.changes(),lambda:None)
         self.assertGreater(result['generation'],number)
         self.assertEqual(world.World(self.path).containers[0]['items'][0]['stack'],11)
+    def test_complete_marker_with_unknown_version_fails_closed(self):
+        number,files=self.w.build(self.changes())
+        for name,data in files.items():(self.path/name).write_bytes(world.p('i',43) if name.endswith('.ok') else data)
+        with self.assertRaisesRegex(ValueError,'commit marker'):world.World(self.path)
+    def test_publish_never_replaces_an_existing_marker(self):
+        src=self.path/'.staged';src.write_bytes(b'new');dst=self.path/'_main.1.ok'
+        with self.assertRaises(FileExistsError):world.publish_new(src,dst)
+        self.assertEqual(dst.read_bytes(),world.p('i',42))
+    def test_publish_without_hard_links_falls_back_to_checked_rename(self):
+        import errno,platforms
+        if platforms.WINDOWS:self.skipTest('Windows always renames')
+        src=self.path/'.staged';src.write_bytes(b'new');dst=self.path/'_main.9.ok'
+        with patch.object(platforms.os,'link',side_effect=OSError(errno.EPERM,'no hard links')):world.publish_new(src,dst)
+        self.assertEqual((dst.read_bytes(),src.exists()),(b'new',False))
     def test_no_complete_generation_is_an_error(self):
         (self.path/'_main.1.ok').write_bytes(b'')
         with self.assertRaisesRegex(ValueError,'No complete world generation'):world.World(self.path)

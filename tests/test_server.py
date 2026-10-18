@@ -48,6 +48,23 @@ class SessionTests(unittest.TestCase):
         with patch.object(server,'World',return_value=fake):server.scan_tombstones(dict(session=sid,path='p'))
         self.assertEqual(server.RECOVERY[sid],{})
 
+    def test_recovery_keeps_no_world_and_rejects_a_changed_world(self):
+        sid=server.open_save(self.raw,'x.fch')['session']
+        root,_,_=server.SESSIONS[sid]
+        root['worlds']=[dict(world_id=1,have_custom_spawn=False,spawn_point=[0.,0.,0.],have_logout_point=False,logout_point=[0.,0.,0.],
+                             have_death_point=False,death_point=[0.,0.,0.],home_point=[0.,0.,0.],map_data_hex=None)]
+        grave=dict(owner=str(root['player_id']),position=[1.,2.,3.],items=[])
+        scanned=type('W',(),{'path':Path('/w'),'seen':[1],'number':1,'warning':None,'meta':dict(uid='1',name='W'),'tombs':[grave]})()
+        with patch.object(server,'World',return_value=scanned):rows=server.scan_tombstones(dict(session=sid,path='/w'))['tombstones']
+        self.assertFalse(any(hasattr(v,'files') or isinstance(v,type(scanned)) for choice in server.RECOVERY[sid].values() for v in choice.values()))
+        player=server.public_player(server.SESSIONS[sid][1])
+        changed=type('W',(),{'seen':[1,2],'number':2})()
+        with patch.object(server,'World',return_value=changed),self.assertRaisesRegex(ValueError,'changed since the scan'):
+            server.export_save(dict(session=sid,player=player,teleportTarget=rows[0]['id']))
+        with patch.object(server,'World',return_value=scanned):
+            moved=server.decode(server.export_save(dict(session=sid,player=player,teleportTarget=rows[0]['id'])))[0]
+        self.assertEqual(moved['worlds'][0]['logout_point'],[1.,2.,3.])
+
     def test_world_sessions_are_capped_and_replaced_per_path(self):
         worlds=[type('W',(),{'path':Path(f'/w{i}')})() for i in range(6)]
         with patch.object(server,'MAX_WORLDS',3):
@@ -79,6 +96,16 @@ class TokenTests(unittest.TestCase):
         cookie=response.getheader('Set-Cookie').split(';')[0]
         self.assertIn('HttpOnly',response.getheader('Set-Cookie'))
         self.assertEqual(self.request('/api/characters',{'Cookie':cookie})[0].status,200)
+
+    def test_foreign_and_malformed_cookies_do_not_lock_out(self):
+        good=f'rune{self.port}={server.TOKEN}'
+        for header in ('prefs={"theme":"dark"}; '+good,'a b; ab[c]=1; '+good,f'rune1={server.TOKEN}x; '+good):
+            with self.subTest(header=header):self.assertEqual(self.request('/api/characters',{'Cookie':header})[0].status,200)
+        for header in (f'rune{self.port}=wrong',f'rune{self.port+1}={server.TOKEN}',f'rune{self.port}=café'.encode('utf-8').decode('latin-1')):
+            with self.subTest(header=header):self.assertEqual(self.request('/api/characters',{'Cookie':header})[0].status,403)
+
+    def test_icons_require_token(self):
+        self.assertEqual(self.request('/icons/'+'a'*64+'.png')[0].status,403)
 
     def test_static_page_and_csp(self):
         response,_=self.request('/')

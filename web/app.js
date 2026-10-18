@@ -71,7 +71,7 @@ $('inventoryGrid').ondragover=e=>{if(dragIndex<0)return;e.preventDefault();const
 $('inventoryGrid').ondragleave=e=>e.target.closest('[data-slot]')?.classList.remove('drag-over');
 $('inventoryGrid').ondrop=e=>{if(dragIndex<0)return;e.preventDefault();e.stopPropagation();const b=e.target.closest('[data-slot]');if(b){const[x,y]=b.dataset.slot.split(',').map(Number);moveItem(dragIndex,x,y)}dragIndex=-1};
 document.addEventListener('dragend',()=>{dragIndex=-1;document.querySelectorAll('.drag-over').forEach(b=>b.classList.remove('drag-over'))});
-document.addEventListener('dragover',e=>{if(e.dataTransfer.types.includes('Files')){e.preventDefault();document.body.classList.add('dragging-file')}});document.addEventListener('dragleave',e=>{if(!e.relatedTarget)document.body.classList.remove('dragging-file')});document.addEventListener('drop',e=>{document.body.classList.remove('dragging-file');if(e.dataTransfer.files.length){e.preventDefault();load(e.dataTransfer.files[0])}});
+document.addEventListener('dragover',e=>{if(e.dataTransfer.types.includes('Files')){e.preventDefault();document.body.classList.add('dragging-file')}});document.addEventListener('dragleave',e=>{if(!e.relatedTarget)document.body.classList.remove('dragging-file')});document.addEventListener('drop',e=>{document.body.classList.remove('dragging-file');if(e.dataTransfer.files.length){e.preventDefault();if(!isBusy())load(e.dataTransfer.files[0])}});
 document.addEventListener('keydown',e=>{if(isBusy()||window.worldMode||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo()}if(e.key==='Delete'&&state&&selected>=0&&activeTab==='inventory'&&!$('picker').open){e.preventDefault();mutate(()=>{state.player.inventory.splice(selected,1);selected=-1})}});
 window.addEventListener('beforeunload',e=>{if(dirty()){e.preventDefault();e.returnValue=''}});
 (async()=>{try{catalog=await(await api('/api/catalog')).json();itemsById=Object.fromEntries(catalog.items.map(i=>[i.prefab,i]));$('category').innerHTML='<option value="">All categories</option>'+[...new Set(catalog.items.map(i=>i.category))].sort().map(c=>`<option>${esc(c)}</option>`).join('');await recent()}catch(e){toast('Could not start the workshop: '+e.message,true)}})();
@@ -136,7 +136,8 @@ $('scanTombs').onclick=async()=>{
  busy(true,'Finding your tombstones…');
  try{
   const result=await(await api('/api/tombstones',{session:state.session,path:$('recoveryPath').value})).json();
-  if(state.teleportTarget)mutate(()=>state.teleportTarget=null);
+  if(result.warning)toast(result.warning,true);
+  if(state.teleportTarget){remember();state.teleportTarget=null;render()}
   $('tombChoices').innerHTML=result.tombstones.length?result.tombstones.map((g,i)=>`<div class="panel-heading"><strong>${esc(result.world)} · Tombstone ${i+1}</strong><p class="muted">Position: ${g.position.map(n=>Math.round(n)).join(', ')} · ${g.items.length} occupied slots</p><p>${g.items.map(x=>`${esc(itemsById[x.prefab]?.name||x.prefab)} ×${x.stack}`).join(' · ')}</p><button data-tomb="${g.id}">Teleport here on next login</button></div>`).join(''):'<p>No nonempty tombstones belonging to this character were found in this world save.</p>';
   renderRecovery();
  }catch(e){toast(e.message,true)}finally{busy(false)}

@@ -20,6 +20,11 @@ Rune needs Python 3.9 or newer and nothing else (standard library only).
 - **Any platform, with a console:** `python3 server.py` (Ctrl+C stops it).
   `--port <n>` picks a fixed port and `--no-browser` skips opening a tab.
 
+Each launch creates a new access token. The link Rune opens (and prints, and
+saves in `.runtime/url.txt`, readable only by you) carries it; the browser keeps
+it as a cookie. A tab left open from an earlier launch, or the bare
+`http://127.0.0.1:<port>` address, cannot reach your saves: use the new link.
+
 ### Where Rune looks for saves
 
 | | Local saves | Steam Cloud cache (read-only) |

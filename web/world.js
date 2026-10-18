@@ -125,7 +125,7 @@ $('worldSave').onclick=async()=>{
   const result=await(await api('/api/world/save',worldPayload())).json();
   worldState=result.world;worldBaseline=worldSnapshot();worldHistory=[];worldChanged();renderContainer();renderWorldExtras();
   $('worldSaveHelp').textContent=result.unchanged?'No changes to save.':'Saved generation '+result.generation+'. Full backup: '+result.backup+(result.warning?' '+result.warning:'');
-  toast(result.unchanged?'No changes to save.':'World saved. Previous generation and backup retained.');
+  if(result.warning)toast(result.warning,true);else toast(result.unchanged?'No changes to save.':'World saved. Previous generation and backup retained.');
  }catch(e){$('worldSaveHelp').textContent=e.message;toast(e.message,true)}finally{busy(false)}
 };
 $('worldExport').onclick=async()=>{

@@ -2,7 +2,7 @@
 import copy, io, math, os, re, struct, zipfile
 from pathlib import Path
 from datetime import datetime
-from platforms import flush_to_disk
+from platforms import flush_to_disk, publish_new, sync_directory
 from subscripts.playerDataUtil import get_stable_hash_code as hashcode, ITEM_HASH_TO_PREFAB
 
 def p(fmt,*values): return struct.pack('<'+fmt,*values)
@@ -167,9 +167,9 @@ def durable(path,data,created=None):
         if created is not None:created.append(path)
         f.write(data);flush_to_disk(f)
     if path.read_bytes()!=data:raise ValueError('Write verification failed.')
-def complete_marker(path):
-    raw=path.read_bytes()
-    return len(raw)==4 and struct.unpack('<i',raw)[0] in (40,41,42)
+def torn_marker(path):
+    # Only a short marker is an interrupted write; a full marker with an unknown version must fail closed, not be skipped.
+    return len(path.read_bytes())<4
 class World:
     def __init__(self,path):
         self.path=Path(str(path).strip().strip('"')).resolve()
@@ -177,10 +177,10 @@ class World:
         nums=generations(self.path)
         if not nums:raise ValueError('Choose a Valheim 1.0 world folder containing _main.<number>.ok and .chunks files.')
         # A save interrupted while writing its marker leaves an empty or partial .ok; the previous generation is still the committed one.
-        complete=[n for n in nums if complete_marker(self.path/f'_main.{n}.ok')]
-        if not complete:raise ValueError('No complete world generation: every _main.<number>.ok marker is empty or invalid.')
+        complete=[n for n in nums if not torn_marker(self.path/f'_main.{n}.ok')]
+        if not complete:raise ValueError('No complete world generation: every _main.<number>.ok marker is empty or partial.')
         self.seen=nums;self.number=max(complete)
-        self.warning=f'Generation {max(nums)} was never finished (its _main.{max(nums)}.ok marker is incomplete), so generation {self.number} was opened. Saving writes a new, complete generation.' if self.number!=max(nums) else None
+        self.warning=f'Generation {max(nums)} was never finished (its _main.{max(nums)}.ok marker is empty or partial), so generation {self.number} was opened. Saving writes a new, complete generation.' if self.number!=max(nums) else None
         self.files={};self.containers=[];self.texts=[];self.tombs=[];self.links=[];prefix=f'_main.{self.number}'
         for ext in ('.chunks','.fwl2','.db2','.ok'):self.files[prefix+ext]=(self.path/(prefix+ext)).read_bytes()
         self.settings_error=None
@@ -298,12 +298,15 @@ class World:
                 if name!=marker:durable(self.path/name,data,created)
             staged.unlink(missing_ok=True);durable(staged,files[marker],created)
             self.verify_source();ensure_closed()
-            if (self.path/marker).exists():raise ValueError('World changed since opening. Reopen it before saving.')
             # The marker appears complete or not at all, so a crash can never leave a torn commit.
-            os.replace(staged,self.path/marker);committed=True
+            try:publish_new(staged,self.path/marker)
+            except FileExistsError:raise ValueError('World changed since opening. Reopen it before saving.')
+            committed=True;sync_directory(self.path)
         finally:
-            if not committed:
-                for leftover in created:leftover.unlink(missing_ok=True)
+            staged_left=[staged] if committed else created
+            for leftover in staged_left:
+                try:leftover.unlink(missing_ok=True)
+                except OSError:pass
         try:refreshed=World(self.path);self.__dict__.update(refreshed.__dict__);warning=None
         except (OSError,ValueError,struct.error) as e:warning=f'Saved, but reopening the new generation failed ({e}). Reopen the world before making more changes.'
         return dict(unchanged=False,backup=str(backup),generation=number,warning=warning)

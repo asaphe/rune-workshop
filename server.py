@@ -13,6 +13,7 @@ sys.path.insert(0, str(EDITOR))
 from subscripts.fchUtil import decompile_fch, compile_fch
 from subscripts.playerDataUtil import unpack_player_data_hex, pack_player_data_hex
 from world import World
+from platforms import ensure_game_closed, flush_to_disk, local_dirs, pick_character_file, steam_remote_dirs
 WORLD_SESSIONS = {}
 from data.skills import VALHEIM_SKILLS
 from data.powers import GUARDIAN_POWERS
@@ -182,34 +183,6 @@ def is_cloud_cache(path):
     parts=[part.lower() for part in Path(path).resolve().parts]
     return 'userdata' in parts and '892970' in parts and 'remote' in parts
 
-def ensure_game_closed():
-    if os.name!='nt':raise ValueError('Direct saves are only enabled on Windows with process checks.')
-    import ctypes
-    from ctypes import wintypes
-    class Entry(ctypes.Structure):
-        _fields_=[('size',wintypes.DWORD),('usage',wintypes.DWORD),('pid',wintypes.DWORD),
-                  ('heap',ctypes.c_size_t),('module',wintypes.DWORD),('threads',wintypes.DWORD),
-                  ('parent',wintypes.DWORD),('priority',wintypes.LONG),('flags',wintypes.DWORD),
-                  ('name',wintypes.WCHAR*260)]
-    dll=ctypes.WinDLL('kernel32',use_last_error=True)
-    dll.CreateToolhelp32Snapshot.argtypes=[wintypes.DWORD,wintypes.DWORD]
-    dll.CreateToolhelp32Snapshot.restype=wintypes.HANDLE
-    dll.Process32FirstW.argtypes=[wintypes.HANDLE,ctypes.POINTER(Entry)]
-    dll.Process32NextW.argtypes=[wintypes.HANDLE,ctypes.POINTER(Entry)]
-    dll.CloseHandle.argtypes=[wintypes.HANDLE]
-    handle=dll.CreateToolhelp32Snapshot(2,0)
-    if handle==ctypes.c_void_p(-1).value:raise ValueError('Cannot check whether Valheim is running. Save cancelled.')
-    try:
-        entry=Entry();entry.size=ctypes.sizeof(entry)
-        if not dll.Process32FirstW(handle,ctypes.byref(entry)):raise ValueError('Cannot inspect running processes. Save cancelled.')
-        while True:
-            if entry.name.lower() in ('valheim.exe','valheim_server.exe'):
-                raise ValueError('Close Valheim completely, including the main menu, before saving.')
-            if not dll.Process32NextW(handle,ctypes.byref(entry)):
-                if ctypes.get_last_error()!=18:raise ValueError('Process inspection failed. Save cancelled.')
-                break
-    finally:dll.CloseHandle(handle)
-
 def install_staged(staged,path):
     os.replace(staged,path)
 
@@ -231,10 +204,10 @@ def save_character(data):
         staged=Path(temp)
         try:
             with os.fdopen(fd,'wb') as stream:
-                stream.write(result);stream.flush();os.fsync(stream.fileno())
+                stream.write(result);flush_to_disk(stream)
             if staged.read_bytes()!=result:raise ValueError('Staged save verification failed.')
             with backup.open('xb') as stream:
-                stream.write(expected);stream.flush();os.fsync(stream.fileno())
+                stream.write(expected);flush_to_disk(stream)
             if backup.read_bytes()!=expected:raise ValueError('Backup verification failed. Original file was not changed.')
             ensure_game_closed()
             if path.read_bytes()!=expected:raise ValueError('This file changed outside the editor. Reopen it before saving.')
@@ -245,20 +218,15 @@ def save_character(data):
         finally:staged.unlink(missing_ok=True)
 
 def browse_character():
-    import tkinter as tk
-    from tkinter import filedialog
-    window=tk.Tk();window.withdraw();window.attributes('-topmost',True)
-    try:path=filedialog.askopenfilename(parent=window,title='Open Valheim character',filetypes=[('Valheim character','*.fch')])
-    finally:window.destroy()
+    path=pick_character_file()
     if not path:return dict(cancelled=True)
-    source=Path(path)
-    return open_save(source.read_bytes(),source.name,source)
+    return open_character_path(path)
 
 def open_character_path(value):
     if not isinstance(value,str) or not value.strip():raise ValueError('Paste a character file or folder path.')
     value=value.strip().strip('"')
     path=Path(os.path.expandvars(value)).expanduser()
-    if not path.is_absolute():raise ValueError('Use the full path, including the drive letter.')
+    if not path.is_absolute():raise ValueError('Use the full path to the file or folder.')
     path=path.resolve()
     if path.is_dir():
         files=sorted((p for p in path.iterdir() if p.is_file() and p.suffix.lower()=='.fch'),key=lambda p:p.name.lower())
@@ -304,7 +272,7 @@ def world_public(world, sid):
     return result
 
 def character_paths():
-    dirs=[*Path('D:/Steam/userdata').glob('*/892970/remote/characters'),Path.home()/'AppData/LocalLow/IronGate/Valheim/characters_local']
+    dirs=steam_remote_dirs('characters')+local_dirs('characters')
     return sorted([p for d in dirs if d.exists() for p in d.glob('*.fch') if '_backup_' not in p.name],key=lambda p:p.stat().st_mtime,reverse=True)
 
 class Handler(BaseHTTPRequestHandler):
@@ -325,7 +293,7 @@ class Handler(BaseHTTPRequestHandler):
         path=urlparse(self.path).path
         try:
             if path=='/api/worlds':
-                roots=[Path.home()/'AppData/LocalLow/IronGate/Valheim/worlds_local',*Path('D:/Steam/userdata').glob('*/892970/remote/worlds')]
+                roots=local_dirs('worlds')+steam_remote_dirs('worlds')
                 return self.send(200,[dict(name=p.name,path=str(p),cloud=is_cloud_cache(p)) for root in roots if root.exists() for p in root.iterdir() if p.is_dir() and '_backup' not in p.name and any(p.glob('_main.*.ok'))])
             if path=='/api/catalog':return self.send(200,dict(items=CATALOG,foods=FOOD_DATA['foods'],foodBase=FOOD_DATA['base'],skills=VALHEIM_SKILLS,powers=GUARDIAN_POWERS,hairs=VALHEIM_HAIRS,beards=VALHEIM_BEARDS))
             if path=='/api/characters':return self.send(200,[dict(id=hashlib.sha256(str(p).encode()).hexdigest(),name=p.stem,location='Steam Cloud' if is_cloud_cache(p) else 'Local',modified=p.stat().st_mtime,size=p.stat().st_size) for p in character_paths()])

@@ -10,8 +10,30 @@ Rune needs Python 3.9 or newer and nothing else (standard library only).
 - **Windows:** double-click **Launch Rune.cmd**. It uses a bundled
   `runtime\pythonw.exe` when one is present and otherwise falls back to the
   `pyw` launcher from a [python.org](https://www.python.org/downloads/) install.
+- **macOS:** double-click **Launch Rune.command**. It runs in a Terminal
+  window; closing the window stops Rune. The first time, macOS may block a
+  downloaded script: Control-click the file, choose **Open**, then confirm. If
+  no Python 3.9+ is found it links to the python.org installer.
 - **Any platform, with a console:** `python3 server.py` (Ctrl+C stops it).
   `--port <n>` picks a fixed port and `--no-browser` skips opening a tab.
+
+### Where Rune looks for saves
+
+| | Local saves | Steam Cloud cache (read-only) |
+|---|---|---|
+| Windows | `%USERPROFILE%\AppData\LocalLow\IronGate\Valheim` | `<Steam>\userdata\<account>\892970\remote` |
+| macOS (Steam) | `~/Library/Application Support/IronGate/Valheim` | `~/Library/Application Support/Steam/userdata/<account>/892970/remote` |
+
+Each location holds `characters_local`/`worlds_local` (or `characters`/`worlds`
+in the Cloud cache). On Windows the Steam folder comes from the registry; set
+`RUNE_STEAM_DIR` to point at a different Steam folder on either platform. The
+Mac App Store build of Valheim keeps its saves inside its sandbox under
+`~/Library/Containers`; Rune does not scan there (macOS would show a privacy
+prompt), so paste that folder's path into **Open character** or the world path
+field instead.
+
+Direct **Save** needs a check that Valheim is closed, which Rune does on Windows
+and macOS. On other platforms Rune can still open and export saves.
 
 ### Item artwork
 
@@ -66,9 +88,9 @@ recovery. Tests use private fixture copies in the development workspace.
 - `licenses`: upstream notices
 - `.runtime`: temporary working files, created when running
 
-The server binds only to 127.0.0.1 and makes no external requests. The launcher
-runs it in the background. For a console that stops with Ctrl+C, run
-`runtime\python.exe server.py` from this directory.
+The server binds only to 127.0.0.1 and makes no external requests. The Windows
+launcher runs it in the background. For a console that stops with Ctrl+C, run
+`runtime\python.exe server.py` (Windows) or `python3 server.py` from this directory.
 
 Original browser interface using the patched miskamero/VikingEditor parser
 (https://github.com/miskamero/VikingEditor, GPL-3.0). Item labels were prepared

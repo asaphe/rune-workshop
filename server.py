@@ -1,9 +1,8 @@
 """Local-only Valheim character editor with verified saves and retained backups."""
 from pathlib import Path
-import base64, copy, hashlib, io, json, math, os, re, secrets, sys, tempfile, threading, webbrowser
+import copy, hashlib, hmac, json, math, os, re, secrets, sys, tempfile, threading, webbrowser
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
-from urllib.parse import urlparse, unquote
-from contextlib import redirect_stdout
+from urllib.parse import urlparse, unquote, parse_qs
 from datetime import datetime
 
 BASE = Path(__file__).resolve().parent
@@ -27,6 +26,31 @@ LOCK = threading.Lock()
 SAVE_LOCK = threading.Lock()
 SOURCES = {}
 RECOVERY = {}
+SAVING = set()
+MAX_SESSIONS = 32
+MAX_WORLDS = 4
+# Every /api and /icons request must carry this; the launch URL hands it to the browser as a cookie.
+TOKEN = secrets.token_urlsafe(32)
+
+def character_session(sid):
+    with LOCK:
+        if sid not in SESSIONS:raise ValueError('Session expired. Reopen your character.')
+        SESSIONS[sid]=SESSIONS.pop(sid)
+        return SESSIONS[sid]
+
+def world_session(sid):
+    with LOCK:
+        if sid not in WORLD_SESSIONS:raise ValueError('World session expired. Reopen the world.')
+        WORLD_SESSIONS[sid]=WORLD_SESSIONS.pop(sid)
+        return WORLD_SESSIONS[sid]
+
+def add_world_session(world):
+    sid=secrets.token_hex(16)
+    with LOCK:
+        for old in [k for k,w in WORLD_SESSIONS.items() if w.path==world.path]:WORLD_SESSIONS.pop(old)
+        while len(WORLD_SESSIONS)>=MAX_WORLDS:WORLD_SESSIONS.pop(next(iter(WORLD_SESSIONS)))
+        WORLD_SESSIONS[sid]=world
+    return sid
 FIELDS = {'time_since_death','max_health','health','max_stamina','stamina','max_eitr','eitr','guardian_power','guardian_power_cooldown',
           'foods','skills','inventory','hair','beard','model_index','hair_color','skin_color','known_recipes',
           'known_stations','known_material','trophies','known_biomes','uniques','known_texts','shown_tutorials'}
@@ -50,7 +74,7 @@ CATALOG = catalogue()
 FOOD_DATA=json.loads((EDITOR/'food-stats.json').read_text(encoding='utf-8'))
 
 def decode(raw):
-    with tempfile.TemporaryDirectory(dir=RUNTIME) as folder, redirect_stdout(io.StringIO()):
+    with tempfile.TemporaryDirectory(dir=RUNTIME) as folder:
         p = Path(folder)/'input.fch';p.write_bytes(raw)
         root = decompile_fch(str(p))
         if not root.get('player_data_hex'): raise ValueError('This character has no saved player data yet.')
@@ -62,7 +86,7 @@ def decode(raw):
 def encode(root, player):
     root = copy.deepcopy(root)
     root['player_data_hex'] = pack_player_data_hex(player)
-    with tempfile.TemporaryDirectory(dir=RUNTIME) as folder, redirect_stdout(io.StringIO()):
+    with tempfile.TemporaryDirectory(dir=RUNTIME) as folder:
         j=Path(folder)/'wrapper.json';f=Path(folder)/'output.fch'
         j.write_text(json.dumps(root,ensure_ascii=False),encoding='utf-8');compile_fch(str(j),str(f))
         raw=f.read_bytes()
@@ -119,8 +143,9 @@ def open_save(raw,name,source=None):
     if encode(root,player)!=raw:raise ValueError('This save cannot yet be reproduced exactly. No changes were made.')
     sid=secrets.token_urlsafe(24)
     with LOCK:
-        if len(SESSIONS)>=32:
-            expired=next(iter(SESSIONS));SESSIONS.pop(expired);SOURCES.pop(expired,None);RECOVERY.pop(expired,None)
+        idle=[k for k in SESSIONS if k not in SAVING]
+        while len(SESSIONS)>=MAX_SESSIONS and idle:
+            expired=idle.pop(0);SESSIONS.pop(expired);SOURCES.pop(expired,None);RECOVERY.pop(expired,None)
         SESSIONS[sid]=(root,player,raw)
         if source is not None:SOURCES[sid]=(Path(source).resolve(),raw)
     return dict(session=sid, filename=Path(name).name, canSave=source is not None and not is_cloud_cache(source), saveBlockedReason="Steam Cloud cache: move the character to Local in Valheim Manage Saves, quit Valheim, then reopen the local file." if source and is_cloud_cache(source) else None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
@@ -128,9 +153,7 @@ def open_save(raw,name,source=None):
                 worlds=len(root.get('worlds',[])))
 
 def export_save(data):
-    with LOCK:
-        if data['session'] not in SESSIONS:raise ValueError('Session expired. Reopen your character.')
-        root,original,raw=SESSIONS[data['session']]
+    root,original,raw=character_session(data['session'])
     root=copy.deepcopy(root);player=copy.deepcopy(original)
     supplied=data['player']
     if set(supplied)-FIELDS:raise ValueError('Unsupported character field.')
@@ -152,12 +175,13 @@ def export_save(data):
         root['used_cheats']=data['usedCheats']
     target=data.get('teleportTarget')
     if target:
-        choices=RECOVERY.get(data['session'],{})
+        with LOCK:choices=RECOVERY.get(data['session'],{})
         if target not in choices:raise ValueError('Tombstone selection expired. Scan the world again.')
-        world,grave=choices[target]
-        world.verify_source()
+        choice=choices[target];grave=choice['grave']
+        current=World(choice['path'])
+        if (current.seen,current.number)!=(choice['seen'],choice['number']):raise ValueError('The world changed since the scan. Scan the world again.')
         if grave['owner']!=str(root['player_id']):raise ValueError('This tombstone belongs to another character.')
-        entry=next((w for w in root['worlds'] if str(w['world_id'])==world.meta['uid']),None)
+        entry=next((w for w in root['worlds'] if str(w['world_id'])==choice['uid']),None)
         if entry is None:raise ValueError('This character has no saved position in that world.')
         pos=grave['position']
         if len(pos)!=3 or not all(math.isfinite(x) for x in pos):raise ValueError('Invalid tombstone position.')
@@ -167,17 +191,19 @@ def export_save(data):
     return result
 
 def scan_tombstones(data):
-    root,_,_=SESSIONS[data['session']]
+    root,_,_=character_session(data['session'])
     world=World(data['path'])
     if not any(str(w['world_id'])==world.meta['uid'] for w in root['worlds']):
         raise ValueError('This world is not in the character save. Choose the world where you died.')
     choices={};rows=[]
     for grave in world.tombs:
         if grave['owner']!=str(root['player_id']):continue
-        token=secrets.token_hex(16);choices[token]=(world,grave)
+        token=secrets.token_hex(16);choices[token]=dict(path=world.path,seen=world.seen,number=world.number,uid=world.meta['uid'],grave=grave)
         rows.append(dict(id=token,position=grave['position'],items=[dict(prefab=i['prefab'] or str(i['prefab_hash']),stack=i['stack']) for i in grave['items']]))
-    RECOVERY.setdefault(data['session'],{}).update(choices)
-    return dict(world=world.meta['name'],tombstones=rows)
+    with LOCK:
+        if data['session'] not in SESSIONS:raise ValueError('Session expired. Reopen your character.')
+        RECOVERY[data['session']]=choices
+    return dict(world=world.meta['name'],tombstones=rows,warning=getattr(world,'warning',None))
 
 def is_cloud_cache(path):
     parts=[part.lower() for part in Path(path).resolve().parts]
@@ -187,6 +213,16 @@ def install_staged(staged,path):
     os.replace(staged,path)
 
 def save_character(data):
+    sid=data['session']
+    with LOCK:
+        if sid in SAVING:raise ValueError('A save of this character is already running.')
+        SAVING.add(sid)
+    try:return _save_character(data)
+    finally:
+        with LOCK:SAVING.discard(sid)
+
+def _save_character(data):
+    character_session(data['session'])
     with LOCK:source=SOURCES.get(data['session'])
     if source is None:raise ValueError('Reopen with Open character to save to its original location, or use Export copy.')
     if is_cloud_cache(source[0]):
@@ -194,7 +230,7 @@ def save_character(data):
     ensure_game_closed()
     result=export_save(data)
     with SAVE_LOCK:
-        with LOCK:path,expected=SOURCES[data['session']]
+        with LOCK:path,expected=SOURCES.get(data['session'],source)
         if path.read_bytes()!=expected:raise ValueError('This file changed outside the editor. Reopen it before saving.')
         if result==expected:return dict(saved=True,backup=None,path=str(path),unchanged=True)
         stamp=datetime.now().strftime('%Y%m%d-%H%M%S-%f')
@@ -285,15 +321,28 @@ class Handler(BaseHTTPRequestHandler):
         elif isinstance(body,str):body=body.encode()
         self.send_response(status);self.send_header('Content-Type',ctype);self.send_header('Content-Length',str(len(body)))
         self.send_header('Cache-Control','no-store');self.send_header('X-Content-Type-Options','nosniff')
-        self.send_header('Content-Security-Policy',"default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'")
+        self.send_header('Content-Security-Policy',"default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'")
         for k,v in (extra or {}).items():self.send_header(k,v)
         self.end_headers();self.wfile.write(body)
     def allowed(self):
         expected=f'127.0.0.1:{self.server.server_port}'
         return self.headers.get('Host')==expected and self.headers.get('Origin',f'http://{expected}')==f'http://{expected}'
+    def cookie_name(self):
+        return f'rune{self.server.server_port}'
+    def authorized(self):
+        # Parsed by hand: SimpleCookie drops every cookie after a malformed one, and 127.0.0.1 cookies are shared by all local ports.
+        for part in self.headers.get('Cookie','').split(';'):
+            name,_,value=part.strip().partition('=')
+            if name==self.cookie_name() and hmac.compare_digest(value.encode(),TOKEN.encode()):return True
+        return False
     def do_GET(self):
         if not self.allowed():return self.send(403,{'error':'Local access only.'})
-        path=urlparse(self.path).path
+        url=urlparse(self.path);path=url.path
+        if path=='/' and parse_qs(url.query).get('t'):
+            if not hmac.compare_digest(parse_qs(url.query)['t'][0].encode(),TOKEN.encode()):return self.send(403,{'error':'This Rune link is from an earlier launch. Use the link Rune printed when it started.'})
+            return self.send(303,b'','text/plain',{'Location':'/','Set-Cookie':f'{self.cookie_name()}={TOKEN}; Path=/; HttpOnly; SameSite=Strict'})
+        if (path.startswith('/api/') or path.startswith('/icons/')) and not self.authorized():
+            return self.send(403,{'error':'Open Rune with its launcher, or the link saved in the .runtime/url.txt file next to server.py.'})
         try:
             if path=='/api/worlds':
                 roots=local_dirs('worlds')+steam_remote_dirs('worlds')
@@ -311,6 +360,7 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as exc:self.send(400,{'error':str(exc)})
     def do_POST(self):
         if not self.allowed():return self.send(403,{'error':'Local access only.'})
+        if not self.authorized():return self.send(403,{'error':'Open Rune with its launcher, or the link saved in the .runtime/url.txt file next to server.py.'})
         try:
             size=int(self.headers.get('Content-Length',0))
             if not 0<size<=40*1024*1024:raise ValueError('Invalid request size.')
@@ -323,16 +373,18 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200,result)
             if self.path=='/api/world/open':
                 with SAVE_LOCK:
-                    world=World(data['path']);sid=secrets.token_hex(16)
-                    WORLD_SESSIONS[sid]=world
+                    world=World(data['path']);sid=add_world_session(world)
                     result=world_public(world,sid)
                 return self.send(200,result)
             if self.path in ('/api/world/save','/api/world/export'):
                 with SAVE_LOCK:
-                    world=WORLD_SESSIONS[data['session']]
+                    world=world_session(data['session'])
                     if self.path.endswith('/export'):return self.send(200,world.export(data.get('changes',[]),data.get('texts'),data.get('settings')),'application/zip')
                     result=world.save(data.get('changes',[]),ensure_game_closed,data.get('texts'),data.get('settings'))
-                    result['world']=world_public(world,data['session'])
+                    if not result.get('unchanged') and not result.get('reopen'):
+                        try:result['world']=world_public(world,data['session'])
+                        except Exception as exc:result.update(reopen=True,warning=f'Saved generation {result["generation"]}, but preparing the updated view failed ({exc}). Reopen the world before making more changes.')
+                    elif result.get('unchanged'):result['world']=world_public(world,data['session'])
                 return self.send(200,result)
             if self.path=='/api/backups':return self.send(200,list_backups(data['session']))
             if self.path=='/api/backup-copy':
@@ -350,7 +402,7 @@ class Handler(BaseHTTPRequestHandler):
             if self.path=='/api/save':return self.send(200,save_character(data))
             if self.path=='/api/export':return self.send(200,export_save(data),'application/octet-stream')
             if self.path=='/api/original':
-                with LOCK:raw=SESSIONS[data['session']][2]
+                raw=character_session(data['session'])[2]
                 return self.send(200,raw,'application/octet-stream')
             self.send(404,{'error':'Not found.'})
         except Exception as exc:self.send(400,{'error':str(exc)})
@@ -359,8 +411,10 @@ if __name__=='__main__':
     import argparse
     parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=0);parser.add_argument('--no-browser',action='store_true');args=parser.parse_args()
     server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
-    url=f'http://127.0.0.1:{server.server_port}'
-    (RUNTIME/'url.txt').write_text(url)
+    url=f'http://127.0.0.1:{server.server_port}/?t={TOKEN}'
+    url_file=RUNTIME/'url.txt'
+    with os.fdopen(os.open(url_file,os.O_WRONLY|os.O_CREAT|os.O_TRUNC,0o600),'w') as stream:stream.write(url)
+    os.chmod(url_file,0o600)
     print(url,flush=True)
     if not args.no_browser:webbrowser.open(url)
     try:server.serve_forever()

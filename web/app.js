@@ -11,7 +11,8 @@ const fmt=n=>Number(n||0).toLocaleString(undefined,{maximumFractionDigits:1});
 const snapshot=()=>JSON.stringify({name:state.name,usedCheats:state.usedCheats,teleportTarget:state.teleportTarget||null,player:state.player});
 const dirty=()=>state&&snapshot()!==saved;
 function toast(message,error=false){$('toast').textContent=message;$('toast').className='toast'+(error?' error':'');$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,error?9000:4000)}
-function busy(on,message='Reading your character…'){$('busy').hidden=!on;$('busyText').textContent=message}
+function busy(on,message='Reading your character…'){$('busy').hidden=!on;$('busyText').textContent=message;for(const el of document.querySelectorAll('header,main,dialog'))el.inert=on}
+const isBusy=()=>!$('busy').hidden;
 async function api(url,data,raw=false,filename=''){const options=data===undefined?{}:{method:'POST',headers:raw?{'Content-Type':'application/octet-stream','X-Filename':encodeURIComponent(filename)}:{'Content-Type':'application/json'},body:raw?data:JSON.stringify(data)};const response=await fetch(url,options);if(!response.ok){const e=await response.json();throw Error(e.error||'Request failed')}return response}
 function remember(){history.push(snapshot());if(history.length>80)history.shift();future=[]}
 function foodTotals(foods){
@@ -30,7 +31,7 @@ function recalculateFoodStats(){
   state.player[maxKey]=total[key];state.player[key]=Math.min(state.player[key],total[key]);
  }
 }
-function mutate(fn){remember();const foods=JSON.stringify(state.player.foods);fn();if(foods!==JSON.stringify(state.player.foods))recalculateFoodStats();render()}
+function mutate(fn){if(isBusy())return;remember();const foods=JSON.stringify(state.player.foods);fn();if(foods!==JSON.stringify(state.player.foods))recalculateFoodStats();render()}
 function restore(value){const data=JSON.parse(value);state.teleportTarget=data.teleportTarget;state.name=data.name;state.usedCheats=data.usedCheats;state.player=data.player;selected=Math.min(selected,state.player.inventory.length-1);render()}
 function undo(){if(!history.length)return;future.push(snapshot());restore(history.pop())}
 function redo(){if(!future.length)return;history.push(snapshot());restore(future.pop())}
@@ -70,8 +71,8 @@ $('inventoryGrid').ondragover=e=>{if(dragIndex<0)return;e.preventDefault();const
 $('inventoryGrid').ondragleave=e=>e.target.closest('[data-slot]')?.classList.remove('drag-over');
 $('inventoryGrid').ondrop=e=>{if(dragIndex<0)return;e.preventDefault();e.stopPropagation();const b=e.target.closest('[data-slot]');if(b){const[x,y]=b.dataset.slot.split(',').map(Number);moveItem(dragIndex,x,y)}dragIndex=-1};
 document.addEventListener('dragend',()=>{dragIndex=-1;document.querySelectorAll('.drag-over').forEach(b=>b.classList.remove('drag-over'))});
-document.addEventListener('dragover',e=>{if(e.dataTransfer.types.includes('Files')){e.preventDefault();document.body.classList.add('dragging-file')}});document.addEventListener('dragleave',e=>{if(!e.relatedTarget)document.body.classList.remove('dragging-file')});document.addEventListener('drop',e=>{document.body.classList.remove('dragging-file');if(e.dataTransfer.files.length){e.preventDefault();load(e.dataTransfer.files[0])}});
-document.addEventListener('keydown',e=>{if(window.worldMode||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo()}if(e.key==='Delete'&&state&&selected>=0&&activeTab==='inventory'&&!$('picker').open){e.preventDefault();mutate(()=>{state.player.inventory.splice(selected,1);selected=-1})}});
+document.addEventListener('dragover',e=>{if(e.dataTransfer.types.includes('Files')){e.preventDefault();document.body.classList.add('dragging-file')}});document.addEventListener('dragleave',e=>{if(!e.relatedTarget)document.body.classList.remove('dragging-file')});document.addEventListener('drop',e=>{document.body.classList.remove('dragging-file');if(e.dataTransfer.files.length){e.preventDefault();if(!isBusy())load(e.dataTransfer.files[0])}});
+document.addEventListener('keydown',e=>{if(isBusy()||window.worldMode||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo()}if(e.key==='Delete'&&state&&selected>=0&&activeTab==='inventory'&&!$('picker').open){e.preventDefault();mutate(()=>{state.player.inventory.splice(selected,1);selected=-1})}});
 window.addEventListener('beforeunload',e=>{if(dirty()){e.preventDefault();e.returnValue=''}});
 (async()=>{try{catalog=await(await api('/api/catalog')).json();itemsById=Object.fromEntries(catalog.items.map(i=>[i.prefab,i]));$('category').innerHTML='<option value="">All categories</option>'+[...new Set(catalog.items.map(i=>i.category))].sort().map(c=>`<option>${esc(c)}</option>`).join('');await recent()}catch(e){toast('Could not start the workshop: '+e.message,true)}})();
 
@@ -91,8 +92,9 @@ async function saveCharacter(){
  if(!state||!state.canSave)return;
  busy(true,'Backing up and saving your character…');
  try{
-  const result=await(await api('/api/save',{session:state.session,name:state.name,usedCheats:state.usedCheats,teleportTarget:state.teleportTarget||null,player:state.player})).json();
-  saved=snapshot();controls();
+  const submitted=snapshot();
+  const result=await(await api('/api/save',{session:state.session,...JSON.parse(submitted)})).json();
+  saved=submitted;controls();
   $('saveResult').textContent=result.unchanged?'No changes to save.':`Saved to ${result.path}. Previous file: ${result.backup}`;
   toast(result.unchanged?'No changes to save.':'Character saved. Previous file retained as .old.');
  }catch(e){toast(e.message,true)}finally{busy(false)}
@@ -134,7 +136,8 @@ $('scanTombs').onclick=async()=>{
  busy(true,'Finding your tombstones…');
  try{
   const result=await(await api('/api/tombstones',{session:state.session,path:$('recoveryPath').value})).json();
-  if(state.teleportTarget)mutate(()=>state.teleportTarget=null);
+  if(result.warning)toast(result.warning,true);
+  if(state.teleportTarget){remember();state.teleportTarget=null;render()}
   $('tombChoices').innerHTML=result.tombstones.length?result.tombstones.map((g,i)=>`<div class="panel-heading"><strong>${esc(result.world)} · Tombstone ${i+1}</strong><p class="muted">Position: ${g.position.map(n=>Math.round(n)).join(', ')} · ${g.items.length} occupied slots</p><p>${g.items.map(x=>`${esc(itemsById[x.prefab]?.name||x.prefab)} ×${x.stack}`).join(' · ')}</p><button data-tomb="${g.id}">Teleport here on next login</button></div>`).join(''):'<p>No nonempty tombstones belonging to this character were found in this world save.</p>';
   renderRecovery();
  }catch(e){toast(e.message,true)}finally{busy(false)}

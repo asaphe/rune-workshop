@@ -41,12 +41,13 @@ class WorldTests(unittest.TestCase):
         self.assertEqual(i['custom_data'],{'mod':'preserve'})
         self.assertEqual(i['_cheat_byte'],129)
     def test_failed_write_never_commits_and_retry_succeeds(self):
-        real=world.durable
-        def fail(path,data):
+        real=world.durable;before=sorted(p.name for p in self.path.iterdir())
+        def fail(path,data,created=None):
             if path.suffix=='.fwl2':raise OSError('injected failure')
-            real(path,data)
+            real(path,data,created)
         with patch.object(world,'durable',side_effect=fail):
             with self.assertRaises(OSError):self.w.save(self.changes(),lambda:None)
+        self.assertEqual(sorted(p.name for p in self.path.iterdir() if p.name!='.rune-backups'),before)
         self.assertEqual(world.World(self.path).number,1)
         self.assertTrue(list((self.path/'.rune-backups').glob('*.zip')))
         result=self.w.save(self.changes(),lambda:None)
@@ -114,6 +115,69 @@ class WorldTests(unittest.TestCase):
             with self.assertRaises(ValueError):self.w.build([],text_changes=[dict(id='0',text=value)])
     def test_truncated_chunk_rejected(self):
         with self.assertRaises(ValueError):world.parse_chunk(self.w.files['00_01__0_1.chunk'][:-1])
+    def test_torn_newest_marker_opens_previous_generation_and_save_recovers(self):
+        number,files=self.w.build(self.changes())
+        for name,data in files.items():(self.path/name).write_bytes(b'' if name.endswith('.ok') else data)
+        reopened=world.World(self.path)
+        self.assertEqual(reopened.number,1)
+        self.assertIn('never finished',reopened.public()['warning'])
+        result=reopened.save(self.changes(),lambda:None)
+        self.assertGreater(result['generation'],number)
+        self.assertEqual(world.World(self.path).containers[0]['items'][0]['stack'],11)
+    def test_complete_marker_with_unknown_version_fails_closed(self):
+        number,files=self.w.build(self.changes())
+        for name,data in files.items():(self.path/name).write_bytes(world.p('i',43) if name.endswith('.ok') else data)
+        with self.assertRaisesRegex(ValueError,'commit marker'):world.World(self.path)
+    def test_publish_never_replaces_an_existing_marker(self):
+        src=self.path/'.staged';src.write_bytes(b'new');dst=self.path/'_main.1.ok'
+        with self.assertRaises(FileExistsError):world.publish_new(src,dst)
+        self.assertEqual(dst.read_bytes(),world.p('i',42))
+    def test_publish_without_hard_links_falls_back_to_checked_rename(self):
+        import errno,platforms
+        if platforms.WINDOWS:self.skipTest('Windows always renames')
+        src=self.path/'.staged';src.write_bytes(b'new');dst=self.path/'_main.9.ok'
+        with patch.object(platforms.os,'link',side_effect=OSError(errno.EPERM,'no hard links')):world.publish_new(src,dst)
+        self.assertEqual((dst.read_bytes(),src.exists()),(b'new',False))
+    def test_no_complete_generation_is_an_error(self):
+        (self.path/'_main.1.ok').write_bytes(b'')
+        with self.assertRaisesRegex(ValueError,'No complete world generation'):world.World(self.path)
+    def test_marker_failure_leaves_no_new_generation(self):
+        real=world.durable
+        def fail(path,data,created=None):
+            if path.name.endswith('.ok.tmp'):
+                real(path,data[:2],created);raise OSError('power cut while writing the marker')
+            real(path,data,created)
+        with patch.object(world,'durable',side_effect=fail),self.assertRaises(OSError):self.w.save(self.changes(),lambda:None)
+        self.assertEqual(world.generations(self.path),[1])
+        self.assertEqual(sorted(p.name for p in self.path.iterdir() if p.name.startswith(('_main.2','.'))),['.rune-backups'])
+    def test_refresh_failure_after_commit_reports_success_with_warning(self):
+        with patch.object(world,'World',side_effect=ValueError('boom')):result=self.w.save(self.changes(),lambda:None)
+        self.assertFalse(result['unchanged'])
+        self.assertTrue(result['reopen'])
+        self.assertIn('Reopen the world',result['warning'])
+        self.assertEqual(world.generations(self.path),[1,result['generation']])
+        with self.assertRaisesRegex(ValueError,'changed since opening'):self.w.save(self.changes(),lambda:None)
+    def test_marker_completed_in_place_after_opening_counts_as_a_change(self):
+        number,files=self.w.build(self.changes())
+        for name,data in files.items():(self.path/name).write_bytes(b'' if name.endswith('.ok') else data)
+        stale=world.World(self.path);self.assertEqual(stale.number,1)
+        (self.path/f'_main.{number}.ok').write_bytes(files[f'_main.{number}.ok'])
+        with self.assertRaisesRegex(ValueError,'changed since opening'):stale.save([],lambda:None,settings={'nobuildcost':True})
+    def test_retagging_unlinks_peer_portal_without_creator(self):
+        def portal(creator,tag):
+            return world.p('Hfffi',1|32|64,1.,2.,3.,world.hashcode('portal_wood'))+world.p('Bi',1,4242)+bytes([1])+world.p('iq',world.hashcode('creator'),creator)+bytes([1])+world.p('i',world.hashcode('tag'))+world.string(tag)
+        objects=[portal(123,'Home'),portal(0,'Home')]
+        (self.path/'00_01__0_1.chunk').write_bytes(world.p('hi',42,2)+b''.join(objects))
+        (self.path/'_main.1.chunks').write_bytes(world.p('hiiHBIi',42,2,1,1,0,1,2))
+        self.w=world.World(self.path)
+        self.assertEqual((len(self.w.texts),len(self.w.links)),(1,2))
+        self.w.save([],lambda:None,text_changes=[dict(id='0',text='Away')])
+        self.assertEqual(self.w.links,[])
+    def test_unsupported_container_has_empty_items(self):
+        inv=world.p('iH',999,0)
+        obj=world.p('Hfffi',0xa0,1.,2.,3.,world.hashcode('piece_chest_wood'))+bytes([1])+world.p('iq',world.hashcode('creator'),5)+bytes([1])+world.p('ii',world.hashcode('items'),len(inv))+inv
+        _,containers=world.parse_chunk(world.p('hi',42,1)+obj)
+        self.assertEqual((containers[0]['items'],'Unsupported inventory version' in containers[0]['error']),([],True))
 
 if __name__=='__main__':unittest.main()
 

@@ -20,6 +20,11 @@ Rune needs Python 3.9 or newer and nothing else (standard library only).
 - **Any platform, with a console:** `python3 server.py` (Ctrl+C stops it).
   `--port <n>` picks a fixed port and `--no-browser` skips opening a tab.
 
+Each launch creates a new access token. The link Rune opens (and prints, and
+saves in `.runtime/url.txt`, readable only by you) carries it; the browser keeps
+it as a cookie. A tab left open from an earlier launch, or the bare
+`http://127.0.0.1:<port>` address, cannot reach your saves: use the new link.
+
 ### Where Rune looks for saves
 
 | | Local saves | Steam Cloud cache (read-only) |
@@ -59,7 +64,10 @@ character in Rune.
 Before a changed save, Rune writes and verifies an exact backup in the
 `.rune-backups` folder beside the character. It then atomically replaces the
 character file, without a missing-file interval. Every backup ends in `.fch.old`.
-External file changes and a running game block saving.
+External file changes and a running game block saving. Rune re-reads the file
+immediately before replacing it, but it cannot lock out other programs: if Steam
+Cloud sync or another editor writes the same save in that final instant, its
+write can be overwritten. Keep Steam and other save tools idle while saving.
 
 **Backups** lists both current and older editor backups and lets you download a
 verified `.fch` restore copy. **Export** downloads the edited character separately.
@@ -120,6 +128,10 @@ one-based in the UI; use the actual container dimensions in game.
 **Save world** requires a local world and a closed game. It verifies the loaded
 files have not changed, creates a verified full-generation ZIP in the world's
 .rune-backups folder, and writes a new generation with its commit marker last.
+The marker is written to a temporary file and renamed into place, so it is
+either complete or absent; if a save fails, the files it already wrote are
+removed. If an older Rune version left an incomplete marker, Rune opens the
+previous complete generation, says so, and the next save writes a complete one.
 The old generation is retained. The saved backup path is displayed after saving.
 To restore, close Valheim and extract the backup world folder into a separate
 location; do not merge it over a newer world generation.

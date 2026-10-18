@@ -92,6 +92,26 @@ def flush_to_disk(stream):
             if exc.errno not in (errno.ENOTSUP,errno.EOPNOTSUPP,errno.EINVAL,errno.ENOTTY):raise
     os.fsync(stream.fileno())
 
+def publish_new(src,dst):
+    """Rename src to dst, refusing to replace an existing dst."""
+    if WINDOWS:os.rename(src,dst);return
+    try:os.link(src,dst)
+    except FileExistsError:raise
+    except OSError:
+        # exFAT and some network volumes have no hard links; fall back to a checked rename.
+        if Path(dst).exists():raise FileExistsError(dst)
+        os.rename(src,dst);return
+    os.unlink(src)
+
+def sync_directory(path):
+    """Persist a rename by flushing its directory entry; Windows and some volumes do not support this."""
+    if WINDOWS:return
+    try:
+        fd=os.open(path,os.O_RDONLY)
+        try:os.fsync(fd)
+        finally:os.close(fd)
+    except OSError:pass
+
 def pick_character_file():
     """Returns the chosen path, or None when the person cancels."""
     start=next((d for d in local_dirs('characters') if d.is_dir()),Path.home())

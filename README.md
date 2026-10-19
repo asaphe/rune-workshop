@@ -354,3 +354,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md). Rune is
 distributed under [GPL-3.0](LICENSE) because it includes a patched copy of the
 GPL-3.0 VikingEditor parser; third-party notices are in `licenses/`. Rune is not
 affiliated with Iron Gate or Coffee Stain. Valheim is a trademark of its owners.
+
+### Survival streak
+
+Character & food has separate current and best survival streaks in whole days. Choose the difficulty you play. Editing updates that difficulty and both overall statistic profiles; other difficulties, cheat flags and the death timer are preserved. Best is raised automatically when current exceeds it. Undo/redo and normal verified Save/backups apply. The separate time-since-death timer controls the death-penalty cooldown and does not advance survival achievement progress. The game still checks achievement eligibility; an unlock is not guaranteed.

@@ -179,4 +179,3 @@ if __name__ == '__main__':
     except Exception as exc:
         print(f'Icon setup failed: {exc}', file=sys.stderr)
         raise SystemExit(1)
-

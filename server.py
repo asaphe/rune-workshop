@@ -336,7 +336,20 @@ def character_paths():
     dirs=steam_remote_dirs('characters')+local_dirs('characters')
     return sorted([p for d in dirs if d.exists() for p in d.glob('*.fch') if '_backup_' not in p.name],key=lambda p:p.stat().st_mtime,reverse=True)
 
+class RuneServer(ThreadingHTTPServer):
+    # Drain accepted requests (including saves) before the process exits.
+    daemon_threads = False
+    block_on_close = True
+
+    def __init__(self, *args, **kwargs):
+        self.stopping = threading.Event()
+        super().__init__(*args, **kwargs)
+
 class Handler(BaseHTTPRequestHandler):
+    def setup(self):
+        super().setup()
+        self.connection.settimeout(15)
+
     def log_message(self,*args):pass
     def send(self,status,body,ctype='application/json',extra=None):
         if isinstance(body,(dict,list)):body=json.dumps(body,ensure_ascii=False,allow_nan=False).encode()
@@ -383,6 +396,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         if not self.allowed():return self.send(403,{'error':'Local access only.'})
         if not self.authorized():return self.send(403,{'error':'Open Rune with its launcher, or the link saved in the .runtime/url.txt file next to server.py.'})
+        if getattr(self.server,'stopping',None) and self.server.stopping.is_set():return self.send(503,{'error':'Rune is shutting down.'})
         try:
             size=int(self.headers.get('Content-Length',0))
             if not 0<size<=40*1024*1024:raise ValueError('Invalid request size.')
@@ -390,6 +404,11 @@ class Handler(BaseHTTPRequestHandler):
             if self.path=='/api/open':return self.send(200,open_save(body,unquote(self.headers.get('X-Filename','character.fch'))))
             if self.headers.get('Content-Type')!='application/json':raise ValueError('Expected JSON request.')
             data=json.loads(body)
+            if self.path=='/api/quit':
+                self.server.stopping.set()
+                try:self.send(200,{'stopping':True})
+                finally:threading.Thread(target=self.server.shutdown,daemon=True).start()
+                return
             if self.path=='/api/tombstones':
                 with SAVE_LOCK:result=scan_tombstones(data)
                 return self.send(200,result)
@@ -432,7 +451,7 @@ class Handler(BaseHTTPRequestHandler):
 if __name__=='__main__':
     import argparse
     parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=0);parser.add_argument('--no-browser',action='store_true');args=parser.parse_args()
-    server=ThreadingHTTPServer(('127.0.0.1',args.port),Handler)
+    server=RuneServer(('127.0.0.1',args.port),Handler)
     url=f'http://127.0.0.1:{server.server_port}/?t={TOKEN}'
     url_file=RUNTIME/'url.txt'
     with os.fdopen(os.open(url_file,os.O_WRONLY|os.O_CREAT|os.O_TRUNC,0o600),'w') as stream:stream.write(url)
@@ -441,4 +460,9 @@ if __name__=='__main__':
     if not args.no_browser:webbrowser.open(url)
     try:server.serve_forever()
     except KeyboardInterrupt:pass
-    finally:server.server_close()
+    finally:
+        server.server_close()
+        # Another launch may now own this file; never remove its link.
+        try:
+            if url_file.read_text()==url:url_file.unlink()
+        except OSError:pass

@@ -358,3 +358,15 @@ affiliated with Iron Gate or Coffee Stain. Valheim is a trademark of its owners.
 ### Survival streak
 
 Character & food has separate current and best survival streaks in whole days. Choose the difficulty you play. Editing updates that difficulty and both overall statistic profiles; other difficulties, cheat flags and the death timer are preserved. Best is raised automatically when current exceeds it. Undo/redo and normal verified Save/backups apply. The separate time-since-death timer controls the death-penalty cooldown and does not advance survival achievement progress. The game still checks achievement eligibility; an unlock is not guaranteed.
+
+## Quitting Rune
+
+Click **Quit Rune** in the header, available in both Character and World. Confirm
+that you want to stop this instance. Unsaved character or world edits prompt a
+warning; save changes in other tabs first, because quitting affects every tab
+connected to the same server. Active server operations finish before Python exits.
+The page then tells you to close the tab. Use the launcher to start Rune again.
+
+Closing a browser tab alone does not stop the server. Rune requires Python at
+runtime, not Node.js; Quit Rune does not terminate unrelated Python, Node.js or
+browser processes, nor separate Rune instances.

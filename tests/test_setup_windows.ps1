@@ -6,6 +6,14 @@ $base = Join-Path $repo ('.runtime\setup-tests-' + [guid]::NewGuid().ToString('N
 New-Item -ItemType Directory -Path (Join-Path $base '.runtime') -Force | Out-Null
 function Assert($condition, $message) { if (-not $condition) { throw $message } }
 
+# Windows PowerShell 5.1 must emit each folder separately and deduplicate casing.
+$folders = @(Read-DetectedGames '["d:\\steam\\steamapps\\common\\Valheim","D:\\Steam\\steamapps\\common\\Valheim","E:\\Steam Library\\steamapps\\common\\Valheim"]')
+Assert ($folders.Count -eq 2) 'Duplicate or nested detection results.'
+foreach ($folder in $folders) { Assert ($folder -is [string]) 'Detected folder must be one string argument.' }
+Assert ($folders[1] -eq 'E:\Steam Library\steamapps\common\Valheim') 'Spaces in a folder were lost.'
+Assert (@(Read-DetectedGames '[]').Count -eq 0) 'Empty detection must return no folders.'
+Assert (@(Read-DetectedGames '["D:\\Valheim"]').Count -eq 1) 'One folder must remain one choice.'
+
 # Declining Python must not download or launch anything.
 function Confirm-Rune { return $false }
 function Invoke-WebRequest { throw 'Unexpected network request' }

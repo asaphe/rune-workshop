@@ -212,3 +212,21 @@ $('survivalFields').addEventListener('change',e=>{
  if(e.target.value.trim()===''||!Number.isInteger(value)||value<0||value>1000000||(key==='best'&&value<row.current)){toast('Use whole days from 0 to 1,000,000. Best streak must be at least the current streak.',true);renderSurvival();return}
  mutate(()=>{const next={...row,[key]:value};next.best=Math.max(next.best,next.current);for(const index of [0,1,survivalDifficulty])state.survival[index]={...next}});
 });
+
+let runeStopped=false;
+$('quitBtn').onclick=async()=>{
+ if(isBusy()||runeStopped)return;
+ const unsaved=dirty()||(typeof worldDirty==='function'&&worldDirty());
+ const message=(unsaved?'You have unsaved changes. Quit Rune and discard them?':'Quit Rune?')+' This stops the server for all tabs connected to this instance. Save any changes in other tabs first.';
+ if(!confirm(message))return;
+ busy(true,'Stopping Rune…');
+ try{
+  await api('/api/quit',{});
+  runeStopped=true;
+  state=null;
+  if(typeof worldState!=='undefined')worldState=null;
+  busy(false);
+  document.querySelector('header').hidden=true;
+  document.querySelector('main').innerHTML='<section class="panel"><div class="panel-heading"><h1>Rune is shutting down</h1><p>The server will exit after any active operations finish. You can close this tab.</p><p>To start again, use the Rune launcher.</p></div></section>';
+ }catch(e){busy(false);toast('Could not request shutdown: '+e.message+'. Rune may already be stopped.',true)}
+};

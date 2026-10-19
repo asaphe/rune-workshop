@@ -137,6 +137,27 @@ def validate(player):
         if not isinstance(player[key],list) or any(not isinstance(v,str) for v in player[key]):raise ValueError(f'Invalid {key}.')
     for value in player['known_stations'].values():finite(value,0,1000,'Station level',True)
 
+# PlayerStatType IDs verified against Valheim 1.0: independent of the death timer.
+SURVIVAL_CURRENT, SURVIVAL_BEST = 128, 129
+
+def survival_profiles(root):
+    profiles=root.get('profiles',[])
+    if len(profiles)!=10 or any(len(p.get('stats',[]))<=SURVIVAL_BEST for p in profiles):return None
+    return [dict(current=p['stats'][SURVIVAL_CURRENT],best=p['stats'][SURVIVAL_BEST]) for p in profiles]
+
+def apply_survival(root, supplied):
+    original=survival_profiles(root)
+    if supplied==original:return
+    if original is None or not isinstance(supplied,list) or len(supplied)!=10:
+        raise ValueError('Survival statistics are unavailable for this save layout.')
+    for index,row in enumerate(supplied):
+        if row==original[index]:continue
+        if not isinstance(row,dict) or set(row)!={'current','best'}:raise ValueError('Invalid survival statistics.')
+        for key in ('current','best'):finite(row[key],0,1000000,'Survival days',True)
+        if row['best']<row['current']:raise ValueError('Best survival streak cannot be below the current streak.')
+        root['profiles'][index]['stats'][SURVIVAL_CURRENT]=row['current']
+        root['profiles'][index]['stats'][SURVIVAL_BEST]=row['best']
+
 def open_save(raw,name,source=None):
     if len(raw)>32*1024*1024:raise ValueError('Character file is too large.')
     root,player=decode(raw)
@@ -148,13 +169,14 @@ def open_save(raw,name,source=None):
             expired=idle.pop(0);SESSIONS.pop(expired);SOURCES.pop(expired,None);RECOVERY.pop(expired,None)
         SESSIONS[sid]=(root,player,raw)
         if source is not None:SOURCES[sid]=(Path(source).resolve(),raw)
-    return dict(session=sid, filename=Path(name).name, canSave=source is not None and not is_cloud_cache(source), saveBlockedReason="Steam Cloud cache: move the character to Local in Valheim Manage Saves, quit Valheim, then reopen the local file." if source and is_cloud_cache(source) else None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
+    return dict(survival=survival_profiles(root), session=sid, filename=Path(name).name, canSave=source is not None and not is_cloud_cache(source), saveBlockedReason="Steam Cloud cache: move the character to Local in Valheim Manage Saves, quit Valheim, then reopen the local file." if source and is_cloud_cache(source) else None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
                 playerId=str(root['player_id']), created=root.get('date_created_unix'), versions=[root['version'],player['version'],player['inventory_version']],
                 worlds=len(root.get('worlds',[])))
 
 def export_save(data):
     root,original,raw=character_session(data['session'])
     root=copy.deepcopy(root);player=copy.deepcopy(original)
+    if 'survival' in data:apply_survival(root,data['survival'])
     supplied=data['player']
     if set(supplied)-FIELDS:raise ValueError('Unsupported character field.')
     player.update(copy.deepcopy(supplied))

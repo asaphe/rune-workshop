@@ -64,11 +64,13 @@ def catalogue():
     except (OSError,ValueError):labels={}
     limits=json.loads((EDITOR/'stack-limits.json').read_text(encoding='utf-8'))
     durability=json.loads((EDITOR/'durability-stats.json').read_text(encoding='utf-8'))
+    try:local_icons=json.loads((EDITOR/'local-data/item-icons.json').read_text(encoding='utf-8'))
+    except (OSError,ValueError):local_icons={}
     entries = []
     for key, item in raw.items():
         prefab = item['prefab']; label = labels.get(prefab,{})
         entries.append(dict(prefab=prefab, hash=int(key), name=label.get('name') or re.sub(r'(?<=[a-z])(?=[A-Z])',' ',prefab),
-                            category=label.get('category','Other'), maxStack=limits.get(prefab), durability=durability.get(prefab), icons=[i if (ICONS/i).is_file() else None for i in item.get('icons',[])]))
+                            category=label.get('category','Other'), maxStack=limits.get(prefab), durability=durability.get(prefab), icons=[i if isinstance(i,str) and re.fullmatch(r'[a-f0-9]{64}\.png',i) and (ICONS/i).is_file() else None for i in local_icons.get(prefab,item.get('icons',[]))]))
     return sorted(entries,key=lambda x:x['name'].lower())
 CATALOG = catalogue()
 FOOD_DATA=json.loads((EDITOR/'food-stats.json').read_text(encoding='utf-8'))

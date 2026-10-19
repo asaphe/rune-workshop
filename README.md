@@ -5,51 +5,46 @@ world saves, built around verified, byte-exact round-trips and retained backups.
 
 ## Quick setup
 
-### Windows: no installation needed (recommended)
+### Windows: automatic setup (recommended)
 
-1. On this repository's main page, choose **Code → Download ZIP**, then
-   right-click the downloaded ZIP and choose **Extract All**. Open the extracted
-   folder containing `server.py` and **Launch Rune.cmd**.
-2. Open [Python's official Windows downloads](https://www.python.org/downloads/windows/).
-   Under a currently supported stable Python 3 release, choose **Windows
-   embeddable package (64-bit)** for an Intel/AMD Windows PC. For Windows on ARM,
-   choose **Windows embeddable package (ARM64)**. Do not choose the installer,
-   install manager, or a prerelease.
-3. Create a folder named **runtime** beside `server.py`. Extract **all contents**
-   of the Python ZIP directly into it. `python.exe` and `pythonw.exe` must be
-   directly inside `runtime`, not inside another nested folder. Keep the DLLs,
-   Python standard-library ZIP, and `python*._pth` file together and unchanged.
-4. Double-click **Launch Rune.cmd**. Rune opens in your browser.
-   **No Python installation, administrator access, Tcl/Tk, or pip is needed.**
-5. Follow [Open your first save](#open-your-first-save) below.
+1. Choose **Code → Download ZIP**, then **Extract All**. Open the folder
+   containing `server.py` and **Launch Rune.cmd**.
+2. Double-click **Launch Rune.cmd**. If compatible Python is missing, Rune asks
+   before downloading the **official Windows embeddable Python ZIP** from
+   python.org. Type **y** to accept, or decline and use manual setup below.
+3. Optionally accept **item pictures**. Confirm a detected Valheim installation,
+   or select **valheim.exe** in the file picker. Cancel or answer **n** to skip.
+4. Rune opens in your browser. Follow [Open your first save](#open-your-first-save).
 
-Your folder should look like this:
+Setup stays inside Rune's folder, with no administrator access or system install.
+It verifies the Python ZIP's SHA-256 before installation. It does not modify your
+system Python, PATH, game files or saves. No binaries or artwork are committed.
 
-```text
-rune-workshop-main/
-  Launch Rune.cmd
-  launch.py
-  server.py
-  backend/
-  web/
-  runtime/
-    python.exe
-    pythonw.exe
-    python315.dll       (the number depends on your Python version)
-    python315.zip
-    python315._pth
-    ...other files from the Python ZIP
-```
+Automatic setup uses official **Python 3.14.8**, a supported stable release
+compatible with the artwork tools, rather than claiming it is the newest Python.
+An existing compatible runtime is reused. If it is newer than the artwork tools
+support, icon setup offers a separate portable 3.14 runtime for extraction.
 
-Rune uses the official ZIP as supplied. The launcher adds Rune's own folder to
-Python's import path; you do not need to edit `._pth` or enable `site`.
-Python binaries are not stored in this repository, and there is no custom Rune
-runtime package to download. If your existing copy already has a working
-`runtime/pythonw.exe`, you can skip steps 2–3.
+Optional icon setup temporarily downloads **UnityPy 1.24.2** and dependencies
+from PyPI. Reading game artwork can take several minutes and substantial memory.
+It does not install pip or packages into your Python runtime. The editor itself
+remains standard-library only. Skipping icons is remembered; run **Setup Rune.cmd**
+to add or refresh them later. Quit an existing Rune instance before refreshing
+icons, then use the new browser tab opened by setup.
 
-Item artwork is **not included**. Placeholder diamonds are expected and editing
-works with them. There is currently no first-install icon extraction wizard.
-If you have artwork from an existing Rune copy, see [Item artwork](#item-artwork).
+Download errors show a retry option. Declining Python setup exits; skipping or
+failing icons still lets Rune launch with placeholders. Windows PowerShell runs
+setup, then exits after starting Python. It does not remain as a service.
+
+### Windows: manual portable Python setup
+
+1. Download a supported stable **Windows embeddable package** from
+   [python.org](https://www.python.org/downloads/windows/): 64-bit for Intel/AMD,
+   ARM64 for Windows on ARM.
+2. Create **runtime** beside `server.py` and extract **all** ZIP contents directly
+   into it. `runtime/python.exe` and `runtime/pythonw.exe` must exist. Keep the
+   DLLs, standard-library ZIP and `python*._pth` unchanged. No pip setup is needed.
+3. Run **Launch Rune.cmd**. You may skip optional artwork setup.
 
 ### Open your first save
 
@@ -72,7 +67,7 @@ Python 3 release from [python.org](https://www.python.org/downloads/windows/)
 with the Windows launcher (`pyw`), then double-click **Launch Rune.cmd**.
 A `runtime` folder is not required for this route. If the launcher is missing,
 you can run `python launch.py` in Command Prompt from the Rune folder instead.
-No pip packages are required.
+No pip packages are required to run the editor; optional artwork setup downloads its own tools.
 
 **Python 3.9 is the minimum compatibility version, not the recommended version
 to install.** For a new setup, use a currently supported stable release.
@@ -88,7 +83,7 @@ editing. The Windows embeddable Python ZIP does not run on macOS.
 ### After updating Rune
 
 Keep your portable `runtime` folder and locally extracted
-`backend/local-data/item_icons` folder when moving to a new download. Relaunch
+`backend/local-data/item_icons` folder and `item-icons.json` index when moving to a new download. Relaunch
 Rune and use its newly opened browser tab. Refreshing an old tab does not restart
 an older server or reload its startup catalog. Save pending edits before restarting.
 
@@ -98,8 +93,8 @@ Rune requires Python 3.9 or newer, with no pip packages. For a new setup, use a
 currently supported stable Python 3 release. The official Windows embeddable
 ZIP works without installation; Windows uses its native file picker, not Tcl/Tk.
 
-- **Windows:** double-click **Launch Rune.cmd**. It uses a bundled
-  `runtime\pythonw.exe` through `launch.py` when one is present and otherwise falls back to the
+- **Windows:** double-click **Launch Rune.cmd**. It checks a local
+  `runtime\pythonw.exe` through `launch.py` when present, then checks the
   `pyw` launcher from a [python.org](https://www.python.org/downloads/) install.
 - **macOS:** double-click **Launch Rune.command**. It runs in a Terminal
   window; closing the window stops Rune. A `git clone` copy runs as is. A copy
@@ -140,19 +135,16 @@ instances of the game and any dedicated server using the save before editing.
 Item icons are game artwork and are not part of this repository. Without them,
 the inventory shows placeholder diamonds; all editing features still work.
 
-If you already have a working Rune copy with icons:
+On Windows, run **Setup Rune.cmd** and accept the artwork step. Choose an
+installed Valheim folder, **not** a character/world save folder. Setup reads
+`valheim_Data/StreamingAssets/SoftRef/Bundles` and writes PNGs plus an icon index
+under `backend/local-data`. Unreadable sprites use placeholders. Failed extraction
+preserves the existing artwork and index.
 
-1. Copy its entire `backend/local-data/item_icons` folder into the same location
-   in your new Rune folder. The PNG files should sit directly inside `item_icons`,
-   not in another nested `item_icons` folder.
-2. Relaunch Rune and use the newly opened tab. Icons are checked at server startup,
-   so refreshing the old page alone is not enough.
-
-For a first installation, this repository currently has **no icon extraction
-command or setup wizard**. You need PNGs extracted from your own Valheim install,
-with the hash filenames listed in `backend/local-data/valheim_items.json`.
-Renaming arbitrary images to item names will not work. You can use Rune with its
-placeholders until artwork is available. Do not commit extracted game artwork.
+To transfer artwork, copy `backend/local-data/item_icons/` and, if present,
+`backend/local-data/item-icons.json`. Quit and relaunch Rune; refreshing an old
+tab alone does not reload artwork. Older PNG-only copies still work with the
+bundled metadata. Never commit extracted artwork or the local icon index.
 
 ## Save and export
 
@@ -340,7 +332,7 @@ to its save folder. In-game arrival has not been manually tested.
 |---|---|
 | “Python 3.9 or newer” when launching | Extract the official embeddable Python ZIP into `runtime`, or use an installed Python with the Windows launcher. 3.9 is the minimum compatibility version, not an installation recommendation. |
 | Rune does not open | Check that `runtime/pythonw.exe` exists directly inside `runtime`. From Command Prompt in the Rune folder, run `runtime\python.exe launch.py --check`. A startup error dialog points to `.runtime/startup.log` when available. |
-| Diamonds instead of item pictures | Add your local icon folder, then relaunch Rune. See [Item artwork](#item-artwork). |
+| Diamonds instead of item pictures | Run Setup Rune.cmd, then relaunch Rune. See [Item artwork](#item-artwork). |
 | Save is disabled | Read the message above the tabs. Move Cloud saves to Local in Valheim, quit the game, and reopen the local save. Imported/dropped files must be reopened by their file path for direct saving. |
 | Edits do not appear in game | Check that you saved rather than only exported, and that the game loads the same Local character/world you edited. Compare names, storage labels and modification dates. |
 | “File changed” or “World changed” | Reopen the latest save before editing again; another process or the game updated it. |

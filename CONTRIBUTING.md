@@ -18,8 +18,10 @@ git commit -s -m "fix: ..."
 
 - **Never commit save files** (`.fch`, `.fch.old`, world folders) or extracted
   game artwork. `.gitignore` blocks the common names; check `git status` anyway.
-- Standard library only. Rune ships with a bundled Python on Windows and uses
-  the system Python on macOS, so a third-party dependency is a distribution change.
+- The editor runtime is standard-library only. Windows setup downloads official
+  portable Python after consent; macOS uses system Python. Optional artwork
+  extraction installs UnityPy into temporary local tools, never the server runtime.
+  Changes to setup dependencies need download/extraction tests.
 - A change to a serializer or write path needs a test showing an unchanged save
   round-trips byte for byte and an edited one reads back as intended.
 

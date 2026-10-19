@@ -19,3 +19,6 @@ backend/local-data/item_icons/
 *.chunks
 *.chunk
 _main.*.ok
+
+# Local extracted artwork metadata
+backend/local-data/item-icons.json

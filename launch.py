@@ -39,8 +39,7 @@ def main():
         return 0
     except Exception as exc:
         message = ('Rune could not start.\n\n' + str(exc) + '\n\n'
-                   'Extract the official Python embeddable ZIP directly into the runtime folder.\n'
-                   'Alternatively, install Python with the Windows launcher. See README.md.\n'
+                   'See README.md for setup and browser-mode troubleshooting.\n'
                    'If present, see .runtime/startup.log beside Launch Rune.cmd.')
         if sys.stderr is not None:
             print(message, file=sys.stderr)

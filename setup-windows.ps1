@@ -153,6 +153,14 @@ try {
         Write-Host 'Setup cancelled. Nothing was launched. See README.md for manual Python setup.'
         exit 1
     }
+    & $python -E -s (Join-Path $base 'setup_webview.py') --check
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host 'Rune uses a native WebView2 window with its own private data folder.'
+        Write-Host 'Setup downloads Microsoft WebView2 SDK (~10 MB) from NuGet and builds the small host locally.'
+        if (-not (Confirm-Rune 'Set up the Rune app window?')) { exit 1 }
+        & $python -E -s (Join-Path $base 'setup_webview.py')
+        if ($LASTEXITCODE -ne 0) { throw 'WebView2 setup did not finish. See the message above.' }
+    }
     Set-UpIcons $python
     $pythonw = Join-Path (Split-Path -Parent $python) 'pythonw.exe'
     if (-not (Test-Path -LiteralPath $pythonw)) { $pythonw = $python }

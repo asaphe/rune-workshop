@@ -18,7 +18,9 @@ git commit -s -m "fix: ..."
 
 - **Never commit save files** (`.fch`, `.fch.old`, world folders) or extracted
   game artwork. `.gitignore` blocks the common names; check `git status` anyway.
-- The editor runtime is standard-library only. Windows setup downloads official
+- The Python server is standard-library only. The Windows window host uses
+  Microsoft WebView2 and .NET Framework; its SDK and locally compiled executable
+  stay under `.runtime`, never in Git. Windows setup downloads official
   portable Python after consent; macOS uses system Python. Optional artwork
   extraction installs UnityPy into temporary local tools, never the server runtime.
   Changes to setup dependencies need download/extraction tests.

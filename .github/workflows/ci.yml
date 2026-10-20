@@ -28,10 +28,11 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m compileall -q server.py world.py platforms.py setup_icons.py backend tests
+      - run: python -m compileall -q server.py world.py platforms.py setup_icons.py setup_webview.py desktop.py statistics_data.py backend tests
       - name: Windows setup regression tests
         if: runner.os == 'Windows'
         run: powershell -NoProfile -ExecutionPolicy Bypass -File tests/test_setup_windows.ps1
+      - run: node tests/test_inventory_tools.cjs
       - run: python -m unittest discover -s tests -v
       - if: runner.os != 'Windows'
         run: for f in web/*.js; do node --check "$f"; done

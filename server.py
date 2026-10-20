@@ -1,5 +1,6 @@
 """Local-only Valheim character editor with verified saves and retained backups."""
 from pathlib import Path
+import statistics_data
 import copy, hashlib, hmac, json, math, os, re, secrets, sys, tempfile, threading, webbrowser
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote, parse_qs
@@ -64,13 +65,14 @@ def catalogue():
     except (OSError,ValueError):labels={}
     limits=json.loads((EDITOR/'stack-limits.json').read_text(encoding='utf-8'))
     durability=json.loads((EDITOR/'durability-stats.json').read_text(encoding='utf-8'))
+    weights=json.loads((EDITOR/'weight-stats.json').read_text(encoding='utf-8'))
     try:local_icons=json.loads((EDITOR/'local-data/item-icons.json').read_text(encoding='utf-8'))
     except (OSError,ValueError):local_icons={}
     entries = []
     for key, item in raw.items():
         prefab = item['prefab']; label = labels.get(prefab,{})
         entries.append(dict(prefab=prefab, hash=int(key), name=label.get('name') or re.sub(r'(?<=[a-z])(?=[A-Z])',' ',prefab),
-                            category=label.get('category','Other'), maxStack=limits.get(prefab), durability=durability.get(prefab), icons=[i if isinstance(i,str) and re.fullmatch(r'[a-f0-9]{64}\.png',i) and (ICONS/i).is_file() else None for i in local_icons.get(prefab,item.get('icons',[]))]))
+                            category=label.get('category','Other'), maxStack=limits.get(prefab), durability=durability.get(prefab), weight=weights.get(prefab), icons=[i if isinstance(i,str) and re.fullmatch(r'[a-f0-9]{64}\.png',i) and (ICONS/i).is_file() else None for i in local_icons.get(prefab,item.get('icons',[]))]))
     return sorted(entries,key=lambda x:x['name'].lower())
 CATALOG = catalogue()
 FOOD_DATA=json.loads((EDITOR/'food-stats.json').read_text(encoding='utf-8'))
@@ -171,7 +173,7 @@ def open_save(raw,name,source=None):
             expired=idle.pop(0);SESSIONS.pop(expired);SOURCES.pop(expired,None);RECOVERY.pop(expired,None)
         SESSIONS[sid]=(root,player,raw)
         if source is not None:SOURCES[sid]=(Path(source).resolve(),raw)
-    return dict(survival=survival_profiles(root), session=sid, filename=Path(name).name, canSave=source is not None and not is_cloud_cache(source), saveBlockedReason="Steam Cloud cache: move the character to Local in Valheim Manage Saves, quit Valheim, then reopen the local file." if source and is_cloud_cache(source) else None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
+    return dict(statistics=statistics_data.public(root), survival=survival_profiles(root), session=sid, filename=Path(name).name, canSave=source is not None and not is_cloud_cache(source), saveBlockedReason="Steam Cloud cache: move the character to Local in Valheim Manage Saves, quit Valheim, then reopen the local file." if source and is_cloud_cache(source) else None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
                 playerId=str(root['player_id']), created=root.get('date_created_unix'), versions=[root['version'],player['version'],player['inventory_version']],
                 worlds=len(root.get('worlds',[])))
 
@@ -179,6 +181,7 @@ def export_save(data):
     root,original,raw=character_session(data['session'])
     root=copy.deepcopy(root);player=copy.deepcopy(original)
     if 'survival' in data:apply_survival(root,data['survival'])
+    if 'statistics' in data:statistics_data.apply(root,data['statistics'])
     supplied=data['player']
     if set(supplied)-FIELDS:raise ValueError('Unsupported character field.')
     player.update(copy.deepcopy(supplied))
@@ -384,15 +387,15 @@ class Handler(BaseHTTPRequestHandler):
             if path=='/api/worlds':
                 roots=local_dirs('worlds')+steam_remote_dirs('worlds')
                 return self.send(200,[dict(name=p.name,path=str(p),cloud=is_cloud_cache(p)) for root in roots if root.exists() for p in root.iterdir() if p.is_dir() and '_backup' not in p.name and any(p.glob('_main.*.ok'))])
-            if path=='/api/catalog':return self.send(200,dict(items=CATALOG,foods=FOOD_DATA['foods'],foodBase=FOOD_DATA['base'],skills=VALHEIM_SKILLS,powers=GUARDIAN_POWERS,hairs=VALHEIM_HAIRS,beards=VALHEIM_BEARDS))
+            if path=='/api/catalog':return self.send(200,dict(statLabels=statistics_data.LABELS,items=CATALOG,foods=FOOD_DATA['foods'],foodBase=FOOD_DATA['base'],skills=VALHEIM_SKILLS,powers=GUARDIAN_POWERS,hairs=VALHEIM_HAIRS,beards=VALHEIM_BEARDS))
             if path=='/api/characters':return self.send(200,[dict(id=hashlib.sha256(str(p).encode()).hexdigest(),name=p.stem,location='Steam Cloud' if is_cloud_cache(p) else 'Local',modified=p.stat().st_mtime,size=p.stat().st_size) for p in character_paths()])
             if path.startswith('/icons/'):
                 name=path.split('/')[-1]
                 if not re.fullmatch(r'[a-f0-9]{64}\.png',name):raise ValueError('Invalid icon.')
                 return self.send(200,(ICONS/name).read_bytes(),'image/png')
-            files={'/':'index.html','/world.js':'world.js','/app.js':'app.js','/style.css':'style.css'}
+            files={'/favicon.ico':'rune.ico','/rune.svg':'rune.svg','/rune.png':'rune.png','/statistics.js':'statistics.js','/inventory-tools.js':'inventory-tools.js','/':'index.html','/world.js':'world.js','/app.js':'app.js','/style.css':'style.css'}
             if path not in files:return self.send(404,{'error':'Not found.'})
-            ctype={'/':'text/html; charset=utf-8','/world.js':'text/javascript; charset=utf-8','/app.js':'text/javascript; charset=utf-8','/style.css':'text/css; charset=utf-8'}[path]
+            ctype={'/favicon.ico':'image/x-icon','/rune.svg':'image/svg+xml','/rune.png':'image/png','/statistics.js':'text/javascript; charset=utf-8','/inventory-tools.js':'text/javascript; charset=utf-8','/':'text/html; charset=utf-8','/world.js':'text/javascript; charset=utf-8','/app.js':'text/javascript; charset=utf-8','/style.css':'text/css; charset=utf-8'}[path]
             self.send(200,(BASE/'web'/files[path]).read_bytes(),ctype)
         except Exception as exc:self.send(400,{'error':str(exc)})
     def do_POST(self):
@@ -452,19 +455,32 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__=='__main__':
     import argparse
-    parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=0);parser.add_argument('--no-browser',action='store_true');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=0);parser.add_argument('--no-browser',action='store_true');parser.add_argument('--browser',action='store_true',help='Use a normal browser tab instead of the Windows app window');args=parser.parse_args()
     server=RuneServer(('127.0.0.1',args.port),Handler)
     url=f'http://127.0.0.1:{server.server_port}/?t={TOKEN}'
     url_file=RUNTIME/'url.txt'
     with os.fdopen(os.open(url_file,os.O_WRONLY|os.O_CREAT|os.O_TRUNC,0o600),'w') as stream:stream.write(url)
     os.chmod(url_file,0o600)
     print(url,flush=True)
-    if not args.no_browser:webbrowser.open(url)
-    try:server.serve_forever()
+    window=None
+    try:
+        if not args.no_browser:
+            if os.name=='nt' and not args.browser:
+                from desktop import AppWindow
+                window=AppWindow(url,RUNTIME)
+                def window_closed():
+                    server.stopping.set()
+                    server.shutdown()
+                threading.Thread(target=window.watch,args=(window_closed,),daemon=True).start()
+            else:webbrowser.open(url)
+        server.serve_forever()
     except KeyboardInterrupt:pass
     finally:
         server.server_close()
+        if window is not None:window.close()
         # Another launch may now own this file; never remove its link.
         try:
             if url_file.read_text()==url:url_file.unlink()
         except OSError:pass
+    if window is not None and window.error:
+        raise RuntimeError(window.error)

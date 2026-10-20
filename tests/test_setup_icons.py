@@ -31,6 +31,12 @@ class IconSetupTests(unittest.TestCase):
                 setup.main()
             install.assert_not_called()
 
+    def test_accepts_game_folder_directly_and_deduplicates_library(self):
+        library = self.root / 'Steam'
+        game = library / 'steamapps/common/Valheim'
+        setup.bundles_path(game).mkdir(parents=True)
+        self.assertEqual(setup.discover_games([game, library, game]), [str(game.resolve())])
+
     def test_rejects_wrong_pip_hash_before_execution(self):
         metadata = {'urls': [{'filename': 'pip-py3-none-any.whl', 'url': 'https://files.pythonhosted.org/pip.whl',
                               'digests': {'sha256': '0' * 64}}]}

@@ -1,6 +1,6 @@
 # Rune · Local Character Workshop
 
-A local-only browser editor for Valheim character saves (`.fch`) and Valheim 1.0
+A local-only editor for Valheim character saves (`.fch`) and Valheim 1.0
 world saves, built around verified, byte-exact round-trips and retained backups.
 
 ## Quick setup
@@ -12,9 +12,11 @@ world saves, built around verified, byte-exact round-trips and retained backups.
 2. Double-click **Launch Rune.cmd**. If compatible Python is missing, Rune asks
    before downloading the **official Windows embeddable Python ZIP** from
    python.org. Type **y** to accept, or decline and use manual setup below.
-3. Optionally accept **item pictures**. Confirm a detected Valheim installation,
+3. Accept **Rune app window setup** to download Microsoft’s WebView2 SDK and build
+   the native host. If prompted, install the WebView2 Runtime from Microsoft.
+4. Optionally accept **item pictures**. Confirm a detected Valheim installation,
    or select **valheim.exe** in the file picker. Cancel or answer **n** to skip.
-4. Rune opens in your browser. Follow [Open your first save](#open-your-first-save).
+5. Rune opens in its own Windows app window (using Microsoft WebView2). Follow [Open your first save](#open-your-first-save).
 
 Setup stays inside Rune's folder, with no administrator access or system install.
 It verifies the Python ZIP's SHA-256 before installation. It does not modify your
@@ -30,7 +32,7 @@ from PyPI. Reading game artwork can take several minutes and substantial memory.
 It does not install pip or packages into your Python runtime. The editor itself
 remains standard-library only. Skipping icons is remembered; run **Setup Rune.cmd**
 to add or refresh them later. Quit an existing Rune instance before refreshing
-icons, then use the new browser tab opened by setup.
+icons, then use the new app window opened by setup.
 
 Download errors show a retry option. Declining Python setup exits; skipping or
 failing icons still lets Rune launch with placeholders. Windows PowerShell runs
@@ -84,7 +86,7 @@ editing. The Windows embeddable Python ZIP does not run on macOS.
 
 Keep your portable `runtime` folder and locally extracted
 `backend/local-data/item_icons` folder and `item-icons.json` index when moving to a new download. Relaunch
-Rune and use its newly opened browser tab. Refreshing an old tab does not restart
+Rune and use its newly opened window. Refreshing an old tab does not restart
 an older server or reload its startup catalog. Save pending edits before restarting.
 
 ## Launch options
@@ -110,6 +112,55 @@ Each launch creates a new access token. The link Rune opens (and prints, and
 saves in `.runtime/url.txt`, readable only by you) carries it; the browser keeps
 it as a cookie. A tab left open from an earlier launch, or the bare
 `http://127.0.0.1:<port>` address, cannot reach your saves: use the new link.
+
+### Dedicated Windows app window
+
+Windows launches Rune in its own native WebView2 window. It does not launch
+Edge or Chrome, load your personal browser profile, or open external browser windows.
+Each instance uses a separate `.runtime/webview2-data/session-*` folder inside
+Rune; normal shutdown removes that session data. Your browser history, cookies,
+extensions and sign-in are not used.
+
+Close **X** or choose **Quit Rune** to stop the local server and its WebView2
+processes. X checks for unsaved edits and waits for an active operation. Quit
+allows active server operations to finish before closing the window.
+
+First launch asks before downloading Microsoft's WebView2 SDK (~10 MB) from
+NuGet. Setup verifies the pinned checksum and compiles `native/RuneHost.cs` using
+the .NET Framework compiler supplied with Windows. The SDK files, license and
+compiled host stay under `.runtime`; no binary is committed to the repository.
+Windows .NET Framework 4.6.2+ and the **WebView2 Evergreen Runtime** are required.
+If the runtime is missing, install it from
+[Microsoft](https://developer.microsoft.com/microsoft-edge/webview2/) and relaunch.
+WebView2's runtime receives Microsoft updates separately from the Edge browser.
+
+To intentionally use a normal browser tab, run
+`runtime\python.exe launch.py --browser` (or `python launch.py --browser`).
+In browser mode, use **Quit Rune**; closing a tab does not stop the server.
+macOS continues to use browser mode.
+
+### Inventory conveniences
+
+- Inventory and selected-stack **weight** update as you edit quantity and quality.
+  Values use the bundled game item data, including quality-dependent weight.
+  Unknown/modded items are explicitly excluded from the known total and counted
+  as unknown stacks. Weight is a display, not a way to change game item weights.
+- **+ Portal materials** adds 20 fine wood, 10 greydwarf eyes and 2 surtling cores
+  for one wooden portal. Click again for another. Ordinary existing stacks fill
+  first; additional stacks use empty slots. If the full recipe cannot fit,
+  nothing changes. One click is one Undo step. Save to apply it in-game.
+
+### Statistics
+
+The character's **Statistics** tab includes survival streaks by difficulty and
+identified activity counters, such as berries/mushrooms picked, crafting, fishing
+and kills. Select a record (overall or a specific difficulty) and category.
+Activity edits affect only that record. Survival streak edits retain their
+separate rule: the selected difficulty and both overall streak counters update.
+Per-item categories show entries already stored in the save. Undo, Export and
+Save include statistics. Unknown counters and other save data are preserved.
+Editing a counter does not directly unlock a platform achievement; the game
+still evaluates its requirements and eligibility.
 
 ### Where Rune looks for saves
 
@@ -349,7 +400,7 @@ affiliated with Iron Gate or Coffee Stain. Valheim is a trademark of its owners.
 
 ### Survival streak
 
-Character & food has separate current and best survival streaks in whole days. Choose the difficulty you play. Editing updates that difficulty and both overall statistic profiles; other difficulties, cheat flags and the death timer are preserved. Best is raised automatically when current exceeds it. Undo/redo and normal verified Save/backups apply. The separate time-since-death timer controls the death-penalty cooldown and does not advance survival achievement progress. The game still checks achievement eligibility; an unlock is not guaranteed.
+Statistics has separate current and best survival streaks in whole days. Choose the difficulty you play. Editing updates that difficulty and both overall statistic profiles; other difficulties, cheat flags and the death timer are preserved. Best is raised automatically when current exceeds it. Undo/redo and normal verified Save/backups apply. The separate time-since-death timer controls the death-penalty cooldown and does not advance survival achievement progress. The game still checks achievement eligibility; an unlock is not guaranteed.
 
 ## Quitting Rune
 
@@ -359,6 +410,6 @@ warning; save changes in other tabs first, because quitting affects every tab
 connected to the same server. Active server operations finish before Python exits.
 The page then tells you to close the tab. Use the launcher to start Rune again.
 
-Closing a browser tab alone does not stop the server. Rune requires Python at
+On Windows, closing the dedicated app window also stops the server. In browser mode, closing a tab alone does not stop the server. Rune requires Python at
 runtime, not Node.js; Quit Rune does not terminate unrelated Python, Node.js or
 browser processes, nor separate Rune instances.

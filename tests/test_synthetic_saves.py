@@ -52,6 +52,22 @@ class SyntheticSaveTests(unittest.TestCase):
         self.assertEqual([p.read_bytes() for p in (self.path.parent/'.rune-backups').iterdir()],[raw])
         self.assertEqual(self.leftovers(),[])
 
+    def test_cloud_save_requires_steam_closed_and_retains_backup(self):
+        self.path=Path(self.temp.name)/'userdata/123/892970/remote/characters/viking.fch'
+        self.path.parent.mkdir(parents=True)
+        raw=synthetic_fch(34);self.path.write_bytes(raw)
+        data=server.open_local_path(self.path);data['player']['health']=17.0
+        self.assertTrue(data['canSave']);self.assertTrue(data['cloudCache'])
+        for outcomes in ([ValueError('Exit Steam')], [None, ValueError('Exit Steam')]):
+            with patch.object(server,'ensure_steam_closed',side_effect=outcomes):
+                with self.assertRaisesRegex(ValueError,'Exit Steam'):server.save_character(data)
+            self.assertEqual(self.path.read_bytes(),raw)
+        with patch.object(server,'ensure_steam_closed') as check:
+            result=server.save_character(data)
+            self.assertEqual(check.call_count,2)
+        self.assertEqual(Path(result['backup']).read_bytes(),raw)
+        self.assertEqual(server.decode(self.path.read_bytes())[1]['health'],17.0)
+
     def test_browse_opens_the_literal_picked_file(self):
         picked=Path(self.temp.name)/'$RUNE_TEST_VAR.fch';picked.write_bytes(synthetic_fch(34))
         (Path(self.temp.name)/'other.fch').write_bytes(synthetic_fch(33))

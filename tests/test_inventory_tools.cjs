@@ -1,0 +1,25 @@
+const assert = require('node:assert/strict');
+const tools = require('../web/inventory-tools.js');
+const catalogue = Object.fromEntries(['FineWood','GreydwarfEye','SurtlingCore'].map((name,index)=>
+  [name,{hash:index,maxStack:50,weight:{base:index+1,perQuality:0}}]));
+let inventory=tools.portalMaterials([],catalogue,4);
+assert.deepEqual(inventory.map(i=>i.stack),[20,10,2]);
+assert.equal(tools.weight(inventory[0],catalogue),20);
+assert.equal(tools.weight({prefab:'ModItem'},catalogue),null);
+assert.equal(tools.weight({prefab:'X',stack:3,quality:4},{X:{weight:{base:2,perQuality:.5}}}),15);
+const original=JSON.stringify(inventory);
+inventory=tools.portalMaterials(inventory,catalogue,4);
+assert.deepEqual(inventory.map(i=>i.stack),[40,20,4]);
+inventory=tools.portalMaterials(inventory,catalogue,4);
+assert.deepEqual(inventory.map(i=>i.stack),[50,30,6,10]);
+assert.equal(new Set(inventory.map(i=>`${i.grid_x},${i.grid_y}`)).size,4);
+assert.equal(JSON.parse(original)[0].stack,20);
+const full=Array.from({length:8},(_,x)=>({prefab:'Other',grid_x:x,grid_y:0}));
+const before=JSON.stringify(full);
+assert.throws(()=>tools.portalMaterials(full,catalogue,1),/Nothing was added/);
+assert.equal(JSON.stringify(full),before);
+const partial=full.slice(0,6);
+assert.throws(()=>tools.portalMaterials(partial,catalogue,1),/Nothing was added/);
+assert.equal(partial.length,6);
+assert.throws(()=>tools.portalMaterials([],{},4),/unavailable/);
+console.log('Inventory helpers passed: weight, repeat additions, stack limits, atomic failure.');

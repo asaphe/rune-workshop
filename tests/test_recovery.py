@@ -19,7 +19,8 @@ class RecoveryTests(unittest.TestCase):
   data=server.open_save(raw,'test.fch');root,player=server.decode(raw)
   w=Mock();w.meta=dict(uid=str(root['worlds'][0]['world_id']),name='Test')
   owner=str(root['player_id']);w.tombs=[dict(owner=owner,position=[1.,2.,3.],items=[]),dict(owner=owner,position=[8.,9.,10.],items=[]),dict(owner='other',position=[4.,5.,6.],items=[])]
-  with patch.object(server,'World',return_value=w):result=server.scan_tombstones(dict(session=data['session'],path='unused'))
+  world_patch=patch.object(server,'World',return_value=w);world_patch.start();self.addCleanup(world_patch.stop)
+  result=server.scan_tombstones(dict(session=data['session'],path='unused'))
   self.assertEqual(len(result['tombstones']),2)
   data['teleportTarget']=result['tombstones'][1]['id']
   output=server.export_save(data);after,p=server.decode(output)
@@ -29,6 +30,6 @@ class RecoveryTests(unittest.TestCase):
   data['teleportTarget']=None;self.assertEqual(server.export_save(data),raw)
   data['teleportTarget']='forged'
   with self.assertRaises(ValueError):server.export_save(data)
-  data['teleportTarget']=result['tombstones'][0]['id'];w.verify_source.side_effect=ValueError('changed')
+  data['teleportTarget']=result['tombstones'][0]['id'];w.number=123456
   with self.assertRaises(ValueError):server.export_save(data)
 if __name__=='__main__':unittest.main()

@@ -23,13 +23,21 @@ class IconSetupTests(unittest.TestCase):
             '"libraryfolders" { "1" { "path" "' + str(library).replace('\\', '\\\\') + '" } }')
         game = library / 'steamapps/common/Valheim'
         setup.bundles_path(game).mkdir(parents=True)
-        self.assertEqual(setup.discover_games([steam, library]), [str(game)])
+        # Discovery canonicalizes paths, including Windows 8.3 temp paths
+        # (e.g. RUNNER~1) and macOS temporary-directory symlinks.
+        self.assertEqual(setup.discover_games([steam, library]), [str(game.resolve())])
 
     def test_invalid_game_fails_before_downloading_dependencies(self):
         with patch('sys.argv', ['setup_icons.py', '--game', str(self.root)]), patch.object(setup, 'install_tools') as install:
             with self.assertRaises(ValueError):
                 setup.main()
             install.assert_not_called()
+
+    def test_accepts_game_folder_directly_and_deduplicates_library(self):
+        library = self.root / 'Steam'
+        game = library / 'steamapps/common/Valheim'
+        setup.bundles_path(game).mkdir(parents=True)
+        self.assertEqual(setup.discover_games([game, library, game]), [str(game.resolve())])
 
     def test_rejects_wrong_pip_hash_before_execution(self):
         metadata = {'urls': [{'filename': 'pip-py3-none-any.whl', 'url': 'https://files.pythonhosted.org/pip.whl',

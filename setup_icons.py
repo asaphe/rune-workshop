@@ -26,16 +26,51 @@ def bundles_path(game):
 def discover_games(roots=None):
     libraries = list(steam_roots() if roots is None else roots)
     if roots is None and os.name == 'nt':
-        libraries.extend(Path(f'{drive}:/{name}') for drive in 'CDEFGHIJKLMNOPQRSTUVWXYZ'
-                         for name in ('Steam', 'SteamLibrary'))
-    for root in list(libraries):
+        libraries.extend(
+            Path(f'{drive}:/{name}')
+            for drive in 'CDEFGHIJKLMNOPQRSTUVWXYZ'
+            for name in ('Steam', 'SteamLibrary')
+        )
+
+    candidates = []
+    seen = set()
+
+    def consider(path):
+        path = Path(path)
         try:
-            vdf = (root / 'steamapps/libraryfolders.vdf').read_text(encoding='utf-8')
-            libraries.extend(Path(s.replace('\\\\', '\\')) for s in re.findall(r'"path"\s+"([^"]+)"', vdf))
+            resolved = path.resolve()
+        except OSError:
+            resolved = path
+        key = os.path.normcase(str(resolved))
+        if key in seen:
+            return
+        if bundles_path(path).is_dir():
+            seen.add(key)
+            candidates.append(str(resolved))
+            return
+        # Also accept a library root that contains the game
+        valheim = path / 'steamapps' / 'common' / 'Valheim'
+        if bundles_path(valheim).is_dir():
+            try:
+                resolved_v = valheim.resolve()
+            except OSError:
+                resolved_v = valheim
+            key_v = os.path.normcase(str(resolved_v))
+            if key_v not in seen:
+                seen.add(key_v)
+                candidates.append(str(resolved_v))
+
+    for root in libraries:
+        consider(root)
+        # Pull additional library roots from libraryfolders.vdf when present
+        try:
+            vdf = (Path(root) / 'steamapps' / 'libraryfolders.vdf').read_text(encoding='utf-8')
+            for raw in re.findall(r'"path"\s+"([^"]+)"', vdf):
+                consider(Path(raw.replace('\\\\', '\\')))
         except OSError:
             continue
-    return list(dict.fromkeys(str(root / 'steamapps/common/Valheim') for root in libraries
-                             if bundles_path(root / 'steamapps/common/Valheim').is_dir()))
+
+    return candidates
 
 
 def download(url):

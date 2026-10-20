@@ -83,6 +83,16 @@ function Install-RunePython([string]$RuntimeFolder = 'runtime') {
     }
 }
 
+function Read-DetectedGames([string]$Json) {
+    # Windows PowerShell 5.1 emits a JSON array as one pipeline object. Enumerate
+    # explicitly before collecting results, otherwise two folders become one argv.
+    $folders = foreach ($folder in (ConvertFrom-Json -InputObject $Json)) {
+        if ($folder -isnot [string]) { throw 'Unexpected Valheim detection result.' }
+        $folder
+    }
+    $folders | Sort-Object -Unique
+}
+
 function Set-UpIcons([string]$Python) {
     $marker = Join-Path $base '.runtime\icon-setup.json'
     $icons = Join-Path $base 'backend\local-data\item_icons'
@@ -105,7 +115,9 @@ function Set-UpIcons([string]$Python) {
     }
     while ($true) {
         try {
-            $detected = @(& $Python -E -s (Join-Path $base 'setup_icons.py') --detect | ConvertFrom-Json)
+            $detectionJson = & $Python -E -s (Join-Path $base 'setup_icons.py') --detect
+            if ($LASTEXITCODE -ne 0) { throw 'Could not search for Valheim installations.' }
+            $detected = @(Read-DetectedGames ($detectionJson -join "`n"))
             $game = $null
             foreach ($folder in $detected) {
                 if (Confirm-Rune "Use Valheim at $folder ?") { $game = $folder; break }
@@ -140,6 +152,14 @@ try {
     if (-not $python) {
         Write-Host 'Setup cancelled. Nothing was launched. See README.md for manual Python setup.'
         exit 1
+    }
+    & $python -E -s (Join-Path $base 'setup_webview.py') --check
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host 'Rune uses a native WebView2 window with its own private data folder.'
+        Write-Host 'Setup downloads Microsoft WebView2 SDK (~10 MB) from NuGet and builds the small host locally.'
+        if (-not (Confirm-Rune 'Set up the Rune app window?')) { exit 1 }
+        & $python -E -s (Join-Path $base 'setup_webview.py')
+        if ($LASTEXITCODE -ne 0) { throw 'WebView2 setup did not finish. See the message above.' }
     }
     Set-UpIcons $python
     $pythonw = Join-Path (Split-Path -Parent $python) 'pythonw.exe'

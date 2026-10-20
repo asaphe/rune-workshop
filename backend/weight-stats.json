@@ -1,0 +1,3878 @@
+{
+  "DvergerArbalest_shoot": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "DvergerArbalest_shootAshlands": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "DvergerArbalest_shootDeepNorth": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "DvergerArbalest": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "FW_ArmorBronzeChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorBronzeLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorFenringChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorFenringLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorMageChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorMageChest_Ashlands": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorMageLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorMageLegs_Ashlands": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorPaddedCuirass": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorPaddedGreaves": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorTrollLeatherChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_ArmorTrollLeatherLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_AxeBronze": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FW_BattleaxeCrystal": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "FW_BowDraugrFang": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "FW_CapeLinen": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "FW_CapeTrollHide": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "FW_CapeWolf": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "FW_HelmetBronze": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "FW_KnifeSilver": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "FW_KnifeSkollAndHati": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "FW_ShieldBlackmetalTower": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "FW_StaffFireball": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "FW_StaffLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "FW_SwordBlackmetal": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SP_ArmorBronzeChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorBronzeLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorFenringChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorFenringLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorMageChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorMageChest_Ashlands": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorMageLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorMageLegs_Ashlands": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorPaddedCuirass": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorPaddedGreaves": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorTrollLeatherChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorTrollLeatherLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_AxeBronze": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SP_BattleaxeCrystal": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "SP_BowDraugrFang": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SP_CapeLinen": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SP_CapeTrollHide": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SP_CapeWolf": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SP_HelmetBronze": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "SP_KnifeSilver": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "SP_KnifeSkollAndHati": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "SP_ShieldBlackmetalTower": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_StaffFireball": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "SP_StaffLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SP_SwordBlackmetal": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "Catapult_Ammo_BloodGold": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Catapult_ammo": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "TrinketBlackDamageHealth": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketBlackStamina": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketBloodGoldHealth": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketBloodGoldStamina": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketBronzeHealth": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketBronzeStamina": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketCarapaceEitr": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketChitinSwim": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketFlametalEitr": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketFlametalStaminaHealth": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketIronHealth": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketIronStamina": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketScaleStaminaDamage": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketSilverDamage": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrinketSilverResist": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Upgrader0Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader0Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader1Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader1Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader2Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader2Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader3Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader3Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader4Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader4Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader5Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader5Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader6Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader6Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader7Armor": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Upgrader7Weapon": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "ArmorAshlandsMediumChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorAshlandsMediumlegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorBerserkerChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorBerserkerLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorBerserkerUndeadChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorBerserkerUndeadLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorBronzeChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorBronzeLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorCarapaceChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorCarapaceLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDeepNorthHeavyChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorDeepNorthHeavylegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorDeepNorthMageChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorDeepNorthMagelegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorDeepNorthMediumChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorDeepNorthMediumlegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress1": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress10": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress2": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress3": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress4": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress5": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress6": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress7": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress8": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorDress9": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorFenringChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorFenringLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorFlametalChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorFlametalLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorHarvester1": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorHarvester2": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorIronChest": {
+    "base": 15.0,
+    "perQuality": 0.0
+  },
+  "ArmorIronLegs": {
+    "base": 15.0,
+    "perQuality": 0.0
+  },
+  "ArmorLeatherChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorLeatherLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorLoxChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorLoxLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorMageChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorMageChest_Ashlands": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorMageLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorMageLegs_Ashlands": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorPaddedCuirass": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorPaddedGreaves": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorRagsChest": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "ArmorRagsLegs": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "ArmorRootChest": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorRootLegs": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTrollLeatherChest": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorTrollLeatherLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic1": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic10": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic2": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic3": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic4": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic5": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic6": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic7": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic8": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorTunic9": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorWolfChest": {
+    "base": 15.0,
+    "perQuality": 0.0
+  },
+  "ArmorWolfLegs": {
+    "base": 15.0,
+    "perQuality": 0.0
+  },
+  "CapeAsh": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeAsksvin": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeDeepNorth": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeDeepNorthMage": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeDeerHide": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeFeather": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeLinen": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeLox": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeOdin": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeTrollHide": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "CapeWolf": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorDress1": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorLeatherLegs": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "SP_ArmorTunic5": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldHeavyChestUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldHeavyHelmetUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldHeavyLegsUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldMageChestUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldMageHelmetUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldMageLegsUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldMediumChestUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldMediumHelmetUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ArmorGoldMediumLegsUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "AsksvinEgg": {
+    "base": 1.0,
+    "perQuality": 0.20000000298023224
+  },
+  "AsksvinMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BakedPoteitr": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BakedPoteitrUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BarleyWine": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BarleyWineBase": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BjornMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BlackCore": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BlackSoup": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BloodPudding": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Blueberries": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BoarJerky": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BoneMawSerpentMeat": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Bread": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BugMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Carrot": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "CarrotSoup": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ChickenEgg": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ChickenMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Cloudberry": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "CookedAsksvinMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedBjornMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedBoneMawSerpentMeat": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "CookedBugMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedChickenMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedDeerMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedEgg": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedHareMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedLoxMeat": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "CookedMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedMooseMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedSealBlubber": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedVoltureMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CookedWolfMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "DeerMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "DeerStew": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Eyescream": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Fiddleheadfern": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FierySvinstew": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FishAndBread": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FishAnglerRaw": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FishCooked": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FishRaw": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FishSoup": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FishWraps": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FrostCore": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "GenericMoldUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "GlowWorm": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "HareMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HoneyGlazedChicken": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Kale": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "KaleChips": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "KaleChipsUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "KeysGoldUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Larva": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Lingonberry": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Lingondricka": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "LoxMeat": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "LoxPie": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "LoxPieUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MagicallyStuffedShroom": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MagicallyStuffedShroomUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MarinatedGreens": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MashedMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseBugRepellent": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseBzerker": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseEitrLingering": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseEitrMinor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseFrostResist": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseHasty": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseHealthLingering": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseHealthMajor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseHealthMedium": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseHealthMinor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseLightFoot": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBasePoisonResist": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseStaminaLingering": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseStaminaMedium": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseStaminaMinor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseStrength": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseSwimmer": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseTamer": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBaseTasty": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBugRepellent": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadBzerker": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadEitrLingering": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadEitrMinor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadFrostResist": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadHasty": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadHealthLingering": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadHealthMajor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadHealthMedium": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadHealthMinor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadLightfoot": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadPoisonResist": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadStaminaLingering": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadStaminaMedium": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadStaminaMinor": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadStrength": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadSwimmer": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadTamer": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadTasty": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeadTrollPheromones": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeatPlatter": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MeatballsMashedPoteitr": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MinceMeatSauce": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MisthareSupreme": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorGoldChest": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorGoldHelmet": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorGoldLegs": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorMageChest": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorMageHelmet": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorMageLegs": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorMediumHelmet": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmorMediumLegs": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldArmormediumChest": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldAtgeir": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldAxe": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldAxe2H": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldBow": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldCrossbow": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldFistweapon": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldKeys": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldKnife": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldMace": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldMace2H": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldShieldBuckler": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldShieldRound": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldShieldTower": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldSmallParts": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldSpear": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldStaffOrbofAhri": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldStafffrostorbs": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldStaffspiritcaller": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldStaffthunderblood": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldSword": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoldSword2H": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoltenCore": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MooseKebab": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MooseMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Mushroom": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "MushroomBlue": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "MushroomBzerker": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "MushroomJotunPuffs": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "MushroomMagecap": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "MushroomOmelette": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MushroomSmokePuff": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "MushroomYellow": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "NeckTailGrilled": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Oat": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "OatMilk": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "OatmealLingonberryJam": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Onion": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "OnionSoup": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "OvenPancake": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "OvenPancakeUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Pancakes": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "PiquantPie": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "PiquantPieUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Poteitr": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Pukeberries": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "PulledBear": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "QueensJam": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Raspberry": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "RawMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "RoastedCrustPie": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "RoastedCrustPieUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "RottenMeat": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "RoyalJelly": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Salad": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Sausages": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "ScorchingMedley": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SealBlubber": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SealSoup": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SeekerAspic": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SerpentMeat": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SerpentMeatCooked": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SerpentStew": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ShieldBucklerGoldUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ShieldCore": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ShieldRoundGoldUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ShieldTowerGoldUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ShocklateSmoothie": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SizzlingBerryBroth": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SmallPartsGoldUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SmokedFish": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SmokedMooseMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Softtissue": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SparklingShroomshake": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SpicyMarmalade": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TurnipStew": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "VikingCupcake": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "VikingCupcakeUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Vineberry": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "VoltureEgg": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "VoltureMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "WolfJerky": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "WolfMeat": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "WolfMeatSkewer": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "YggdrasilPorridge": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetAshlandsMediumHood": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetBerserkerHood": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetBerserkerUndead": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetBronze": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetCarapace": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetCelebration": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetCrownofValheim": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetDNHeavy": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetDNMage": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetDNMediumHood": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetDrake": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetDverger": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetFenring": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetFishingHat": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetFlametal": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat1": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat10": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat2": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat3": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat4": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat5": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat6": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat7": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat8": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetHat9": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetIron": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetLeather": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetLox": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetMage": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetMage_Ashlands": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetMidsummerCrown": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetOdin": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetPadded": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetPointyHat": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetRoot": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetRootCrown": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetStrawHat": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "HelmetSweatBand": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetTrollLeather": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HelmetYule": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Acorn": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "AncientSeed": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "AskBladder": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "AskHide": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "AsksvinCarrionNeck": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AsksvinCarrionPelvic": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AsksvinCarrionRibcage": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "AsksvinCarrionSkull": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeHead1": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeHead2": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BarberKit": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BarkaBranch": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Barley": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "BarleyFlour": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "BarrelRings": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BeechSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Bilebag": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BirchSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BjornHide": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BjornPaw": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BlackMarble": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BlackMetal": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "BlackMetalScrap": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Blackwood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Bloodbag": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BoneFragments": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BonemawSerpentScale": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BonemawSerpentTooth": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BreadDough": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Bronze": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "BronzeNails": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BronzeScrap": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "CandleWick": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Carapace": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "CarrotSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "CelestialFeather": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "CeramicPlate": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Chain": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "CharcoalResin": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "CharredBone": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "CharredCogwheel": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "Charredskull": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Chitin": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Coal": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Copper": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "CopperOre": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "CopperScrap": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "CrownJewel": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Crystal": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "CuredSquirrelHamstring": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Dandelion": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "DeerHide": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "DragonTear": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "DvergrNeedle": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "Ectoplasm": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Eitr": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ElakingHairBundle": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ElderBark": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Entrails": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FaderEmber": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FeastAshlands_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastBlackforest_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastDeepNorth_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastMeadows_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastMistlands_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastMountains_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastOceans_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastPlains_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "FeastSwamps_Material": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Feathers": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FineWood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FirCone": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FirConeFrost": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_Blue": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_Cyan": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_Green": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_Purple": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_Red": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_White": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FireworksRocket_Yellow": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FishAndBreadUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FishingBait": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitAshlands": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitCave": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitDeepNorth": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitForest": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitMistlands": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitOcean": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitPlains": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "FishingBaitSwamp": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Flametal": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "FlametalNew": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "FlametalOre": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "FlametalOreNew": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Flax": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "Flint": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FragrantBundle": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FreezeGland": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FreshSeaweed": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Frostwood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FrozenFuel": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "GemstoneBlue": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "GemstoneGreen": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "GemstoneRed": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "GiantBloodSack": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Gold": {
+    "base": 14.0,
+    "perQuality": 0.0
+  },
+  "GoldOre": {
+    "base": 14.0,
+    "perQuality": 0.0
+  },
+  "Grausten": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "GreydwarfEye": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "Guck": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "HardAntler": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "HatefulBlood": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Honey": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "HoneyGlazedChickenUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Hook": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "Ice": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Iron": {
+    "base": 12.0,
+    "perQuality": 0.0
+  },
+  "IronNails": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "IronOre": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "IronScrap": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Ironpit": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "JuteBlue": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "JuteRed": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "KaleSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "LeatherScraps": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Leatherstraps": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "LinenThread": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "LoxPelt": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Mandible": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "MeatPlatterUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MechanicalSpring": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "MemorialCoal": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MisthareSupremeUncooked": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MoleClaws": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "MooseHide": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "MooseSinew": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "MorgenHeart": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "MorgenSinew": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "NeckTail": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "Needle": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "NornThread": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "OatFlour": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "OatSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Obsidian": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "OnionSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Ooze": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "OozeMork": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "OrbFrostFire": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "OrbThunderBlood": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "PineCone": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Pot_Shard_Green": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Pot_Shard_Red": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "PoteitrSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "PowderedDragonEgg": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "ProustitePowder": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "PungentPebbles": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "QueenBee": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "Resin": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Root": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "RoundLog": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Sap": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "ScaleHide": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "ScytheHandle": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SealHide": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "SerpentScale": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SharpeningStone": {
+    "base": 6.0,
+    "perQuality": 0.0
+  },
+  "Silver": {
+    "base": 14.0,
+    "perQuality": 0.0
+  },
+  "SilverOre": {
+    "base": 14.0,
+    "perQuality": 0.0
+  },
+  "SpiceAshlands": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SpiceDeepNorth": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SpiceForests": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SpiceMistlands": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SpiceMountains": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SpiceOceans": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SpicePlains": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Stone": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "StoneRock": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SulfurStone": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SurtlingCore": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "Tar": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Thistle": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Thunderstone": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Tin": {
+    "base": 8.0,
+    "perQuality": 0.0
+  },
+  "TinOre": {
+    "base": 8.0,
+    "perQuality": 0.0
+  },
+  "TrollHide": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Turnip": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "TurnipSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "UndeadBjornRibcage": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "Voidplasm": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Wisp": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "WolfClaw": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "WolfFang": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "WolfHairBundle": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "WolfPelt": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Wood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "WrithanRoots": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "YggdrasilWood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "YmirRemains": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Bell": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BellFragment": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "BlobVial": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "BloodGoldKey": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "CryptKey": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "DragonEgg": {
+    "base": 200.0,
+    "perQuality": 0.0
+  },
+  "DvergrKey": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "DvergrKeyFragment": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "DyrnwynBladeFragment": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "DyrnwynHiltFragment": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "DyrnwynTipFragment": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FaderDrop": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FrozenKingDrop": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "GoblinTotem": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "HildirKey_forestcrypt": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "HildirKey_mountaincave": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "HildirKey_plainsfortress": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "QueenDrop": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Tankard": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TankardAnniversary": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TankardOdin": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "Tankard_dvergr": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "WitheredBone": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "YagluthDrop": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "ShieldBanded": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldBlackmetal": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldBlackmetalTower": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldBoneTower": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldBronzeBuckler": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "ShieldCarapace": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldCarapaceBuckler": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldFlametal": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldFlametalTower": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldGold": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldGoldBuckler": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldGoldTower": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldIronBuckler": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldIronSquare": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldIronTower": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldKnight": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldRoots": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldSerpentscale": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldSilver": {
+    "base": 5.0,
+    "perQuality": 0.0
+  },
+  "ShieldWood": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "ShieldWoodTower": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "Cultivator": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Feaster": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FishingRod": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "Hammer": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Hoe": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SaddleAsksvin": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SaddleLox": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "SaddleMoose": {
+    "base": 10.0,
+    "perQuality": 0.0
+  },
+  "Scythe": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Shovel": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyAbomination": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "TrophyAsksvin": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyBarka": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyBjorn": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyBjornUndead": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyBlob": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyBlob_Frost": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyBlob_Lava": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyBlob_Morkhalla": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyBoar": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyBonemass": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyBonemawSerpent": {
+    "base": 25.0,
+    "perQuality": 0.0
+  },
+  "TrophyCharredArcher": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyCharredMage": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyCharredMelee": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyCultist": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "TrophyCultist_Hildir": {
+    "base": 3.0,
+    "perQuality": 0.0
+  },
+  "TrophyDeathsquito": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyDeer": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyDeerWhite": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyDragonQueen": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyDraugr": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyDraugrElite": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyDraugrFem": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyDvergr": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyEikthyr": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyElaking": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyFader": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyFallenValkyrie": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyFenring": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "TrophyForestTroll": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "TrophyFrostTroll": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "TrophyGhost": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyGjall": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyGoblin": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyGoblinBrute": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyGoblinBruteBrosBrute": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyGoblinBruteBrosShaman": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyGoblinKing": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyGoblinShaman": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyGreydwarf": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyGreydwarfBrute": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "TrophyGreydwarfShaman": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyGrowth": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyHare": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyHatchling": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyJotunWarrior": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyJotunWitch": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyLeech": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyLox": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyMole": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "TrophyMoose": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyMorgen": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophyNeck": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophySGolem": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophySeal": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophySeeker": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophySeekerBrute": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophySeekerQueen": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophySerpent": {
+    "base": 25.0,
+    "perQuality": 0.0
+  },
+  "TrophySkeleton": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophySkeletonHildir": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophySkeletonPoison": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TrophySurtling": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyTheElder": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "TrophyTick": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyUlv": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "TrophyVolture": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "TrophyWolf": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "TrophyWraith": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TrophyWrithan": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "BeltStrength": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Demister": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "IceShoes": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "IceSkates": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Wishbone": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Amber": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "AmberPearl": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "AncientCoin": {
+    "base": 0.20000000298023224,
+    "perQuality": 0.0
+  },
+  "AncientGemstoneBlack": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "AncientGemstoneGreen": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "AncientGemstoneOrange": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "AncientGemstonePurple": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Coins": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "Ruby": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "SilverNecklace": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowBloodGold": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowBronze": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowCarapace": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowCharred": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowFire": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowFlint": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowFrost": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowIron": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowNeedle": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowObsidian": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowPoison": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowSilver": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "ArrowWood": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "AtgeirBlackmetal": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirBronze": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirGold": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirGoldUncooked": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirGold_BloodLightning": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirGold_FrostFire": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirHimminAfl": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirIron": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AtgeirWood": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "AxeBerzerkr": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeBerzerkrBlood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeBerzerkrLightning": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeBerzerkrNature": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeBlackMetal": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeBronze": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeEarly": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeFlint": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "AxeGold": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeGoldUncooked": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeGold_BloodLightning": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeGold_FrostFire": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeIron": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeJotunBane": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "AxeStone": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "AxeWood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Battleaxe": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeBlackmetal": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeCrystal": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeGold": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeGoldUncooked": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeGold_BloodLightning": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeGold_FrostFire": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeSkullSplittur": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BattleaxeWood": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "BoltBlackmetal": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BoltBloodGold": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BoltBone": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BoltCarapace": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BoltCharred": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BoltIron": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "BombBile": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombBlob_Frost": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombBlob_Lava": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombBlob_Morkhalla": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombBlob_Poison": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombBlob_PoisonElite": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombBlob_Tar": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombDynamite": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombLava": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombOoze": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombSiege": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "BombSmoke": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Bow": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowAshlands": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowAshlandsBlood": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowAshlandsRoot": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowAshlandsStorm": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowDraugrFang": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowFineWood": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowGold": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowGoldUncooked": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowGold_BloodLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowGold_FrostFire": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowHuntsman": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "BowSpineSnap": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "Club": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "CrossbowArbalest": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowGold": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowGoldUncooked": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowGold_BloodLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowGold_FrostFire": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowRipper": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowRipperBlood": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowRipperLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "CrossbowRipperNature": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "FistBjornClaw": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FistBjornUndeadClaw": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FistFenrirClaw": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FistGold": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FistGoldUncooked": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FistGold_BloodLightning": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "FistGold_FrostFire": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "GrapplingHook": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "KnifeBlackMetal": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeButcher": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeChitin": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeCopper": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeFlint": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeGold": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeGoldUncooked": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeGold_BloodLightning": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeGold_FrostFire": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeSilver": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeSkollAndHati": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeVoid": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "KnifeWood": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Lantern": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "Lantern_DN": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceBronze": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceEldner": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceEldnerBlood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceEldnerLightning": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceEldnerNature": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceGold": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceGoldUncooked": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceGold_BloodLightning": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceGold_FrostFire": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceIron": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceNeedle": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceSilver": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "MaceWood": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "PickaxeAntler": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "PickaxeBlackMetal": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "PickaxeBronze": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "PickaxeIron": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "PickaxeStone": {
+    "base": 2.0,
+    "perQuality": 0.0
+  },
+  "SledgeDemolisher": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeGold": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeGoldUncooked": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeGold_BloodLightning": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeGold_FrostFire": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeIron": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeStagbreaker": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "SledgeWood": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "Snowball": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "Sparkler": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SpearBronze": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearCarapace": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearChitin": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearElderbark": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearFlint": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearGold": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearGoldUncooked": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearGold_BloodLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearGold_FrostFire": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearSplitner": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearSplitner_Blood": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearSplitner_Lightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearSplitner_Nature": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearWolfFang": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "SpearWood": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "StaffClusterbomb": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffFireball": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffFrostOrbs": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffFrostOrbsUncooked": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "StaffGreenRoots": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffIceShards": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffLightning": {
+    "base": 1.5,
+    "perQuality": 0.0
+  },
+  "StaffOrbofAhri": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffOrbofAhriUncooked": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "StaffRedTroll": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffShield": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffSkeleton": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffSpiritCaller": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffSpiritCallerUncooked": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "StaffThunderBlood": {
+    "base": 0.30000001192092896,
+    "perQuality": 0.0
+  },
+  "StaffThunderbloodUncooked": {
+    "base": 2.5,
+    "perQuality": 0.0
+  },
+  "SwordBlackmetal": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordBronze": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordDyrnwyn": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordGold": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordGoldUncooked": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordGold_BloodLightning": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordGold_FrostFire": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordIron": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordIronFire": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SwordMistwalker": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordNiedhogg": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordNiedhoggBlood": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordNiedhoggLightning": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordNiedhoggNature": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "SwordSilver": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "SwordWood": {
+    "base": 0.800000011920929,
+    "perQuality": 0.0
+  },
+  "THSwordGold": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordGoldUncooked": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordGold_BloodLightning": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordGold_FrostFire": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordKrom": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordSlayer": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordSlayerBlood": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordSlayerLightning": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordSlayerNature": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "THSwordWood": {
+    "base": 4.0,
+    "perQuality": 0.0
+  },
+  "Torch": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TorchMist": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "TurretBolt": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TurretBoltBloodgold": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TurretBoltBone": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TurretBoltFlametal": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "TurretBoltWood": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "FeastAshlands": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastBlackforest": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastDeepNorth": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastMeadows": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastMistlands": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastMountains": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastOceans": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastPlains": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "FeastSwamps": {
+    "base": 1.0,
+    "perQuality": 0.0
+  },
+  "LastBossGate_RuneTile": {
+    "base": 0.5,
+    "perQuality": 0.0
+  },
+  "chest_hildir1": {
+    "base": 200.0,
+    "perQuality": 0.0
+  },
+  "chest_hildir2": {
+    "base": 200.0,
+    "perQuality": 0.0
+  },
+  "chest_hildir3": {
+    "base": 200.0,
+    "perQuality": 0.0
+  },
+  "VineberrySeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  },
+  "VineGreenSeeds": {
+    "base": 0.10000000149011612,
+    "perQuality": 0.0
+  }
+}

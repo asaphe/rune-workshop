@@ -25,6 +25,7 @@ internal sealed class RuneWindow : Form
         Text = "Rune · Character Workshop";
         Icon = new Icon(icon);
         Size = new Size(1280, 900);
+        WindowState = FormWindowState.Maximized;
         MinimumSize = new Size(720, 500);
         StartPosition = FormStartPosition.CenterScreen;
         BackColor = Color.FromArgb(21, 19, 12);

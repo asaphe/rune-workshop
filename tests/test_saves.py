@@ -158,9 +158,10 @@ class SaveTests(unittest.TestCase):
             path=Path(folder)/'userdata/12345678/892970/remote/characters/test.fch'
             path.parent.mkdir(parents=True);path.write_bytes(raw)
             data=server.open_save(raw,path.name,path)
-            self.assertFalse(data['canSave'])
+            self.assertTrue(data['canSave'])
             data['player']['health']=50
-            with self.assertRaisesRegex(ValueError,'Steam Cloud'):server.save_character(data)
+            with patch.object(server,'ensure_steam_closed',side_effect=ValueError('Steam Cloud requires Steam to exit')):
+                with self.assertRaisesRegex(ValueError,'Steam Cloud'):server.save_character(data)
             self.assertEqual(path.read_bytes(),raw)
 
     def test_running_game_blocks_save(self):

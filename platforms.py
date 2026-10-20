@@ -81,6 +81,13 @@ def ensure_game_closed():
     running=next((n for n in names if is_game_process(n)),None)
     if running:raise ValueError(f'Close Valheim completely, including the main menu, before saving (found running process "{process_name(running)}").')
 
+def ensure_steam_closed():
+    if WINDOWS:names=_windows_processes()
+    elif MACOS:names=_macos_processes()
+    else:raise ValueError('Steam Cloud character saves require Windows or macOS process checks.')
+    if any(process_name(n).lower().startswith('steam') for n in names):
+        raise ValueError('Exit Steam completely (Steam > Exit), then press Save again. Steam Cloud character files cannot be replaced while Steam is running.')
+
 def flush_to_disk(stream):
     stream.flush()
     if MACOS:

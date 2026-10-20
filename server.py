@@ -13,7 +13,7 @@ sys.path.insert(0, str(EDITOR))
 from subscripts.fchUtil import decompile_fch, compile_fch
 from subscripts.playerDataUtil import unpack_player_data_hex, pack_player_data_hex
 from world import World
-from platforms import ensure_game_closed, flush_to_disk, local_dirs, pick_character_file, steam_remote_dirs
+from platforms import ensure_game_closed, ensure_steam_closed, flush_to_disk, local_dirs, pick_character_file, steam_remote_dirs
 WORLD_SESSIONS = {}
 from data.skills import VALHEIM_SKILLS
 from data.powers import GUARDIAN_POWERS
@@ -173,7 +173,7 @@ def open_save(raw,name,source=None):
             expired=idle.pop(0);SESSIONS.pop(expired);SOURCES.pop(expired,None);RECOVERY.pop(expired,None)
         SESSIONS[sid]=(root,player,raw)
         if source is not None:SOURCES[sid]=(Path(source).resolve(),raw)
-    return dict(statistics=statistics_data.public(root), survival=survival_profiles(root), session=sid, filename=Path(name).name, canSave=source is not None and not is_cloud_cache(source), saveBlockedReason="Steam Cloud cache: move the character to Local in Valheim Manage Saves, quit Valheim, then reopen the local file." if source and is_cloud_cache(source) else None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
+    return dict(statistics=statistics_data.public(root), survival=survival_profiles(root), session=sid, filename=Path(name).name, canSave=source is not None, cloudCache=bool(source and is_cloud_cache(source)), saveBlockedReason=None, sourcePath=str(Path(source).resolve()) if source else None, name=root['character_name'], usedCheats=root.get('used_cheats',False), player=public_player(player),
                 playerId=str(root['player_id']), created=root.get('date_created_unix'), versions=[root['version'],player['version'],player['inventory_version']],
                 worlds=len(root.get('worlds',[])))
 
@@ -252,8 +252,7 @@ def _save_character(data):
     character_session(data['session'])
     with LOCK:source=SOURCES.get(data['session'])
     if source is None:raise ValueError('Reopen with Open character to save to its original location, or use Export copy.')
-    if is_cloud_cache(source[0]):
-        raise ValueError('Direct Steam Cloud cache writes are disabled: they can truncate saves. In Valheim Manage Saves, move this character to Local, quit Valheim completely, then reopen the local character here.')
+    if is_cloud_cache(source[0]):ensure_steam_closed()
     ensure_game_closed()
     result=export_save(data)
     with SAVE_LOCK:
@@ -273,6 +272,7 @@ def _save_character(data):
                 stream.write(expected);flush_to_disk(stream)
             if backup.read_bytes()!=expected:raise ValueError('Backup verification failed. Original file was not changed.')
             ensure_game_closed()
+            if is_cloud_cache(path):ensure_steam_closed()
             if path.read_bytes()!=expected:raise ValueError('This file changed outside the editor. Reopen it before saving.')
             install_staged(staged,path)
             if path.read_bytes()!=result:raise ValueError(f'The file changed during save. The verified previous file is retained at {backup}.')

@@ -164,7 +164,7 @@ still evaluates its requirements and eligibility.
 
 ### Where Rune looks for saves
 
-| | Local saves | Steam Cloud cache (read-only) |
+| | Local saves | Steam Cloud cache |
 |---|---|---|
 | Windows | `%USERPROFILE%\AppData\LocalLow\IronGate\Valheim` | `<Steam>\userdata\<account>\892970\remote` |
 | macOS (Steam) | `~/Library/Application Support/IronGate/Valheim` | `~/Library/Application Support/Steam/userdata/<account>/892970/remote` |
@@ -199,11 +199,12 @@ bundled metadata. Never commit extracted artwork or the local icon index.
 
 ## Save and export
 
-**Save** works only with local characters while Valheim is completely closed.
-Steam Cloud cache files are read-only here: editing them directly while Steam or
-Valheim has cached their size can truncate the save. In Valheim Manage Saves,
-move the character to Local, quit the game completely, then reopen that local
-character in Rune.
+**Save** replaces the character file you opened, keeping a verified backup.
+Quit Valheim completely first. For characters in Steam's `userdata/.../remote`
+cache, also exit Steam completely using **Steam > Exit**; Rune checks both before
+writing. After restarting Steam, if a sync conflict appears, keep the edited
+local file. Moving the character to Local in Valheim Manage Saves avoids cloud
+sync conflicts. Imported files without a source path still require Export.
 
 Before a changed save, Rune writes and verifies an exact backup in the
 `.rune-backups` folder beside the character. It then atomically replaces the
@@ -384,7 +385,7 @@ to its save folder. In-game arrival has not been manually tested.
 | “Python 3.9 or newer” when launching | Extract the official embeddable Python ZIP into `runtime`, or use an installed Python with the Windows launcher. 3.9 is the minimum compatibility version, not an installation recommendation. |
 | Rune does not open | Check that `runtime/pythonw.exe` exists directly inside `runtime`. From Command Prompt in the Rune folder, run `runtime\python.exe launch.py --check`. A startup error dialog points to `.runtime/startup.log` when available. |
 | Diamonds instead of item pictures | Run Setup Rune.cmd, then relaunch Rune. See [Item artwork](#item-artwork). |
-| Save is disabled | Read the message above the tabs. Move Cloud saves to Local in Valheim, quit the game, and reopen the local save. Imported/dropped files must be reopened by their file path for direct saving. |
+| Save is disabled | Read the message above the tabs. Quit Valheim; for Cloud characters, also exit Steam completely. Imported/dropped files must be reopened by their file path for direct saving. |
 | Edits do not appear in game | Check that you saved rather than only exported, and that the game loads the same Local character/world you edited. Compare names, storage labels and modification dates. |
 | “File changed” or “World changed” | Reopen the latest save before editing again; another process or the game updated it. |
 | An old browser tab cannot access saves | Use the new browser tab/link opened by the current Rune launch. |

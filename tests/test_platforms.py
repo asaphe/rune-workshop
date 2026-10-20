@@ -9,6 +9,13 @@ def ps(stdout,code=0):
     return subprocess.CompletedProcess(['/bin/ps'],code,stdout=stdout,stderr='')
 
 class ProcessTests(unittest.TestCase):
+    def test_cloud_guard_detects_steam_processes(self):
+        for name in ('steam.exe', 'steamwebhelper.exe', 'Steam', 'steam_osx'):
+            with self.subTest(name=name),patch.object(platforms,'WINDOWS',True),patch.object(platforms,'_windows_processes',return_value=[name]):
+                with self.assertRaisesRegex(ValueError,'Exit Steam'):platforms.ensure_steam_closed()
+        with patch.object(platforms,'WINDOWS',True),patch.object(platforms,'_windows_processes',return_value=['explorer.exe']):
+            platforms.ensure_steam_closed()
+
     def check_macos(self,result):
         with patch.object(platforms,'WINDOWS',False),patch.object(platforms,'MACOS',True),patch.object(platforms.subprocess,'run',return_value=result):
             platforms.ensure_game_closed()

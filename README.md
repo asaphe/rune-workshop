@@ -339,9 +339,31 @@ yet been manually verified.
 
 ### World settings, portals and signs
 
-The World workspace includes Containers, Portals & signs, and World settings.
+The World workspace includes Containers, Portals & signs, World settings, and World flags.
 Settings offer Free-build (No build cost), passive enemies, all portal items,
 player-based raids, and fire hazards. On/Off selectors reflect the opened save.
+Combat difficulty and raid frequency also reflect the saved modifiers. Combat
+difficulty changes combat only, not the full world preset. Unrecognized custom
+values are preserved unless you select a replacement.
+
+For supported world saves, **End active raid** clears the saved random raid;
+enemies already spawned remain. **Reset raid timer** resets elapsed time toward
+the next raid check, not a guaranteed countdown: chance and eligibility still
+apply. Both actions are queued until **Save world** or **Export world ZIP** and
+can be undone. Quit Valheim before saving, then reload the world. These controls
+do not change enemy spawn tables or select specific raid types.
+
+The separate **World flags** tab shows 19 supported boss-defeat and creature-kill
+flags, including Writhan, with explanations of known raid requirements and search. Set/Not set selectors edit world
+progression, not character statistics. These flags can also affect ambient
+spawns and other progression; they do not grant loot, powers or achievements.
+Raid eligibility still depends on other conditions, and player-based raids can
+use character progression instead. Runtime counters (such as active boss encounters), quest-delivery and boss-phase
+flags are read-only and preserved. Undo flag changes affects only flags; Undo
+setting changes affects only regular world settings.
+Edits share world Save/Export, backups and Undo; unsupported formats remain
+uneditable. No-op saves retain the original compressed world data.
+
 Save with Free-build On, build in game, then close the game and reopen the
 latest world to set it Off again. Other world settings, identity, seed, and
 player-history bytes are preserved. Turning it off does not remove buildings.

@@ -1,5 +1,5 @@
 """Chunked-world containers. Format reference: Shuiei/valheim-world-editor (MIT)."""
-import copy, io, math, os, re, struct, zipfile
+import copy, gzip, io, math, os, re, struct, zipfile
 from pathlib import Path
 from datetime import datetime
 from platforms import flush_to_disk, publish_new, sync_directory
@@ -98,10 +98,40 @@ def metadata(raw):
     keys=[r.string() for _ in range(count)]
     return dict(start=start,end=r.pos,keys=keys,name=name,uid=str(uid))
 
+# Values from the installed game's ServerOptionsGUI modifier sliders.
+SETTING_CHOICES={
+    'combatDifficulty':{
+        'veryeasy':['playerdamage 125','enemydamage 50','enemyspeedsize 90'],
+        'easy':['playerdamage 110','enemydamage 75','enemyspeedsize 95'],
+        'normal':[],
+        'hard':['playerdamage 85','enemydamage 150','enemyspeedsize 110','enemyleveluprate 120'],
+        'veryhard':['playerdamage 70','enemydamage 200','enemyspeedsize 120','enemyleveluprate 140']},
+    'raidFrequency':{'none':['eventrate 0'],'muchless':['eventrate 200'],'less':['eventrate 150'],
+                     'normal':[],'more':['eventrate 60'],'muchmore':['eventrate 30']}}
+
+def setting_keys(key):
+    return {entry.split()[0].lower() for entries in SETTING_CHOICES[key].values() for entry in entries}
+
+def setting_choice(keys,key):
+    actual=sorted(entry.lower() for entry in keys if entry.split() and entry.split()[0].lower() in setting_keys(key))
+    return next((name for name,entries in SETTING_CHOICES[key].items() if sorted(entries)==actual),'custom')
+
+def world_settings(keys):
+    return {**{key:any(k.lower()==key for k in keys) for key in sorted(MODIFIERS)},
+            **{key:setting_choice(keys,key) for key in SETTING_CHOICES}}
+
 def patch_settings(raw,settings):
     meta=metadata(raw);keys=meta['keys'][:]
-    if not isinstance(settings,dict) or set(settings)-MODIFIERS:raise ValueError('Unsupported world setting.')
+    if not isinstance(settings,dict) or set(settings)-(MODIFIERS|RAID_ACTIONS|set(SETTING_CHOICES)|{'progression'}):raise ValueError('Unsupported world setting.')
     for key,value in settings.items():
+        if key in RAID_ACTIONS or key=='progression':continue
+        if key in SETTING_CHOICES:
+            if not isinstance(value,str) or value not in {*SETTING_CHOICES[key],'custom'}:raise ValueError('Unsupported modifier choice.')
+            if value=='custom' or setting_choice(keys,key)==value:continue
+            owned=setting_keys(key)
+            keys=[entry for entry in keys if not entry.split() or entry.split()[0].lower() not in owned]
+            keys.extend(SETTING_CHOICES[key][value])
+            continue
         if not isinstance(value,bool):raise ValueError('World settings must be on or off.')
         present=any(k.lower()==key for k in keys)
         if present==value:continue
@@ -110,6 +140,78 @@ def patch_settings(raw,settings):
     if keys==meta['keys']:return raw
     result=raw[4:meta['start']]+p('i',len(keys))+b''.join(string(k) for k in keys)+raw[meta['end']:]
     result=p('i',len(result))+result;metadata(result);return result
+
+RAID_ACTIONS={'endRaid','resetRaidTimer'}
+
+PROGRESSION_FLAGS={
+    'defeated_eikthyr':'Eikthyr defeated',
+    'defeated_gdking':'The Elder defeated',
+    'defeated_bonemass':'Bonemass defeated',
+    'defeated_dragon':'Moder defeated',
+    'defeated_goblinking':'Yagluth defeated',
+    'defeated_queen':'The Queen defeated',
+    'defeated_fader':'Fader defeated',
+    'defeated_writhan':'Writhan defeated',
+    'defeated_serpent':'A serpent has been defeated',
+    'defeated_hive':'Hive defeated (game flag name)',
+    'elakingmole_defeated':'Elaking mole defeated (game flag name)',
+    'jotun_killed':'A jotun has been killed',
+    'killed_frysling':'A frysling has been killed',
+    'killedbat':'A bat has been killed',
+    'bosshildir1':'Hildir miniboss 1 defeated',
+    'bosshildir2':'Hildir miniboss 2 defeated',
+    'bosshildir3':'Hildir miniboss 3 defeated',
+    'killedtroll':'A troll has been killed',
+    'killed_surtling':'A surtling has been killed'}
+
+def progression_state(raw):
+    r=Reader(raw)
+    if r.read('i') not in (41,42):raise ValueError('Progression controls require world DB version 41 or 42.')
+    r.take(8);compressed=r.take(r.read('i'));outer_end=r.pos
+    # Limit decompression before parsing untrusted save files.
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:data=stream.read(64*1024*1024+1)
+    if len(data)>64*1024*1024:raise ValueError('World progression data is too large.')
+    z=Reader(data);zones=z.read('i')
+    if zones<0:raise ValueError('Invalid generated-zone count.')
+    z.take(zones*4);z.take(4) # Vector2s entries and location version.
+    start=z.pos;count=z.read('i')
+    if not 0<=count<=len(data):raise ValueError('Invalid progression key count.')
+    keys=[z.string() for _ in range(count)]
+    return dict(data=data,start=start,end=z.pos,outer_end=outer_end,keys=keys)
+
+def patch_progression(raw,changes):
+    if not isinstance(changes,dict) or set(changes)-set(PROGRESSION_FLAGS) or any(type(v) is not bool for v in changes.values()):
+        raise ValueError('Unsupported progression flag change.')
+    if not changes:return raw
+    state=progression_state(raw);keys=state['keys'][:]
+    for key,value in changes.items():
+        if any(k.lower()==key for k in keys)==value:continue
+        keys=[k for k in keys if k.lower()!=key]
+        if value:keys.append(key)
+    if keys==state['keys']:return raw
+    data=state['data'][:state['start']]+p('i',len(keys))+b''.join(string(k) for k in keys)+state['data'][state['end']:]
+    compressed=gzip.compress(data,mtime=0)
+    return raw[:12]+p('i',len(compressed))+compressed+raw[state['outer_end']:]
+
+def raid_state(raw):
+    r=Reader(raw)
+    if r.read('i') not in (41,42):raise ValueError('Raid controls require world DB version 41 or 42.')
+    r.take(8)  # World clock; preserve it.
+    r.take(r.read('i'))  # Compressed ZoneSystem data; preserve it byte for byte.
+    start=r.pos;timer=r.read('f');name=r.string();elapsed=r.read('f')
+    position=[r.read('f') for _ in range(3)]
+    if any(not math.isfinite(v) for v in [timer,elapsed]+position) or timer<0 or elapsed<0:
+        raise ValueError('Invalid saved raid timer or position.')
+    return dict(start=start,end=r.pos,timer=timer,name=name,elapsed=elapsed,position=position)
+
+def patch_raid(raw,settings):
+    actions={key:settings.get(key,False) for key in RAID_ACTIONS}
+    if any(not isinstance(v,bool) for v in actions.values()):raise ValueError('Raid actions must be on or off.')
+    if not any(actions.values()):return raw
+    raid=raid_state(raw)
+    timer=0.0 if actions['resetRaidTimer'] else raid['timer']
+    name,elapsed,position=('',0.0,[0.0]*3) if actions['endRaid'] else (raid['name'],raid['elapsed'],raid['position'])
+    return raw[:raid['start']]+p('f',timer)+string(name)+p('ffff',elapsed,*position)+raw[raid['end']:]
 
 def parse_chunk(raw,texts=None,tombs=None,links=None):
     r=Reader(raw);v=r.read('h');count=r.read('i')
@@ -184,6 +286,12 @@ class World:
         self.warning=f'Generation {max(nums)} was never finished (its _main.{max(nums)}.ok marker is empty or partial), so generation {self.number} was opened. Saving writes a new, complete generation.' if self.number!=max(nums) else None
         self.files={};self.containers=[];self.texts=[];self.tombs=[];self.links=[];prefix=f'_main.{self.number}'
         for ext in ('.chunks','.fwl2','.db2','.ok'):self.files[prefix+ext]=(self.path/(prefix+ext)).read_bytes()
+        self.raid=None;self.raid_error=None
+        try:self.raid=raid_state(self.files[prefix+'.db2'])
+        except (ValueError,UnicodeError,struct.error) as error:self.raid_error=str(error)
+        self.progression=None;self.progression_error=None
+        try:self.progression=progression_state(self.files[prefix+'.db2'])
+        except (ValueError,UnicodeError,struct.error,OSError,EOFError) as error:self.progression_error=str(error)
         self.settings_error=None
         self.meta=metadata(self.files[prefix+'.fwl2'])
         r=Reader(self.files[prefix+'.chunks']);self.version=r.read('h');total=r.read('i');n=r.read('i')
@@ -213,8 +321,9 @@ class World:
     def public(self):
         parts=[x.lower() for x in self.path.parts];cloud='userdata' in parts and 'remote' in parts
         return dict(name=self.path.name,path=str(self.path),generation=self.number,canSave=not cloud,containers=self.containers,texts=self.texts,warning=self.warning,
-          settings={key:any(k.lower()==key for k in self.meta['keys']) for key in sorted(MODIFIERS)} if self.meta else None,
-          settingsError=self.settings_error,
+          settings={**world_settings(self.meta['keys']),**({'progression':{key:any(k.lower()==key for k in self.progression['keys']) for key in PROGRESSION_FLAGS}} if self.progression else {})} if self.meta else None,
+          progressionFlags=PROGRESSION_FLAGS,progressionKeys=self.progression['keys'] if self.progression else None,progressionError=self.progression_error,
+          settingsError=self.settings_error,raid=self.raid,raidError=self.raid_error,
           saveHelp='Steam Cloud world: move it to Local in Valheim Manage Saves, then quit Valheim and reopen it.' if cloud else 'Save creates a new world generation and a complete backup ZIP. Close Valheim first.')
     def build(self,changes,text_changes=None,settings=None):
         patches={};seen=set()
@@ -227,6 +336,9 @@ class World:
             if data!=self.files[c['chunk']][c['start']+4:c['end']]:patches.setdefault(c['chunk'],[]).append((c['start'],c['end'],p('i',len(data))+data))
         meta_raw=self.files[f'_main.{self.number}.fwl2']
         new_meta=patch_settings(meta_raw,settings) if settings is not None else meta_raw
+        db_raw=self.files[f'_main.{self.number}.db2']
+        new_db=patch_raid(db_raw,settings) if settings is not None else db_raw
+        if settings is not None and 'progression' in settings:new_db=patch_progression(new_db,settings['progression'])
         changed_texts={};disconnect=set()
         for change in text_changes or []:
             key=change['id']
@@ -256,7 +368,7 @@ class World:
             if remove_conn:
                 flags&=~1;dest.append((conn['start'],conn['start']+5,b''))
             if flags!=entry['flags']:dest.append((entry['object_start'],entry['object_start']+2,p('H',flags)))
-        if not patches and new_meta==meta_raw:return None
+        if not patches and new_meta==meta_raw and new_db==db_raw:return None
         number=max([self.number]+[int(m.group(1)) for f in self.path.glob('_main.*.*') if (m:=re.match(r'_main\.(\d+)\.',f.name))])+1
         result={};chunks=[]
         for c in self.chunks:
@@ -270,7 +382,7 @@ class World:
             chunks.append(c)
         prefix=f'_main.{number}'
         result[prefix+'.chunks']=p('hii',self.version,sum(c[3] for c in chunks),len(chunks))+b''.join(p('HBIi',*c) for c in chunks)
-        result[prefix+'.db2']=self.files[f'_main.{self.number}.db2']
+        result[prefix+'.db2']=new_db
         result[prefix+'.fwl2']=new_meta
         result[prefix+'.ok']=p('i',self.version)
         return number,result

@@ -87,6 +87,90 @@ class WorldTests(unittest.TestCase):
         self.assertTrue(self.w.public()['settings']['nobuildcost'])
         self.w.save([],lambda:None,settings={'nobuildcost':False})
         self.assertFalse(self.w.public()['settings']['nobuildcost'])
+    def test_combat_and_frequency_preserve_unrelated_settings(self):
+        raw=self.w.files['_main.1.fwl2']
+        self.assertEqual(world.world_settings(world.metadata(raw)['keys'])['raidFrequency'],'more')
+        self.assertEqual(world.patch_settings(raw,world.world_settings(world.metadata(raw)['keys'])),raw)
+        edited=world.patch_settings(raw,{'combatDifficulty':'hard'})
+        keys=world.metadata(edited)['keys']
+        self.assertIn('eventrate 60',keys)
+        self.assertIn('enemydamage 150',keys)
+        self.assertEqual(world.world_settings(keys)['combatDifficulty'],'hard')
+        self.assertEqual(world.patch_settings(edited,{'combatDifficulty':'normal'}),raw)
+        custom=edited.replace(b'enemydamage 150',b'enemydamage 175')
+        self.assertEqual(world.world_settings(world.metadata(custom)['keys'])['combatDifficulty'],'custom')
+        self.assertEqual(world.patch_settings(custom,{'combatDifficulty':'custom'}),custom)
+        for value in (True,[], 'impossible'):
+            with self.assertRaises(ValueError):world.patch_settings(raw,{'combatDifficulty':value})
+        self.w.save([],lambda:None,settings={'combatDifficulty':'easy','raidFrequency':'none'})
+        loaded=world.World(self.path)
+        self.assertEqual(loaded.public()['settings']['combatDifficulty'],'easy')
+        self.assertEqual(loaded.public()['settings']['raidFrequency'],'none')
+
+    def test_progression_roundtrip_preserves_unknown_keys_and_world_data(self):
+        prefix=world.p('i',1)+world.p('hh',7,-9)+world.p('i',123)
+        tail=b'location data preserved'
+        zone=prefix+world.p('i',2)+world.string('defeated_eikthyr')+world.string('mod_unknown Value')+tail
+        packed=world.gzip.compress(zone,mtime=0)
+        suffix=world.p('f',99)+world.string('army_theelder')+world.p('ffff',5,1,2,3)+b'persistent events'
+        raw=world.p('id',42,12345)+world.p('i',len(packed))+packed+suffix
+        self.assertEqual(world.patch_progression(raw,{'defeated_eikthyr':True}),raw)
+        edited=world.patch_progression(raw,{'defeated_eikthyr':False,'defeated_gdking':True})
+        state=world.progression_state(edited)
+        self.assertEqual(state['keys'],['mod_unknown Value','defeated_gdking'])
+        self.assertTrue(state['data'].startswith(prefix));self.assertTrue(state['data'].endswith(tail))
+        self.assertTrue(edited.endswith(suffix));self.assertEqual(raw[:12],edited[:12])
+        for changes in ({'mod_unknown':False},{'defeated_gdking':'yes'},[]):
+            with self.assertRaises(ValueError):world.patch_progression(raw,changes)
+        with self.assertRaises((ValueError,OSError,EOFError)):world.progression_state(raw[:20])
+        (self.path/'_main.1.db2').write_bytes(raw)
+        loaded=world.World(self.path)
+        settings=loaded.public()['settings']
+        self.assertTrue(settings['progression']['defeated_eikthyr'])
+        self.assertIsNone(loaded.build([],settings=settings))
+        settings['progression']['defeated_gdking']=True
+        settings['endRaid']=True;settings['resetRaidTimer']=True
+        loaded.save([],lambda:None,settings=settings)
+        reopened=world.World(self.path)
+        self.assertTrue(reopened.public()['settings']['progression']['defeated_gdking'])
+        self.assertIn('mod_unknown Value',reopened.public()['progressionKeys'])
+        self.assertEqual(reopened.raid['name'],'');self.assertEqual(reopened.raid['timer'],0)
+        for key in world.PROGRESSION_FLAGS:
+            with self.subTest(flag=key):
+                changed=world.patch_progression(raw,{key:True})
+                self.assertIn(key,world.progression_state(changed)['keys'])
+                cleared=world.patch_progression(changed,{key:False})
+                self.assertNotIn(key,world.progression_state(cleared)['keys'])
+                self.assertIn('mod_unknown Value',world.progression_state(cleared)['keys'])
+        for key in ('activebosses','hildir1','defeated_frozenking_p3'):
+            with self.assertRaises(ValueError):world.patch_progression(raw,{key:True})
+
+    def test_raid_actions_preserve_other_world_data(self):
+        prefix=world.p('id',42,12345.0)+world.p('i',6)+b'opaque'
+        suffix=b'persistent events preserved'
+        raw=prefix+world.p('f',900.0)+world.string('army_eikthyr')+world.p('ffff',25.0,1.0,2.0,3.0)+suffix
+        self.assertEqual(world.patch_raid(raw,{}),raw)
+        reset=world.patch_raid(raw,{'resetRaidTimer':True})
+        self.assertEqual(world.raid_state(reset)['timer'],0)
+        self.assertEqual(world.raid_state(reset)['name'],'army_eikthyr')
+        end=world.patch_raid(raw,{'endRaid':True})
+        self.assertEqual(world.raid_state(end)['name'],'')
+        self.assertEqual(world.raid_state(end)['timer'],900)
+        self.assertTrue(end.startswith(prefix));self.assertTrue(end.endswith(suffix))
+        self.w.files['_main.1.db2']=raw
+        number,files=self.w.build([],settings={'endRaid':True,'resetRaidTimer':True})
+        self.assertEqual(world.raid_state(files[f'_main.{number}.db2'])['timer'],0)
+        self.assertEqual(files[f'_main.{number}.fwl2'],self.w.files['_main.1.fwl2'])
+        with self.assertRaises(ValueError):world.patch_raid(raw,{'endRaid':'yes'})
+        with self.assertRaises(ValueError):world.patch_raid(b'truncated',{'endRaid':True})
+        (self.path/'_main.1.db2').write_bytes(raw)
+        loaded=world.World(self.path)
+        loaded.save([],lambda:None,settings={'endRaid':True,'resetRaidTimer':True})
+        reopened=world.World(self.path)
+        self.assertEqual(reopened.public()['raid']['name'],'')
+        self.assertEqual(reopened.public()['raid']['timer'],0)
+        self.assertTrue(reopened.files[f'_main.{reopened.number}.db2'].endswith(suffix))
+
     def with_text_objects(self):
         def obj(prefab,creator,text=None,conn=None):
             flags=32|(64 if text is not None else 0)|(1 if conn else 0)

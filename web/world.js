@@ -149,20 +149,62 @@ const worldSettingLabels={
  playerevents:['Player-based raids','Use player progress when selecting raids.'],
  fire:['Fire hazards','Allow the game’s fire-hazard rules.']
 };
+const worldSettingChoices={
+ combatDifficulty:['Combat difficulty','Changes combat only; other world modifiers stay as they are. Achievement eligibility is checked by Valheim.',{veryeasy:'Very easy',easy:'Easy',normal:'Normal',hard:'Hard',veryhard:'Very hard'}],
+ raidFrequency:['Raid frequency','Changes how often the game checks for random raids. It does not choose specific raids or remove existing enemies.',{none:'None',muchless:'Much less',less:'Less',normal:'Normal',more:'More',muchmore:'Much more'}]
+};
 function renderWorldSettings(){
  const settings=worldState.settings;
- $('resetWorldSettings').disabled=!settings||JSON.stringify(settings)===JSON.stringify(JSON.parse(worldBaseline).settings);
+ const regular=value=>JSON.stringify(Object.fromEntries(Object.entries(value||{}).filter(([key])=>key!=='progression')));
+ $('resetWorldSettings').disabled=!settings||regular(settings)===regular(JSON.parse(worldBaseline).settings);
  $('worldSettings').innerHTML=settings?Object.entries(worldSettingLabels).map(([key,[label,help]])=>'<div class="world-setting"><div><label for="setting-'+key+'">'+label+'</label><p class="muted">'+help+'</p></div><select id="setting-'+key+'" data-world-setting="'+key+'"><option value="false" '+(!settings[key]?'selected':'')+'>Off</option><option value="true" '+(settings[key]?'selected':'')+'>On</option></select></div>').join(''):'<p class="muted">'+esc(worldState.settingsError||'Settings are unavailable for this metadata version.')+'</p>';
+ if(settings)$('worldSettings').insertAdjacentHTML('afterbegin',Object.entries(worldSettingChoices).map(([key,[label,help,choices]])=>'<div class="world-setting"><div><label for="setting-'+key+'">'+label+'</label><p class="muted">'+help+'</p></div><select id="setting-'+key+'" data-world-setting="'+key+'">'+Object.entries({...choices,...(settings[key]==='custom'?{custom:'Custom — unchanged'}:{})}).map(([value,text])=>'<option value="'+value+'" '+(settings[key]===value?'selected':'')+'>'+text+'</option>').join('')+'</select></div>').join(''));
+ $('worldSettings').insertAdjacentHTML('beforeend',renderRaidControls());
 }
+const progressionHelp={
+ defeated_queen:'Records the Queen defeat. Used by later world progression and spawn rules.',
+ defeated_fader:'Records the Fader defeat. Used by later world progression and raid requirements.',
+ defeated_writhan:'Records a Writhan defeat. The game uses this flag in spawn requirements.',
+ defeated_serpent:'Records a serpent defeat. The game uses this flag in spawn requirements.',
+ defeated_hive:'A creature defeat record. Changes the record only; does not remove or recreate that creature.',
+ elakingmole_defeated:'A defeat record also referenced by raid requirements. Other event conditions still apply.',
+ jotun_killed:'A kill record used by spawn and raid requirements. Other event conditions still apply.',
+ killed_frysling:'Records a frysling kill; does not change existing creatures.',
+ killedbat:'Together with Bonemass defeated, meets world-key requirements for bat raids.',
+ bosshildir1:'Records miniboss defeat only. Does not deliver its chest or complete Hildir’s quest.',
+ bosshildir2:'Records miniboss defeat only. Does not deliver its chest or complete Hildir’s quest.',
+ bosshildir3:'Records miniboss defeat only. Does not deliver its chest or complete Hildir’s quest.',
+ defeated_eikthyr:'Stops the Eikthyr animal raid and meets a requirement for the Elder forest raid.',
+ defeated_gdking:'Stops the Elder raid and meets a requirement for the Bonemass swamp raid and troll raids.',
+ defeated_bonemass:'Stops the Bonemass raid and meets requirements for Moder, wolves, skeletons, blobs and surtling raids.',
+ defeated_dragon:'Stops the Moder raid and meets a requirement for the goblin raid.',
+ defeated_goblinking:'Stops the goblin raid.',
+ killedtroll:'Together with the Elder defeated flag, meets the world progression requirements for troll raids.',
+ killed_surtling:'Together with the Bonemass defeated flag, meets the world progression requirements for surtling raids.'
+};
+function renderProgression(){
+ const flags=worldState.settings?.progression;
+ if(!flags)return '<p class="muted">Unavailable: '+esc(worldState.progressionError||'Unsupported world data')+'</p>';
+ const query=$('worldFlagSearch').value.toLowerCase();
+ const matches=(key,label='')=>(key+' '+label+' '+(progressionHelp[key]||'')).toLowerCase().includes(query);
+ const unknown=(worldState.progressionKeys||[]).filter(key=>!(key.toLowerCase() in (worldState.progressionFlags||{})));
+ return '<p>These flags affect the whole world, including progression and some ambient spawns. They do not award boss loot, powers or achievements. Clearing a flag does not undo buildings or remove existing enemies.</p><p class="muted">Raid notes describe world-key requirements only. Biome, player location and other conditions still apply; player-based raids can use character progression instead. Changes apply when you save the world.</p>'+Object.entries(worldState.progressionFlags||{}).filter(([key,label])=>matches(key,label)).map(([key,label])=>'<div class="world-setting"><div><label for="progression-'+key+'">'+esc(label)+'</label><p class="muted">'+esc(progressionHelp[key]||'World progression flag.')+'</p><small>'+esc(key)+'</small></div><select id="progression-'+key+'" data-world-progression="'+key+'"><option value="false" '+(!flags[key]?'selected':'')+'>Not set</option><option value="true" '+(flags[key]?'selected':'')+'>Set</option></select></div>').join('')+'<h4>World state &amp; other flags · read-only</h4><p class="muted">Runtime counters and flags without a verified edit behavior are preserved. A flag here can still be a normal game flag.</p>'+(unknown.length?'<ul>'+unknown.filter(key=>matches(key,readOnlyFlagLabel(key))).map(key=>'<li>'+esc(readOnlyFlagLabel(key))+' <small>'+esc(key)+'</small></li>').join('')+'</ul>':'<p>None</p>');
+}
+function renderRaidControls(){
+ const raid=worldState.raid,settings=worldState.settings;
+ if(!raid||!settings)return '<div class="world-setting"><p class="muted">Raid controls unavailable: '+esc(worldState.raidError||'Unsupported save format')+'</p></div>';
+ return '<div class="world-setting"><div><h3>Raids</h3><p>Active raid: <strong>'+esc(raid.name||'None')+'</strong></p><p class="muted">Saved raid-check timer: '+fmt(raid.timer/60)+' minutes. This is elapsed time, not a countdown; raids also depend on chance and eligibility.</p><p class="muted">End raid stops the saved random raid, but does not remove enemies already spawned. Quit Valheim first and save the world to apply.</p></div></div><div class="item-actions"><button type="button" data-raid-action="endRaid" '+(!raid.name||settings.endRaid?'disabled':'')+'>'+(settings.endRaid?'End raid queued':'End active raid')+'</button><button type="button" data-raid-action="resetRaidTimer" '+(settings.resetRaidTimer?'disabled':'')+'>'+(settings.resetRaidTimer?'Timer reset queued':'Reset raid timer')+'</button></div>';
+}
+$('worldSettings').addEventListener('click',e=>{const key=e.target.closest('[data-raid-action]')?.dataset.raidAction;if(!key)return;worldRemember();worldState.settings[key]=true;worldControls();renderWorldSettings()});
 function renderWorldTexts(){
  const q=$('worldTextSearch').value.toLowerCase();
  const entries=(worldState.texts||[]).filter(t=>(t.text+' '+t.kind+' '+t.position.map(v=>Math.round(v)).join(' ')).toLowerCase().includes(q));
  $('worldTexts').innerHTML=entries.length?entries.map(t=>'<div class="panel world-text-card"><label for="world-text-'+t.id+'">'+(t.kind==='portal'?'Portal tag':'Sign text')+'</label><p class="muted">X '+fmt(t.position[0])+' · Y '+fmt(t.position[1])+' · Z '+fmt(t.position[2])+'</p><input id="world-text-'+t.id+'" data-world-text="'+t.id+'" maxlength="500" value="'+esc(t.text)+'"></div>').join(''):'<p class="muted">No matching player-created portals or signs in this save.</p>';
 }
-function renderWorldExtras(){renderWorldSettings();renderWorldTexts()}
+function renderWorldExtras(){renderWorldSettings();renderWorldTexts();renderWorldFlags()}
 $('worldSections').onclick=e=>{
  const b=e.target.closest('[data-world-section]');if(!b)return;
- for(const key of ['containers','texts','settings'])$('world'+key[0].toUpperCase()+key.slice(1)+'Section').hidden=b.dataset.worldSection!==key;
+ for(const key of ['containers','texts','settings','flags'])$('world'+key[0].toUpperCase()+key.slice(1)+'Section').hidden=b.dataset.worldSection!==key;
  document.querySelectorAll('[data-world-section]').forEach(x=>x.classList.toggle('active',x===b));
 };
 $('worldTextSearch').oninput=renderWorldTexts;
@@ -176,6 +218,23 @@ $('worldTexts').addEventListener('change',commitWorldText);
 $('worldTexts').addEventListener('focusout',commitWorldText);
 $('worldSettings').onchange=e=>{
  const key=e.target.dataset.worldSetting;if(!key)return;
- worldRemember();worldState.settings[key]=e.target.value==='true';worldControls();renderWorldSettings();
+ worldRemember();worldState.settings[key]=key in worldSettingChoices?e.target.value:e.target.value==='true';worldControls();renderWorldSettings();
 };
-$('resetWorldSettings').onclick=()=>{worldRemember();worldState.settings=clone(JSON.parse(worldBaseline).settings);worldControls();renderWorldSettings()};
+$('resetWorldSettings').onclick=()=>{worldRemember();const flags=worldState.settings.progression;worldState.settings=clone(JSON.parse(worldBaseline).settings);if(flags)worldState.settings.progression=flags;worldControls();renderWorldSettings()};
+
+function readOnlyFlagLabel(key){
+ if(key.toLowerCase().startsWith('activebosses '))return 'Active boss encounters: '+key.slice(key.indexOf(' ')+1)+' — managed by the game';
+ const labels={hildir1:'Hildir quest 1',hildir2:'Hildir quest 2',hildir3:'Hildir quest 3',lastbossgate_open:'Final boss gate open',stonecircle:'Stone circle state',defeated_frozenking:'Frozen King encounter state',defeated_frozenking_p3:'Frozen King phase 3 state'};
+ if(labels[key.toLowerCase()])return labels[key.toLowerCase()]+' — related quest or encounter state is not edited';
+ return 'Saved flag — no verified editor control';
+}
+function renderWorldFlags(){
+ $('worldFlags').innerHTML=renderProgression();
+ $('resetWorldFlags').disabled=!worldState.settings?.progression||JSON.stringify(worldState.settings.progression)===JSON.stringify(JSON.parse(worldBaseline).settings?.progression);
+}
+$('worldFlagSearch').oninput=renderWorldFlags;
+$('worldFlags').onchange=e=>{
+ const flag=e.target.dataset.worldProgression;if(!flag)return;
+ worldRemember();worldState.settings.progression[flag]=e.target.value==='true';worldControls();renderWorldFlags();
+};
+$('resetWorldFlags').onclick=()=>{worldRemember();worldState.settings.progression=clone(JSON.parse(worldBaseline).settings.progression);worldControls();renderWorldFlags()};

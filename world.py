@@ -1,5 +1,5 @@
 """Chunked-world containers. Format reference: Shuiei/valheim-world-editor (MIT)."""
-import copy, gzip, io, math, os, re, struct, zipfile
+import copy, json, gzip, io, math, os, re, struct, zipfile
 from pathlib import Path
 from datetime import datetime
 from platforms import flush_to_disk, publish_new, sync_directory
@@ -48,7 +48,7 @@ def encode_inventory(v,items,originals):
         i=copy.deepcopy(incoming);old=lookup.get(i.get('_raw'))
         if old:
             i=copy.deepcopy(old)
-            for k in ('prefab','prefab_hash','stack','quality','durability','grid_x','grid_y','cheated'):i[k]=incoming[k]
+            for k in ('prefab','prefab_hash','stack','quality','durability','grid_x','grid_y','cheated','variant'):i[k]=incoming[k]
         for k,lo,hi in [('grid_x',0,255),('grid_y',0,255),('stack',1,65535),('quality',1,65535),('world_level',0,255),('variant',0,2147483647)]:
             val=i.get(k,0)
             if isinstance(val,bool) or not isinstance(val,int) or not lo<=val<=hi:raise ValueError(f'Invalid {k}.')
@@ -213,26 +213,92 @@ def patch_raid(raw,settings):
     name,elapsed,position=('',0.0,[0.0]*3) if actions['endRaid'] else (raid['name'],raid['elapsed'],raid['position'])
     return raw[:raid['start']]+p('f',timer)+string(name)+p('ffff',elapsed,*position)+raw[raid['end']:]
 
+STAND_SLOTS={hashcode(name):slots for name,slots in json.loads((Path(__file__).parent/'backend/stand-slots.json').read_text()).items()}
+
+def read_stand(entry, groups):
+    """Armour stands use per-slot ItemDrop data, not a chest inventory."""
+    ints={key:struct.unpack('<i',bytes.fromhex(value))[0] for key,value in groups.get(16,[])}
+    blobs={key:bytes.fromhex(value)[4:] for key,value in groups.get(128,[])}
+    entry.update(kind='stand',slots=STAND_SLOTS[entry['prefab_hash']],items=[],version=110)
+    try:
+        for slot in range(len(entry['slots'])):
+            prefab=ints.get(hashcode(f'{slot}_item'),0)
+            if not prefab:continue
+            blob=blobs.get(hashcode(f'{slot}_itemData'))
+            if not blob or blob[0]!=110:raise ValueError('This gear stand uses unsupported or missing item data; it is read-only.')
+            _,items=inventory(p('iH',blob[0],1)+blob[1:]);item=items[0]
+            if item['prefab_hash']!=prefab or item['variant']!=ints.get(hashcode(f'{slot}_variant'),0):
+                raise ValueError('Gear stand appearance and item data disagree; this stand is read-only.')
+            item['_stand_grid']=[item['grid_x'],item['grid_y']]
+            item['grid_x'],item['grid_y']=slot,0
+            entry['items'].append(item)
+    except (ValueError,struct.error) as error:entry['error']=str(error)
+    return entry
+
+def encode_stand(c, items, raw):
+    if items==c['items']:return raw[c['object_start']:c['object_end']]
+    types=json.loads((Path(__file__).parent/'backend/attachment-types.json').read_text())
+    original={i['grid_x']:i for i in c['items']};incoming={}
+    for item in items:
+        slot=item['grid_x']
+        if isinstance(slot,bool) or not isinstance(slot,int) or not 0<=slot<len(c['slots']) or item['grid_y']!=0 or slot in incoming or item['stack']!=1:
+            raise ValueError('Invalid or occupied gear stand slot.')
+        old=original.get(slot)
+        if not old and not c['slots'][slot].get('editable',True):raise ValueError('This gear stand slot is not used by the game.')
+        if (not old or old['prefab']!=item['prefab']) and types.get(item['prefab']) not in c['slots'][slot]['types']:
+            raise ValueError('This item cannot be attached to that gear stand slot.')
+        incoming[slot]=item
+    groups={int(bit):[(key,bytes.fromhex(value)) for key,value in entries] for bit,entries in c['groups'].items()}
+    def put(bit,key,value):
+        entries=groups.setdefault(bit,[]);key=hashcode(key)
+        for n,(k,_) in enumerate(entries):
+            if k==key:entries[n]=(key,value);return
+        entries.append((key,value))
+    for slot in set(original)|set(incoming):
+        item=incoming.get(slot);old=original.get(slot)
+        if item==old:continue
+        if item is None:
+            put(16,f'{slot}_item',p('i',0));continue
+        edited=copy.deepcopy(item);prior=copy.deepcopy(old)
+        edited['grid_x'],edited['grid_y']=old.get('_stand_grid',[0,0]) if old else [0,0]
+        if prior:prior['grid_x'],prior['grid_y']=prior['_stand_grid']
+        encoded=encode_inventory(110,[edited],[prior] if prior else [])
+        blob=bytes([110])+encoded[6:]
+        put(128,f'{slot}_itemData',p('i',len(blob))+blob)
+        put(16,f'{slot}_item',p('i',hashcode(item['prefab'])))
+        put(16,f'{slot}_variant',p('i',item['variant']))
+    flags=c['flags']
+    for bit in groups:flags|=bit
+    output=p('H',flags)+raw[c['object_start']+2:c['groups_start']]
+    for bit in (1,2,4,8,16,32,64,128):
+        if not flags&bit:continue
+        if bit==1:output+=bytes.fromhex(c['connection_raw']);continue
+        entries=groups.get(bit,[])
+        output+=num(len(entries))+b''.join(p('i',key)+value for key,value in entries)
+    return output
+
 def parse_chunk(raw,texts=None,tombs=None,links=None):
     r=Reader(raw);v=r.read('h');count=r.read('i')
     if v not in (40,41,42) or not 0<=count<=len(raw)//10:raise ValueError('Unsupported chunk format.')
     containers=[]
     for obj in range(count):
-        object_start=r.pos;flags=r.read('H');creator=0;owner=0;grave_items=None;connection=None;strings={};strings_count=0
+        object_start=r.pos;flags=r.read('H');creator=0;owner=0;grave_items=None;connection=None;strings={};strings_count=0;groups={}
         pos=[r.read('h'),0,r.read('h')] if flags&0x2000 else [r.read('f') for _ in range(3)]
         prefab=r.read('i')
         if flags&0x1000:
             if not r.read('H')&0x8000:r.take(2)
+        groups_start=r.pos;connection_raw=''
         for bit,size in [(1,5),(2,4),(4,12),(8,16),(16,4),(32,8),(64,None),(128,None)]:
             if bit==64:strings_start=strings_end=r.pos;strings_data_start=r.pos
             if not flags&bit:continue
             if bit==1:
                 connection=dict(start=r.pos,type=r.read('B'),hash=r.read('i'))
+                connection_raw=raw[connection['start']:r.pos].hex()
                 continue
-            entries=r.num()
+            entries=r.num();groups[bit]=[]
             if bit==64:strings_count=entries;strings_data_start=r.pos
             for _ in range(entries):
-                key=r.read('i')
+                key=r.read('i');value_start=r.pos
                 if bit==32:
                     value=r.read('q')
                     if key==hashcode('creator'):creator=value
@@ -249,7 +315,10 @@ def parse_chunk(raw,texts=None,tombs=None,links=None):
                         try:entry['version'],entry['items']=inventory(data)
                         except ValueError as e:entry['error']=str(e);entry['items']=[]
                         containers.append(entry)
+                if prefab in STAND_SLOTS:groups[bit].append((key,raw[value_start:r.pos].hex()))
             if bit==64:strings_end=r.pos
+        if creator and prefab in STAND_SLOTS:
+            containers.append(read_stand(dict(creator=str(creator),object=obj,position=pos,prefab_hash=prefab,object_start=object_start,object_end=r.pos,groups_start=groups_start,flags=flags,groups=groups,connection_raw=connection_raw),groups))
         if tombs is not None and prefab==hashcode('Player_tombstone') and owner and grave_items:
             tombs.append(dict(owner=str(owner),ownerName=strings.get(hashcode('ownerName'),{}).get('value',''),position=pos,items=grave_items))
         # Every linked portal, whoever built it, so retagging one side can unlink the other.
@@ -332,6 +401,10 @@ class World:
             if key in seen:raise ValueError('Duplicate container change.')
             seen.add(key);c=next((c for c in self.containers if c['id']==key),None)
             if not c or 'error' in c:raise ValueError('Unsupported container.')
+            if c.get('kind')=='stand':
+                data=encode_stand(c,change['items'],self.files[c['chunk']])
+                if data!=self.files[c['chunk']][c['object_start']:c['object_end']]:patches.setdefault(c['chunk'],[]).append((c['object_start'],c['object_end'],data))
+                continue
             data=encode_inventory(c['version'],change['items'],c['items'])
             if data!=self.files[c['chunk']][c['start']+4:c['end']]:patches.setdefault(c['chunk'],[]).append((c['start'],c['end'],p('i',len(data))+data))
         meta_raw=self.files[f'_main.{self.number}.fwl2']

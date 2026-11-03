@@ -1,0 +1,300 @@
+{
+  "ArmorStand": [
+    {
+      "label": "Chest",
+      "types": [
+        7
+      ],
+      "bodySlot": 4,
+      "editable": true
+    },
+    {
+      "label": "Legs",
+      "types": [
+        11
+      ],
+      "bodySlot": 5,
+      "editable": true
+    },
+    {
+      "label": "Head",
+      "types": [
+        6
+      ],
+      "bodySlot": 6,
+      "editable": true
+    },
+    {
+      "label": "Left hand",
+      "types": [
+        5
+      ],
+      "bodySlot": 2,
+      "editable": true
+    },
+    {
+      "label": "Right hand",
+      "types": [
+        3,
+        4,
+        19,
+        14,
+        15,
+        20
+      ],
+      "bodySlot": 3,
+      "editable": true
+    },
+    {
+      "label": "Cape",
+      "types": [
+        17
+      ],
+      "bodySlot": 7,
+      "editable": true
+    },
+    {
+      "label": "Accessory",
+      "types": [
+        18
+      ],
+      "bodySlot": 8,
+      "editable": true
+    },
+    {
+      "label": "Chest",
+      "types": [
+        7
+      ],
+      "bodySlot": 4,
+      "editable": false
+    },
+    {
+      "label": "Legs",
+      "types": [
+        11
+      ],
+      "bodySlot": 5,
+      "editable": false
+    },
+    {
+      "label": "Head",
+      "types": [
+        6
+      ],
+      "bodySlot": 6,
+      "editable": false
+    },
+    {
+      "label": "Left hand",
+      "types": [
+        5
+      ],
+      "bodySlot": 2,
+      "editable": false
+    },
+    {
+      "label": "Right hand",
+      "types": [
+        3,
+        4,
+        19,
+        14,
+        15,
+        20
+      ],
+      "bodySlot": 3,
+      "editable": false
+    },
+    {
+      "label": "Cape",
+      "types": [
+        17
+      ],
+      "bodySlot": 7,
+      "editable": false
+    },
+    {
+      "label": "Accessory",
+      "types": [
+        18
+      ],
+      "bodySlot": 8,
+      "editable": false
+    }
+  ],
+  "ArmorStand_Male": [
+    {
+      "label": "Chest",
+      "types": [
+        7
+      ],
+      "bodySlot": 4,
+      "editable": true
+    },
+    {
+      "label": "Legs",
+      "types": [
+        11
+      ],
+      "bodySlot": 5,
+      "editable": true
+    },
+    {
+      "label": "Head",
+      "types": [
+        6
+      ],
+      "bodySlot": 6,
+      "editable": true
+    },
+    {
+      "label": "Left back",
+      "types": [
+        3,
+        4,
+        5,
+        14,
+        15,
+        19
+      ],
+      "bodySlot": 0,
+      "editable": true
+    },
+    {
+      "label": "Right back",
+      "types": [
+        3,
+        4,
+        19,
+        14,
+        15
+      ],
+      "bodySlot": 1,
+      "editable": true
+    },
+    {
+      "label": "Left hand",
+      "types": [
+        3,
+        4,
+        19,
+        14,
+        15
+      ],
+      "bodySlot": 2,
+      "editable": true
+    },
+    {
+      "label": "Right hand",
+      "types": [
+        5
+      ],
+      "bodySlot": 3,
+      "editable": true
+    },
+    {
+      "label": "Cape",
+      "types": [
+        17
+      ],
+      "bodySlot": 7,
+      "editable": true
+    },
+    {
+      "label": "Accessory",
+      "types": [
+        18
+      ],
+      "bodySlot": 8,
+      "editable": true
+    }
+  ],
+  "ArmorStand_Female": [
+    {
+      "label": "Chest",
+      "types": [
+        7
+      ],
+      "bodySlot": 4,
+      "editable": true
+    },
+    {
+      "label": "Legs",
+      "types": [
+        11
+      ],
+      "bodySlot": 5,
+      "editable": true
+    },
+    {
+      "label": "Head",
+      "types": [
+        6
+      ],
+      "bodySlot": 6,
+      "editable": true
+    },
+    {
+      "label": "Left back",
+      "types": [
+        3,
+        4,
+        5,
+        14,
+        15,
+        19
+      ],
+      "bodySlot": 0,
+      "editable": true
+    },
+    {
+      "label": "Right back",
+      "types": [
+        3,
+        4,
+        19,
+        14,
+        15
+      ],
+      "bodySlot": 1,
+      "editable": true
+    },
+    {
+      "label": "Left hand",
+      "types": [
+        3,
+        4,
+        19,
+        14,
+        15
+      ],
+      "bodySlot": 2,
+      "editable": true
+    },
+    {
+      "label": "Right hand",
+      "types": [
+        5
+      ],
+      "bodySlot": 3,
+      "editable": true
+    },
+    {
+      "label": "Cape",
+      "types": [
+        17
+      ],
+      "bodySlot": 7,
+      "editable": true
+    },
+    {
+      "label": "Accessory",
+      "types": [
+        18
+      ],
+      "bodySlot": 8,
+      "editable": true
+    }
+  ]
+}

@@ -24,3 +24,5 @@
 .stand-body{position:absolute;inset:0;width:100%;height:100%;fill:#b58a4533;stroke:#b58a4555;pointer-events:none}
 .stand-slot{position:relative;z-index:1;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#15130fe8}
 .stand-slot.selected{border-color:#dbad45;background:#3c301de8}.stand-slot img{width:58px;height:58px;object-fit:contain}.stand-slot small{color:#c9b994}.stand-slot span{font-size:.8rem}.stand-empty{padding:18px}
+
+.refinement-control{margin:14px 0;display:grid;gap:10px}.refinement-control label{font-size:.85rem;color:var(--muted)}.refinement-control select,.refinement-control input{display:block;width:100%;margin-top:6px}

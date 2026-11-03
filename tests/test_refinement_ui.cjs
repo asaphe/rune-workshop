@@ -1,0 +1,22 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const InventoryTools=require('../web/inventory-tools.js');
+const source=fs.readFileSync(path.join(__dirname,'../web/app.js'),'utf8');
+const eligible=JSON.parse(fs.readFileSync(path.join(__dirname,'../backend/refinement-items.json'),'utf8'));
+assert(eligible.Hammer);assert(eligible.MaceBronze);assert(!eligible.ArrowFire);assert(!eligible.MeadHealthMinor);
+const itemsById={Hammer:{maxQuality:3,canRefine:true,durability:{usesDurability:true,base:100,perLevel:100}},Gear:{maxQuality:4,canRefine:true,durability:{usesDurability:true,base:100,perLevel:50}},Arrow:{maxQuality:1,canRefine:false},Ordinary:{maxQuality:3,canRefine:false}};
+const context={InventoryTools,itemsById,selected:0,containerItemSelected:0,worldSelected:'s',mutate:fn=>fn(),worldRemember(){context.remembered=true},worldChanged(){},renderContainer(){context.rendered=true},toast(){context.error=true}};vm.createContext(context);
+vm.runInContext(source.slice(source.indexOf('function qualityControls('),source.indexOf('function variantControls(')),context);
+const gear={prefab:'Gear',quality:4,durability:250};context.item=gear;
+let html=vm.runInContext('qualityControls(item)',context);
+assert.equal((html.match(/data-quality=/g)||[]).length,4);assert(html.includes('Forge of Potential'));assert(html.includes('Higher level…'));
+assert(InventoryTools.setQuality(gear,itemsById,6));assert.equal(gear.durability,350);
+html=vm.runInContext('qualityControls(item)',context);assert(html.includes('Quality 6 · Forge of Potential'));assert(!html.includes('class="chosen"'));assert(html.includes('value="6" selected'));
+InventoryTools.setQuality(gear,itemsById,15);html=vm.runInContext('qualityControls(item,true)',context);assert(html.includes('value="custom" selected'));assert(html.includes('data-refinement="container"'));assert(!html.includes('outside the editor'));
+InventoryTools.setQuality(gear,itemsById,2);assert.equal(gear.durability,150);
+assert(!InventoryTools.validQuality({prefab:'Arrow'},itemsById,5));assert(!InventoryTools.validQuality({prefab:'Ordinary'},itemsById,4));assert(!InventoryTools.validQuality(gear,itemsById,65536));assert(!InventoryTools.validQuality(gear,itemsById,5.5));
+context.state={player:{inventory:[gear]}};
+context.event={target:{dataset:{refinement:'character'},value:'7',checkValidity:()=>true}};vm.runInContext('changeRefinement(event)',context);assert.equal(gear.quality,7);assert.equal(gear.durability,400);
+context.worldState={containers:[{id:'s',items:[gear]}]};context.event.target.dataset.refinement='container';context.event.target.value='11';vm.runInContext('changeRefinement(event)',context);assert.equal(gear.quality,11);assert.equal(gear.durability,600);assert(context.remembered&&context.rendered);
+let focused=false;const box={hidden:true,querySelector(){return {focus(){focused=true}}}};context.event.target.value='custom';context.event.target.closest=()=>({querySelector:()=>box});vm.runInContext('changeRefinement(event)',context);assert(!box.hidden&&focused);assert.equal(gear.quality,11);
+for(const prefab of ['Arrow','Ordinary']){context.item={prefab,quality:1};assert(!vm.runInContext('qualityControls(item)',context).includes('Forge of Potential'))}
+console.log('Refinement eligibility, normal stars, higher levels, durability, character/world controls and validation passed.');

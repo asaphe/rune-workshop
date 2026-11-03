@@ -64,6 +64,7 @@ def catalogue():
     try:labels=json.loads((EDITOR/'catalogue-labels.json').read_text(encoding='utf-8'))
     except (OSError,ValueError):labels={}
     limits=json.loads((EDITOR/'stack-limits.json').read_text(encoding='utf-8'))
+    refinement_items=json.loads((EDITOR/'refinement-items.json').read_text(encoding='utf-8'))
     attachment_types=json.loads((EDITOR/'attachment-types.json').read_text(encoding='utf-8'))
     variant_limits=json.loads((EDITOR/'variant-limits.json').read_text(encoding='utf-8'))
     quality_limits=json.loads((EDITOR/'quality-limits.json').read_text(encoding='utf-8'))
@@ -75,7 +76,7 @@ def catalogue():
     for key, item in raw.items():
         prefab = item['prefab']; label = labels.get(prefab,{})
         entries.append(dict(prefab=prefab, hash=int(key), name=label.get('name') or re.sub(r'(?<=[a-z])(?=[A-Z])',' ',prefab),
-                            category=label.get('category','Other'), attachmentType=attachment_types.get(prefab), maxStack=limits.get(prefab), maxQuality=quality_limits.get(prefab), variantCount=variant_limits.get(prefab), durability=durability.get(prefab), weight=weights.get(prefab), icons=[i if isinstance(i,str) and re.fullmatch(r'[a-f0-9]{64}\.png',i) and (ICONS/i).is_file() else None for i in local_icons.get(prefab,item.get('icons',[]))]))
+                            category=label.get('category','Other'), canRefine=refinement_items.get(prefab,False), attachmentType=attachment_types.get(prefab), maxStack=limits.get(prefab), maxQuality=quality_limits.get(prefab), variantCount=variant_limits.get(prefab), durability=durability.get(prefab), weight=weights.get(prefab), icons=[i if isinstance(i,str) and re.fullmatch(r'[a-f0-9]{64}\.png',i) and (ICONS/i).is_file() else None for i in local_icons.get(prefab,item.get('icons',[]))]))
     return sorted(entries,key=lambda x:x['name'].lower())
 CATALOG = catalogue()
 FOOD_DATA=json.loads((EDITOR/'food-stats.json').read_text(encoding='utf-8'))

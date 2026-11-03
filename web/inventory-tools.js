@@ -1,6 +1,45 @@
 'use strict';
 // Pure helpers: bulk additions are prepared on a copy before touching the save.
 const InventoryTools = {
+  variantCount(item,catalogue) {
+    const count=catalogue[item.prefab]?.variantCount;
+    return Number.isInteger(count)&&count>=0?count:null;
+  },
+  validVariant(item,catalogue,variant) {
+    const count=this.variantCount(item,catalogue);
+    return count>1&&Number.isInteger(variant)&&variant>=0&&variant<count;
+  },
+  iconName(item,catalogue) {
+    const icons=catalogue[item.prefab]?.icons||[],variant=item.variant??0;
+    return Number.isInteger(variant)&&variant>=0&&variant<icons.length?icons[variant]:null;
+  },
+  maxQuality(item, catalogue) {
+    const max=catalogue[item.prefab]?.maxQuality;
+    return Number.isInteger(max)&&max>=1&&max<=65535?max:null;
+  },
+  validQuality(item, catalogue, quality) {
+    const max=this.maxQuality(item,catalogue);
+    return !!max&&Number.isInteger(quality)&&quality>=1&&quality<=max;
+  },
+  maximumDurability(item,catalogue) {
+    const stats=catalogue[item.prefab]?.durability;
+    if(!stats?.usesDurability||!Number.isFinite(stats.base)||!Number.isFinite(stats.perLevel))return null;
+    const maximum=stats.base+Math.max(0,item.quality-1)*stats.perLevel;
+    return Number.isFinite(maximum)&&maximum>=0?maximum:null;
+  },
+  syncItemStats(item,catalogue,previous) {
+    if(previous&&previous.prefab===item.prefab&&previous.quality===item.quality)return;
+    const maximum=this.maximumDurability(item,catalogue);
+    if(maximum===null)return;
+    item.durability=maximum;
+  },
+  setQuality(item, catalogue, quality) {
+    if (!this.validQuality(item,catalogue,quality) || quality===item.quality) return false;
+    const previous={prefab:item.prefab,quality:item.quality};
+    item.quality=quality;
+    this.syncItemStats(item,catalogue,previous);
+    return true;
+  },
   weight(item, catalogue) {
     const stats = catalogue[item.prefab]?.weight;
     return stats && Number.isFinite(stats.base) && Number.isFinite(stats.perQuality)

@@ -141,6 +141,24 @@ macOS continues to use browser mode.
 
 ### Inventory conveniences
 
+- **Style** appears only for items with selectable variants, using the game's
+  variant and sprite counts. Preview buttons update the selected item's artwork
+  in both character and container inventories. Missing artwork shows a placeholder
+  rather than another style; run Setup Rune to extract missing pictures. Unknown
+  or out-of-range saved variants are preserved until explicitly changed.
+
+- Quality buttons use each item's configured maximum, in both character and
+  container inventories. Non-upgradeable items such as arrows and mead hide
+  quality controls. Unknown or existing out-of-range values are preserved;
+  non-upgradeable items with an elevated saved quality offer a reset to 1.
+  Replacing an item clamps its quality to the replacement's known limit.
+  Forge/workbench level is not item quality. Quality affects the game's
+  per-level stats; changing quality automatically sets durability to the new maximum,
+  whether raised or lowered. Food edits
+  recalculate and refill health, stamina and Eitr using the remaining food time.
+  Editing a vital maximum also updates its current value. Direct current-value
+  edits remain available; dependent changes share the same Undo step.
+
 - Inventory and selected-stack **weight** update as you edit quantity and quality.
   Values use the bundled game item data, including quality-dependent weight.
   Unknown/modded items are explicitly excluded from the known total and counted
@@ -436,3 +454,17 @@ The page then tells you to close the tab. Use the launcher to start Rune again.
 On Windows, closing the dedicated app window also stops the server. In browser mode, closing a tab alone does not stop the server. Rune requires Python at
 runtime, not Node.js; Quit Rune does not terminate unrelated Python, Node.js or
 browser processes, nor separate Rune instances.
+
+### World storage and gear stands
+
+Choose **World → Containers → Storage type** to switch between chests, ship holds,
+carts, gear stands and other storage. Lists are grouped into 200 m map areas and
+ordered by X/Z coordinates within each area (then height). Reference numbers do
+not determine the order; the location and creator filters still apply.
+
+Gear stands display a schematic equipment layout with item artwork. Select a slot
+and choose **Add equipment** or **Change equipment**; the picker shows compatible
+items. Quality, durability and available styles can be edited, and the preview
+updates immediately. **Remove** clears that slot. These edits use the same world
+Save/Export and backup flow as containers. Unsupported stand data stays read-only.
+The preview is an equipment diagram, not a rendered game character.

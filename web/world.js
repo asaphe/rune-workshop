@@ -32,14 +32,15 @@ function worldFilters(){
  const creators=[...new Map(worldState.containers.map(c=>[c.creator,c])).values()];
  $('containerCreator').closest('label').hidden=creators.length<2;
  $('containerCreator').innerHTML='<option value="">All creators</option>'+creators.map(c=>'<option value="'+esc(c.creator)+'">'+esc(creatorLabel(c))+'</option>').join('');
- $('containerArea').innerHTML='<option value="">All areas</option>'+[...new Set(worldState.containers.map(containerArea))].sort().map(key=>'<option value="'+key+'">'+areaLabel(key)+'</option>').join('');
+ $('containerArea').innerHTML='<option value="">All areas</option>'+[...new Set(worldState.containers.map(containerArea))].sort((a,b)=>{const x=a.split(',').map(Number),y=b.split(',').map(Number);return x[0]-y[0]||x[1]-y[1]}).map(key=>'<option value="'+key+'">'+areaLabel(key)+'</option>').join('');
 }
 function containerTitle(c){return readable((c.name||'Container').replace(/^piece_chest_/,'').replace(/^wood$/,'Wood chest'))+' · #'+(Number(c.id)+1)}
+function compareContainerPosition(a,b){const aa=containerArea(a).split(',').map(Number),bb=containerArea(b).split(',').map(Number);return aa[0]-bb[0]||aa[1]-bb[1]||a.position[0]-b.position[0]||a.position[2]-b.position[2]||a.position[1]-b.position[1]||Number(a.id)-Number(b.id)}
 function renderContainers(){
  const q=$('containerSearch').value.toLowerCase();
- const rows=worldState.containers.filter(c=>(!$('containerCreator').value||c.creator===$('containerCreator').value)&&(!$('containerArea').value||containerArea(c)===$('containerArea').value)).filter(c=>(containerTitle(c)+' '+c.position.map(v=>Math.round(v)).join(' ')+' '+(c.items||[]).map(i=>itemName(i)+' '+i.prefab).join(' ')).toLowerCase().includes(q));
+ const rows=worldState.containers.filter(c=>c.kind===$('containerType').value).filter(c=>(!$('containerCreator').value||c.creator===$('containerCreator').value)&&(!$('containerArea').value||containerArea(c)===$('containerArea').value)).filter(c=>(containerTitle(c)+' '+c.position.map(v=>Math.round(v)).join(' ')+' '+(c.items||[]).map(i=>itemName(i)+' '+i.prefab).join(' ')).toLowerCase().includes(q)).sort(compareContainerPosition);
  if(!rows.some(c=>c.id===worldSelected)){worldSelected=rows[0]?.id;renderContainer()}
- $('containerList').innerHTML=rows.length?rows.map(c=>'<button class="container-row '+(c.id===worldSelected?'active':'')+'" data-container="'+c.id+'"><strong>'+esc(containerTitle(c))+'</strong><small>X '+Math.round(c.position[0])+' · Y '+Math.round(c.position[1])+' · Z '+Math.round(c.position[2])+'</small><small>'+(c.error?'Unsupported inventory':c.items.length+' item stacks')+'</small></button>').join(''):'<p class="muted">No matching containers.</p>';
+ $('containerList').innerHTML=rows.length?rows.map((c,n)=>(n===0||containerArea(c)!==containerArea(rows[n-1])?'<h4 class="storage-area">'+esc(areaLabel(containerArea(c)))+'</h4>':'')+'<button class="container-row '+(c.id===worldSelected?'active':'')+'" data-container="'+c.id+'"><strong>'+esc(containerTitle(c))+'</strong><small>X '+Math.round(c.position[0])+' · Y '+Math.round(c.position[1])+' · Z '+Math.round(c.position[2])+'</small><small>'+(c.error?'Unsupported inventory':c.items.length+(c.kind==='stand'?' equipped items':' item stacks'))+'</small></button>').join(''):'<p class="muted">No matching containers.</p>';
 }
 let containerItemSelected=0;
 function containerSize(c){const items=c.items||[];return {width:Math.max(c.size?.width||5,...items.map(i=>i.grid_x+1)),height:Math.max(c.size?.height||2,...items.map(i=>i.grid_y+1))}}
@@ -48,9 +49,10 @@ function freeContainerSlot(c){
  for(let y=0;y<c.size.height;y++)for(let x=0;x<c.size.width;x++)if(!c.items.some(i=>i.grid_x===x&&i.grid_y===y))return {x,y};
  return null;
 }
+let standSlotSelected=0;
 function renderContainerGrid(){
  const c=worldState?.containers.find(c=>c.id===worldSelected);if(!c||!$('containerGrid'))return;
- if(c.error)return;const dim=containerSize(c);let html='';
+ if(c.error||c.kind==='stand')return;const dim=containerSize(c);let html='';
  for(let y=0;y<dim.height;y++)for(let x=0;x<dim.width;x++){
   const n=c.items.findIndex(i=>i.grid_x===x&&i.grid_y===y),i=c.items[n];
   html+=`<button type="button" class="slot ${i?'':'empty'} ${n>=0&&n===containerItemSelected?'selected':''}" data-container-slot="${n}" aria-label="${i?esc(itemName(i))+'; quantity '+i.stack:'Empty slot '+(x+1)+', row '+(y+1)}">${i?icon(i)+`<span class="item-name">${esc(itemName(i))}</span><span class="stack">${i.stack}</span>`:'＋'}</button>`;
@@ -64,10 +66,11 @@ function renderContainer(){
  const c=worldState?.containers.find(c=>c.id===worldSelected);
  if(!c){$('containerEditor').innerHTML='<p class="muted">Choose a container to view its contents.</p>';return}
  if(c.error){$('containerEditor').innerHTML='<p>'+esc(c.error)+'</p>';return}
+ if(c.kind==='stand'){renderStand(c);return}
  if(containerItemSelected>=c.items.length)containerItemSelected=c.items.length-1;
  const n=containerItemSelected,i=c.items[n],dim=containerSize(c),space=freeContainerSlot(c),limit=i&&itemsById[i.prefab]?.maxStack;
  const field=(label,k,value,max)=>`<div class="field"><label>${label}<input aria-label="Container item ${label}" data-world-item="${n}" data-world-field="${k}" type="number" min="${k==='durability'?0:1}" max="${max}" step="${k==='durability'?'any':'1'}" value="${value}"></label></div>`;
- $('containerEditor').innerHTML=`<div class="section-title"><div><h2>${esc(containerTitle(c))}</h2><p class="muted">${c.items.length} / ${dim.width*dim.height} slots occupied</p></div><button id="worldClearFlags">Clear item cheat flags</button></div><div class="container-grid-scroll"><div id="containerGrid" class="inventory-grid"></div></div>${!c.size?'<p class="muted">Container capacity is unknown. Adding and duplicating are unavailable.</p>':''}<div class="container-item-panel">${i?`<div class="world-item-name">${icon(i)}<h3>${esc(itemName(i))}</h3></div><div class="item-actions"><button data-container-max ${!limit||i.stack>=limit?'disabled':''}>Max stack${limit?' ('+limit+')':''}</button><button data-container-duplicate ${!space?'disabled':''}>Duplicate</button><button data-world-delete="${n}" class="danger">Delete</button></div>${!space&&c.size?'<p class="muted">Container is full.</p>':''}${!limit?'<p class="muted">Stack limit is unknown for this item.</p>':''}<div class="form-grid">${field('Quantity','stack',i.stack,65535)}${field('Quality','quality',i.quality,65535)}${field('Durability','durability',i.durability,21474836)}</div>`:'<p class="muted">Select a stack to edit it, or add an item.</p>'}</div><div class="world-add"><button id="worldAddItem" type="button" ${!space?'disabled':''}>＋ Add item</button></div>`;
+ $('containerEditor').innerHTML=`<div class="section-title"><div><h2>${esc(containerTitle(c))}</h2><p class="muted">${c.items.length} / ${dim.width*dim.height} slots occupied</p></div><button id="worldClearFlags">Clear item cheat flags</button></div><div class="container-grid-scroll"><div id="containerGrid" class="inventory-grid"></div></div>${!c.size?'<p class="muted">Container capacity is unknown. Adding and duplicating are unavailable.</p>':''}<div class="container-item-panel">${i?`<div class="world-item-name">${icon(i)}<h3>${esc(itemName(i))}</h3></div><div class="item-actions"><button data-container-max ${!limit||i.stack>=limit?'disabled':''}>Max stack${limit?' ('+limit+')':''}</button><button data-container-duplicate ${!space?'disabled':''}>Duplicate</button><button data-world-delete="${n}" class="danger">Delete</button></div>${!space&&c.size?'<p class="muted">Container is full.</p>':''}${!limit?'<p class="muted">Stack limit is unknown for this item.</p>':''}${qualityControls(i,true)}${variantControls(i,true)}<div class="form-grid">${field('Quantity','stack',i.stack,65535)}${field('Durability','durability',i.durability,21474836)}</div>`:'<p class="muted">Select a stack to edit it, or add an item.</p>'}</div><div class="world-add"><button id="worldAddItem" type="button" ${!space?'disabled':''}>＋ Add item</button></div>`;
  renderContainerGrid();
  $('worldClearFlags').disabled=!c.items.some(i=>i.cheated);
  $('worldClearFlags').onclick=()=>{worldRemember();c.items.forEach(i=>i.cheated=false);worldChanged();renderContainer()};
@@ -77,14 +80,32 @@ function renderContainer(){
   if(!info)return toast('Choose an item from the catalogue.',true);
   if(!slot)return toast('No empty slots available.',true);
   worldRemember();c.items.push({prefab:info.prefab,prefab_hash:info.hash,stack:1,quality:1,durability:100,grid_x:slot.x,grid_y:slot.y,world_level:0,variant:0,picked_up:false,equipped:false,crafter_id:'0',crafter_name:'',custom_data:{},cheated:false});
-  containerItemSelected=c.items.length-1;worldChanged();renderContainer();
+  InventoryTools.syncItemStats(c.items[c.items.length-1],itemsById);containerItemSelected=c.items.length-1;worldChanged();renderContainer();
  });
+}
+function renderStand(c){
+ if(standSlotSelected>=c.slots.length||(c.slots[standSlotSelected].editable===false&&!c.items.some(i=>i.grid_x===standSlotSelected)))standSlotSelected=0;
+ containerItemSelected=c.items.findIndex(i=>i.grid_x===standSlotSelected);
+ const i=c.items[containerItemSelected],slot=c.slots[standSlotSelected],positions={0:[1,1],1:[3,1],2:[1,3],3:[3,3],4:[2,2],5:[2,3],6:[2,1],7:[3,2],8:[1,2]},used={};
+ const preview=c.slots.map((s,n)=>{const item=c.items.find(i=>i.grid_x===n);if(s.editable===false&&!item)return '';const pos=positions[s.bodySlot]||[1,4],row=pos[1]+(used[s.bodySlot]||0)*4;used[s.bodySlot]=(used[s.bodySlot]||0)+1;return `<button class="stand-slot ${n===standSlotSelected?'selected':''}" style="grid-column:${pos[0]};grid-row:${row}" data-stand-slot="${n}" aria-label="${esc(s.label)}: ${item?esc(itemName(item)):'Empty'}"><small>${esc(s.label)}</small>${item?icon(item):'<span class="stand-empty">＋</span>'}<span>${item?esc(itemName(item)):'Empty'}</span></button>`}).join('');
+ $('containerEditor').innerHTML=`<h2>${esc(containerTitle(c))}</h2><p class="muted">Equipment layout · Select a slot to change its gear. This is a schematic preview, not an in-game model.</p><div class="stand-preview"><svg class="stand-body" viewBox="0 0 300 400" aria-hidden="true"><circle cx="150" cy="48" r="29"/><path d="M115 90 L185 90 L203 210 L177 215 L177 365 L155 365 L150 235 L145 365 L123 365 L123 215 L97 210 Z"/><path d="M115 95 L65 195 M185 95 L235 195" fill="none" stroke-width="22"/><path d="M75 385 L225 385" fill="none" stroke-width="12"/></svg>${preview}</div><div class="container-item-panel"><h3>${esc(slot.label)}</h3>${i?`<div class="world-item-name">${icon(i)}<strong>${esc(itemName(i))}</strong></div>`:'<p class="muted">This slot is empty.</p>'}<div class="item-actions"><button id="standChoose">${i?'Change equipment':'Add equipment'}</button>${i?`<button data-world-delete="${containerItemSelected}" class="danger">Remove</button>`:''}</div>${i?qualityControls(i,true)+variantControls(i,true)+`<label>Durability<input type="number" min="0" max="21474836" step="any" data-world-item="${containerItemSelected}" data-world-field="durability" value="${i.durability}"></label>`:''}</div>`;
+ $('standChoose').onclick=()=>chooseItem('container-add',null,prefab=>{
+  if(!worldState?.containers.includes(c)||worldSelected!==c.id)return;
+  const info=itemsById[prefab];if(!info||!slot.types.includes(info.attachmentType))return;
+  worldRemember();const existing=c.items.findIndex(i=>i.grid_x===standSlotSelected);
+  const item={prefab:info.prefab,prefab_hash:info.hash,stack:1,quality:1,durability:100,grid_x:standSlotSelected,grid_y:0,world_level:0,variant:0,picked_up:false,equipped:false,crafter_id:'0',crafter_name:'',custom_data:{},cheated:false};
+  InventoryTools.syncItemStats(item,itemsById);if(existing>=0)c.items[existing]=item;else c.items.push(item);
+  worldChanged();renderContainer();
+ },info=>slot.types.includes(info.attachmentType));
 }
 $('containerEditor').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  const c=worldState?.containers.find(c=>c.id===worldSelected);if(!c)return;
+ if(b.dataset.standSlot!==undefined){standSlotSelected=Number(b.dataset.standSlot);renderContainer();return}
  if(b.dataset.containerSlot!==undefined){containerItemSelected=Number(b.dataset.containerSlot);renderContainer();return}
  const i=c.items[containerItemSelected];if(!i)return;
+ if(b.dataset.containerVariant!==undefined){const v=Number(b.dataset.containerVariant);if(InventoryTools.validVariant(i,itemsById,v)){worldRemember();i.variant=v;worldChanged();renderContainer()}return}
+ if(b.dataset.containerQuality){const q=Number(b.dataset.containerQuality);if(InventoryTools.validQuality(i,itemsById,q)){worldRemember();InventoryTools.setQuality(i,itemsById,q);worldChanged();renderContainer()}return}
  if(b.hasAttribute('data-container-max')){
   const limit=itemsById[i.prefab]?.maxStack;if(!limit||i.stack>=limit)return;
   worldRemember();i.stack=limit;worldChanged();renderContainer();
@@ -101,19 +122,20 @@ function commitWorldInput(e){
  if(!el.checkValidity()||!Number.isFinite(value)){el.value=i[k]+(['grid_x','grid_y'].includes(k)?1:0);toast('Enter a valid value.',true);return}
  if(['grid_x','grid_y'].includes(k))value--;
  if(['grid_x','grid_y'].includes(k)&&c.items.some(other=>other!==i&&(k==='grid_x'?value: i.grid_x)===other.grid_x&&(k==='grid_y'?value:i.grid_y)===other.grid_y)){el.value=i[k]+1;toast('That slot is occupied.',true);return}
- if(i[k]===value)return;worldRemember();i[k]=value;worldChanged();
+ if(i[k]===value)return;if(k==='quality'){if(!InventoryTools.validQuality(i,itemsById,value))return;worldRemember();InventoryTools.setQuality(i,itemsById,value);worldChanged();renderContainer();return}worldRemember();i[k]=value;worldChanged();
 }
 $('containerEditor').addEventListener('change',commitWorldInput);
 $('containerEditor').addEventListener('focusout',commitWorldInput);
 $('containerEditor').addEventListener('click',e=>{const b=e.target.closest('[data-world-delete]');if(!b)return;const c=worldState.containers.find(c=>c.id===worldSelected);worldRemember();c.items.splice(Number(b.dataset.worldDelete),1);worldChanged();renderContainer()});
 $('containerList').onclick=e=>{const b=e.target.closest('[data-container]');if(b){worldSelected=b.dataset.container;containerItemSelected=0;renderContainers();renderContainer()}};
+$('containerType').onchange=()=>{standSlotSelected=0;renderContainers();renderContainer()};
 $('containerSearch').oninput=renderContainers;$('containerCreator').onchange=renderContainers;$('containerArea').onchange=renderContainers;
 $('worldUndo').onclick=()=>{if(!worldHistory.length)return;Object.assign(worldState,JSON.parse(worldHistory.pop()));worldChanged();renderContainer();renderWorldExtras()};
 async function openWorld(path){
  if(worldDirty()&&!confirm('Discard unsaved world changes and open another world?'))return;
  busy(true,'Reading world containers…');
  try{
-  worldState=await(await api('/api/world/open',{path})).json();if(worldState.warning)toast(worldState.warning,true);worldBaseline=worldSnapshot();worldHistory=[];worldSelected=worldState.containers[0]?.id;containerItemSelected=0;
+  worldState=await(await api('/api/world/open',{path})).json();if(worldState.warning)toast(worldState.warning,true);worldBaseline=worldSnapshot();worldHistory=[];worldSelected=null;containerItemSelected=0;standSlotSelected=0;
   $('worldPath').value=worldState.path;$('worldContents').hidden=false;worldFilters();worldChanged();renderContainer();renderWorldExtras();
  }catch(e){$('worldStatus').textContent=e.message;toast(e.message,true)}finally{busy(false)}
 }

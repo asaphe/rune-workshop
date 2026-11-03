@@ -16,3 +16,11 @@
 #inspector .item-actions{flex-wrap:wrap}
 
 .inventory-panel>.section-title{flex-wrap:wrap;gap:12px}.inventory-panel>.section-title>.item-actions{display:flex;flex-wrap:wrap;gap:6px}
+
+.variant-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}.variant-row button{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:72px}.variant-row img{width:42px;height:42px;object-fit:contain}.variant-row .chosen{border-color:var(--gold);background:#3c301a;color:var(--gold2)}
+
+.storage-area{padding:12px 10px 4px;color:var(--muted);font-size:.8rem;font-weight:normal}
+.stand-preview{position:relative;display:grid;grid-template-columns:repeat(3,minmax(90px,1fr));gap:12px;max-width:640px;margin:24px auto}
+.stand-body{position:absolute;inset:0;width:100%;height:100%;fill:#b58a4533;stroke:#b58a4555;pointer-events:none}
+.stand-slot{position:relative;z-index:1;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#15130fe8}
+.stand-slot.selected{border-color:#dbad45;background:#3c301de8}.stand-slot img{width:58px;height:58px;object-fit:contain}.stand-slot small{color:#c9b994}.stand-slot span{font-size:.8rem}.stand-empty{padding:18px}

@@ -72,6 +72,15 @@ class WorldTests(unittest.TestCase):
     def test_external_changes_rejected(self):
         (self.path/'00_01__0_1.chunk').write_bytes(b'changed')
         with self.assertRaises(ValueError):self.w.save(self.changes(),lambda:None)
+    def test_container_variant_edit_roundtrip(self):
+        original=copy.deepcopy(self.w.containers[0]['items'][0])
+        changes=[dict(id='0',items=[copy.deepcopy(original)])]
+        changes[0]['items'][0]['variant']=2
+        self.w.save(changes,lambda:None)
+        item=world.World(self.path).containers[0]['items'][0]
+        self.assertEqual(item['variant'],2)
+        for key in ('stack','quality','durability','crafter_id','custom_data','_cheat_byte'):
+            self.assertEqual(item[key],original[key])
     def test_generated_container_cannot_be_targeted(self):
         with self.assertRaises(ValueError):self.w.build([dict(id='1',items=[])])
     def test_settings_toggle_and_restore_preserve_metadata(self):

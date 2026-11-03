@@ -17,8 +17,18 @@ const InventoryTools = {
     const max=catalogue[item.prefab]?.maxQuality;
     return Number.isInteger(max)&&max>=1&&max<=65535?max:null;
   },
+  refinementLimit(item,catalogue) {
+    if(catalogue[item.prefab]?.canRefine!==true||!(this.maxQuality(item,catalogue)>1))return null;
+    // This is the save format's range, not a claimed in-game refinement cap.
+    const d=catalogue[item.prefab]?.durability;
+    const durableMax=d?.usesDurability&&d.perLevel>0?Math.floor((21474836-d.base)/d.perLevel)+1:65535;
+    return Math.max(1,Math.min(65535,durableMax));
+  },
+  maxEditableQuality(item,catalogue) {
+    return this.refinementLimit(item,catalogue)||this.maxQuality(item,catalogue);
+  },
   validQuality(item, catalogue, quality) {
-    const max=this.maxQuality(item,catalogue);
+    const max=this.maxEditableQuality(item,catalogue);
     return !!max&&Number.isInteger(quality)&&quality>=1&&quality<=max;
   },
   maximumDurability(item,catalogue) {

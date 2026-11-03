@@ -147,12 +147,16 @@ macOS continues to use browser mode.
   rather than another style; run Setup Rune to extract missing pictures. Unknown
   or out-of-range saved variants are preserved until explicitly changed.
 
-- Quality buttons use each item's configured maximum, in both character and
+- Quality buttons use each item's normal crafting limit, in both character and
   container inventories. Non-upgradeable items such as arrows and mead hide
   quality controls. Unknown or existing out-of-range values are preserved;
   non-upgradeable items with an elevated saved quality offer a reset to 1.
   Replacing an item clamps its quality to the replacement's known limit.
-  Forge/workbench level is not item quality. Quality affects the game's
+  Eligible items also show a **Forge of Potential** dropdown for refinement beyond
+  that normal limit. Choose a listed quality or **Higher level…** to enter another
+  level; 10 is not presented as an in-game cap. Selecting a normal quality button
+  downgrades the item. These controls also apply to gear stands.
+  Quality affects the game's
   per-level stats; changing quality automatically sets durability to the new maximum,
   whether raised or lowered. Food edits
   recalculate and refill health, stamina and Eitr using the remaining food time.
